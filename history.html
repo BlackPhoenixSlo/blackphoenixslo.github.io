@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div id="logo">Logo</div>
+        <nav>
+            <a href="#">ONFT Bridge</a>
+            <a href="#">OFT Bridge</a>
+            <a href="#">Get Gas</a>
+            <a href="#">Checker</a>
+            <a href="#">History</a>
+        </nav>
+        <button id="connectWalletHeader">Connect Wallet</button>
+    </header>
+
+    <!-- Body -->
+    <main>
+        <div class="centered-div">
+            <!-- Row 1 -->
+            <div class="history-header-div">
+                <div class="history-text">Transaction History</div>
+                <div class="sort-section">
+                    <span>Sort by:</span>
+                    <button id="sortButton" data-state="newest">Newest First</button>
+                </div>
+            </div>
+            
+            <!-- Row 2 -->
+            <div class="no-transactions-div">
+                <div class="no-transactions-text">No transactions found</div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

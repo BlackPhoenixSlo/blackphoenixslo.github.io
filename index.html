@@ -1,85 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website</title>
+    <title>Single Page App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer>document.querySelector(".toggle-button").addEventListener("click", function() {
-        const toggleButton = document.querySelector(".toggle-button");
-        if(toggleButton.getAttribute("data-state") === "v1") {
-            toggleButton.setAttribute("data-state", "v2");
-            toggleButton.textContent = "V2";
-        } else {
-            toggleButton.setAttribute("data-state", "v1");
-            toggleButton.textContent = "V1";
-        }
-    });
-    
-    document.getElementById("swapButton").addEventListener("click", function() {
-        const dropdowns = document.querySelectorAll(".crypto-dropdown");
-        const tempValue = dropdowns[0].value;
-        dropdowns[0].value = dropdowns[1].value;
-        dropdowns[1].value = tempValue;
-    });</script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <!-- Header -->
     <header>
         <div id="logo">Logo</div>
         <nav>
-            <a href="#">ONFT Bridge</a>
-            <a href="#">OFT Bridge</a>
-            <a href="#">Get Gas</a>
-            <a href="#">Checker</a>
-            <a href="#">History</a>
+            <a href="#" data-content="onftBridge">ONFT Bridge</a>
+            <a href="#" data-content="oftBridge">OFT Bridge</a>
+            <a href="#" data-content="getGas">Get Gas</a>
+            <a href="#" data-content="history">History</a>
         </nav>
-        <button id="connectWallet">Connect Wallet</button>
+        <button id="connectWalletHeader">Connect Wallet</button>
     </header>
 
-<!-- Body -->
-<main>
-    <div class="centered-div">
-        <!-- Row 1 -->
-        <div class="bridge-div">
-            <div class="toggle-button" data-state="v1">V1</div>
-            <div class="bridge-text">ONFT BRIDGE</div>
-            <button id="turboBridge">TurboBridge</button>
+    <!-- Main Content Area -->
+    <main>
+        <div class="content-div" id="onftBridge">
+            <!-- ONFT Bridge content here -->
+            <main>
+                <div class="centered-div">
+                    <!-- Row 1 -->
+                    <div class="bridge-div">
+                        <div class="toggle-button" data-state="v1">V1</div>
+                        <div class="bridge-text">ONFT BRIDGE</div>
+                        <button id="turboBridge">TurboBridge</button>
+                    </div>
+                    
+                    <!-- Row 2 -->
+                    <div class="swap-div">
+                        <select class="crypto-dropdown">
+                            <!-- Sample options. Add more as needed -->
+                            <option value="btc">Bitcoin</option>
+                            <option value="eth">Ethereum</option>
+                            <option value="ltc">Litecoin</option>
+                        </select>
+                        <button id="swapButton">Swap</button>
+                        <select class="crypto-dropdown">
+                            <!-- Sample options. Add more as needed -->
+                            <option value="btc">Bitcoin</option>
+                            <option value="eth">Ethereum</option>
+                            <option value="ltc">Litecoin</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Row 3 -->
+                    <div class="step-div">
+                        <div class="step-text">Step 1: Mint NFT</div>
+                        <button id="mintButton">MINT</button>
+                    </div>
+                    
+                    <!-- Row 4 -->
+                    <div class="step-div">
+                        <div class="step-text">Step 2: Bridge</div>
+                        <button id="bridgeButton">BRIDGE</button>
+                    </div>
+                </div>
+            </main>
+            
         </div>
         
-        <!-- Row 2 -->
-        <div class="swap-div">
-            <select class="crypto-dropdown">
-                <!-- Sample options. Add more as needed -->
-                <option value="btc">Bitcoin</option>
-                <option value="eth">Ethereum</option>
-                <option value="ltc">Litecoin</option>
-            </select>
-            <button id="swapButton">Swap</button>
-            <select class="crypto-dropdown">
-                <!-- Sample options. Add more as needed -->
-                <option value="btc">Bitcoin</option>
-                <option value="eth">Ethereum</option>
-                <option value="ltc">Litecoin</option>
-            </select>
+        <div class="content-div" id="oftBridge" style="display: none;">
+            <!-- OFT Bridge content here -->
+            <main>
+                <div class="centered-div">
+                    <!-- Row 1 -->
+                    <div class="bridge-div">
+                        <div class="bridge-text">OFT BRIDGE</div>
+                        <button id="turboBridge">TurboBridge</button>
+                    </div>
+                    
+                    <!-- Row 2 -->
+                    <div class="swap-div">
+                        <select class="crypto-dropdown">
+                            <option value="btc">Bitcoin</option>
+                            <option value="eth">Ethereum</option>
+                            <option value="ltc">Litecoin</option>
+                        </select>
+                        <button id="swapButton">Swap</button>
+                        <select class="crypto-dropdown">
+                            <option value="btc">Bitcoin</option>
+                            <option value="eth">Ethereum</option>
+                            <option value="ltc">Litecoin</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Row 3 -->
+                    <div class="wallet-div">
+                        <button id="connectWallet">Connect Wallet</button>
+                    </div>
+                    
+                    <!-- Row 4 -->
+                    <div class="disclaimer-div">
+                        <div class="disclaimer-text">
+                            Disclaimer<br>
+                            As $MERK has an unlimited supply, it is not meant to be traded on the open market.
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
         
-        <!-- Row 3 -->
-        <div class="step-div">
-            <div class="step-text">Step 1: Mint NFT</div>
-            <button id="mintButton">MINT</button>
+        <div class="content-div" id="getGas" style="display: none;">
+            <!-- Get Gas content here -->
+            <main>
+                <div class="centered-div">
+                    <!-- Row 1 -->
+                    <div class="gas-refuel-div">
+                        <div class="gas-refuel-text">GAS REFUEL</div>
+                    </div>
+                    
+                    <!-- Row 2 -->
+                    <div class="swap-div">
+                        <select class="crypto-dropdown">
+                            <option value="btc">Bitcoin</option>
+                            <option value="eth">Ethereum</option>
+                            <option value="ltc">Litecoin</option>
+                        </select>
+                        <button id="swapButton">Swap</button>
+                        <select class="crypto-dropdown">
+                            <option value="btc">Bitcoin</option>
+                            <option value="eth">Ethereum</option>
+                            <option value="ltc">Litecoin</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Row 3 -->
+                    <div class="wallet-and-zksync-div">
+                        <button id="connectWallet">Connect Wallet</button>
+                        <button id="switchZkSync">Switch to ZkSync Era</button>
+                    </div>
+                </div>
+            </main>
         </div>
         
-        <!-- Row 4 -->
-        <div class="step-div">
-            <div class="step-text">Step 2: Bridge</div>
-            <button id="bridgeButton">BRIDGE</button>
+        <div class="content-div" id="history" style="display: none;">
+            <!-- History content here -->
+            <main>
+                <div class="centered-div">
+                    <!-- Row 1 -->
+                    <div class="history-header-div">
+                        <div class="history-text">Transaction History</div>
+                        <div class="sort-section">
+                            <span>Sort by:</span>
+                            <button id="sortButton" data-state="newest">Newest First</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 2 -->
+                    <div class="no-transactions-div">
+                        <div class="no-transactions-text">No transactions found</div>
+                    </div>
+                </div>
+            </main>
         </div>
-    </div>
-</main>
-
-
+    </main>
 </body>
 </html>

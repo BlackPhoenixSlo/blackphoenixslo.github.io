@@ -17,3 +17,19 @@ document.getElementById("swapButton").addEventListener("click", function() {
     dropdowns[0].value = dropdowns[1].value;
     dropdowns[1].value = tempValue;
 });
+
+
+document.querySelectorAll("nav a").forEach(link => {
+    link.addEventListener("click", function(e) {
+        e.preventDefault(); // Prevent the default link behavior
+        
+        // Hide all content-divs
+        document.querySelectorAll(".content-div").forEach(div => {
+            div.style.display = "none";
+        });
+        
+        // Show the clicked content-div
+        const contentId = e.target.getAttribute("data-content");
+        document.getElementById(contentId).style.display = "block";
+    });
+});

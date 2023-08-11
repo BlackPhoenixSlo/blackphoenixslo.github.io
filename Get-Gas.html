@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Gas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div id="logo">Logo</div>
+        <nav>
+            <a href="#">ONFT Bridge</a>
+            <a href="#">OFT Bridge</a>
+            <a href="#">Get Gas</a>
+            <a href="#">Checker</a>
+            <a href="#">History</a>
+        </nav>
+        <button id="connectWalletHeader">Connect Wallet</button>
+    </header>
+
+    <!-- Body -->
+    <main>
+        <div class="centered-div">
+            <!-- Row 1 -->
+            <div class="gas-refuel-div">
+                <div class="gas-refuel-text">GAS REFUEL</div>
+            </div>
+            
+            <!-- Row 2 -->
+            <div class="swap-div">
+                <select class="crypto-dropdown">
+                    <option value="btc">Bitcoin</option>
+                    <option value="eth">Ethereum</option>
+                    <option value="ltc">Litecoin</option>
+                </select>
+                <button id="swapButton">Swap</button>
+                <select class="crypto-dropdown">
+                    <option value="btc">Bitcoin</option>
+                    <option value="eth">Ethereum</option>
+                    <option value="ltc">Litecoin</option>
+                </select>
+            </div>
+            
+            <!-- Row 3 -->
+            <div class="wallet-and-zksync-div">
+                <button id="connectWallet">Connect Wallet</button>
+                <button id="switchZkSync">Switch to ZkSync Era</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
