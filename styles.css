@@ -223,3 +223,35 @@ button#mintButton, button#bridgeButton {
 button#mintButton:hover, button#bridgeButton:hover {
     background-color: #27ae60; /* A darker shade for hover effect */
 }
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode header {
+    background-color: #1f1f1f;
+}
+
+body.dark-mode a {
+    color: #bb86fc;
+}
+
+body.dark-mode button {
+    background-color: #bb86fc;
+    color: #121212;
+}
+
+body.dark-mode select {
+    background-color: #232323;
+    color: #e0e0e0;
+}
+
+body.dark-mode .centered-div {
+    border: 1px solid #232323;
+}
+
+body.dark-mode .content-div {
+    background-color: #1f1f1f;
+}

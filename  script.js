@@ -33,3 +33,21 @@ document.querySelectorAll("nav a").forEach(link => {
         document.getElementById(contentId).style.display = "block";
     });
 });
+
+
+
+document.getElementById("darkModeToggle").addEventListener("click", function() {
+    const body = document.body;
+    if(body.classList.contains("dark-mode")) {
+        body.classList.remove("dark-mode");
+        localStorage.setItem("darkMode", "off");
+    } else {
+        body.classList.add("dark-mode");
+        localStorage.setItem("darkMode", "on");
+    }
+});
+
+// Check local storage for dark mode preference on page load
+if(localStorage.getItem("darkMode") === "on") {
+    document.body.classList.add("dark-mode");
+}
