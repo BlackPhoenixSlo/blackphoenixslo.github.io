@@ -1,0 +1,327 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+}
+/* ... previous styles ... */
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+}
+
+.footer-left, .footer-right {
+    display: flex;
+    align-items: center;
+}
+
+.social-icon {
+    margin-left: 15px;
+}
+.transaction-container {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-top: 1rem;
+    background-color: #f5f5f5;
+}
+
+.sort-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.sort-section span {
+    margin-right: 0.5rem;
+}
+
+.transaction-list {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    background-color: #ffffff;
+}
+
+.no-transactions-text {
+    text-align: center;
+    color: #888;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #f5f5f5;
+}
+
+nav a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: black;
+}
+
+.bridge-div, .swap-div, .step-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 0;
+    padding: 1rem;
+    border: 1px solid #ddd;
+}
+
+.toggle-button {
+    padding: 0.5rem 1rem;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.crypto-dropdown {
+    flex: 1;
+    margin: 0 1rem;
+}
+
+.swapButton {
+    flex: 1;
+    margin: 0 1rem;
+}
+
+.step-text {
+    flex: 2;
+}
+
+.centered-div {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.step-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* styles.css */
+
+/* ... [Previous CSS] ... */
+
+.centered-div {
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 1rem;
+}
+
+.bridge-div, .swap-div, .step-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0;
+}
+
+.step-div {
+    flex-direction: column;
+    align-items: start;
+}
+/* styles.css */
+
+/* Reset some default styles for a cleaner look */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* A modern and widely used font */
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: #2C3E50; /* A deep blue shade */
+}
+
+#logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ecf0f1; /* Off-white color */
+}
+
+nav a {
+    margin: 0 1.5rem;
+    text-decoration: none;
+    color: #ecf0f1;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #3498db; /* A lighter blue shade for hover effect */
+}
+
+button, .toggle-button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button#connectWallet {
+    background-color: #3498db;
+    color: #ecf0f1;
+}
+
+button#connectWallet:hover {
+    background-color: #2980b9; /* A darker shade for hover effect */
+}
+
+.centered-div {
+    width: 50%;
+    margin: 2rem auto;
+    background-color: #ecf0f1; /* A light off-white background */
+    border-radius: 5px;
+    padding: 1.5rem;
+    box-shadow: 0px 3px 15px rgba(0,0,0,0.1); /* A subtle shadow for depth */
+}
+
+.bridge-div, .swap-div, .step-div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.bridge-div {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toggle-button {
+    background-color: #2C3E50;
+    color: #ecf0f1;
+}
+
+.toggle-button:hover {
+    background-color: #1a242f; /* A darker shade for hover effect */
+}
+
+.bridge-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+button#turboBridge {
+    background-color: #e74c3c; /* A reddish shade */
+    color: #ecf0f1;
+}
+
+button#turboBridge:hover {
+    background-color: #c0392b; /* A darker shade for hover effect */
+}
+
+.crypto-dropdown {
+    width: 45%;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #bdc3c7; /* A light grey border */
+    font-size: 1rem;
+    color: #333;
+}
+
+button#swapButton {
+    width: 10%;
+    background-color: #2C3E50;
+    color: #ecf0f1;
+}
+
+button#swapButton:hover {
+    background-color: #1a242f; /* A darker shade for hover effect */
+}
+
+.step-text {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+button#mintButton, button#bridgeButton {
+    background-color: #2ecc71; /* A green shade */
+    color: #ecf0f1;
+}
+
+button#mintButton:hover, button#bridgeButton:hover {
+    background-color: #27ae60; /* A darker shade for hover effect */
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode header {
+    background-color: #1f1f1f;
+}
+
+body.dark-mode a {
+    color: #bb86fc;
+}
+
+body.dark-mode button {
+    background-color: #bb86fc;
+    color: #121212;
+}
+
+body.dark-mode select {
+    background-color: #232323;
+    color: #e0e0e0;
+}
+
+body.dark-mode .centered-div {
+    border: 1px solid #232323;
+}
+
+body.dark-mode .content-div {
+    background-color: #1f1f1f;
+}
+
+
+body.dark-mode .centered-div,
+body.dark-mode .content-div,
+body.dark-mode .swap-div,
+body.dark-mode .history-header-div,
+body.dark-mode .no-transactions-div {
+    background-color: #1f1f1f;
+    border: 1px solid #232323;
+}
+
+body.dark-mode .history-text,
+body.dark-mode .sort-section span,
+body.dark-mode .gas-refuel-text,
+body.dark-mode .no-transactions-text {
+    color: #e0e0e0;
+}
+
+body.dark-mode .crypto-dropdown {
+    border: 1px solid #232323;
+}
+

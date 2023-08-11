@@ -1,33 +1,11 @@
-/* styles.css */
-
-body {
-    font-family: Arial, sans-serif;
-}
-/* ... previous styles ... */
-
-footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 2rem;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
-}
-
-.footer-left, .footer-right {
-    display: flex;
-    align-items: center;
-}
-
 .social-icon {
     margin-left: 15px;
 }
 .transaction-container {
-    border: 1px solid #ccc;
+    border: none;
     padding: 1rem;
     margin-top: 1rem;
-    background-color: #f5f5f5;
+    background-color: #ffffff;
 }
 
 .sort-section {
@@ -41,29 +19,14 @@ footer {
 }
 
 .transaction-list {
-    border: 1px solid #ccc;
+    border: none;
     padding: 1rem;
     background-color: #ffffff;
 }
 
 .no-transactions-text {
     text-align: center;
-    color: #888;
-}
-
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: #f5f5f5;
-}
-
-nav a {
-    margin: 0 1rem;
-    text-decoration: none;
-    color: black;
+    color: #ffffff;
 }
 
 .bridge-div, .swap-div, .step-div {
@@ -72,12 +35,12 @@ nav a {
     align-items: center;
     margin: 2rem 0;
     padding: 1rem;
-    border: 1px solid #ddd;
+    border: none;
 }
 
 .toggle-button {
     padding: 0.5rem 1rem;
-    border: 1px solid black;
+    border: none;
     cursor: pointer;
 }
 
@@ -95,32 +58,11 @@ nav a {
     flex: 2;
 }
 
-.centered-div {
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .step-div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-/* styles.css */
-
-/* ... [Previous CSS] ... */
-
-.centered-div {
-    width: 50%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid #ddd;
-    padding: 1rem;
 }
 
 .bridge-div, .swap-div, .step-div {
@@ -129,50 +71,6 @@ nav a {
     justify-content: space-between;
     align-items: center;
     margin: 0.5rem 0;
-}
-
-.step-div {
-    flex-direction: column;
-    align-items: start;
-}
-/* styles.css */
-
-/* Reset some default styles for a cleaner look */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Poppins', sans-serif; /* A modern and widely used font */
-    background-color: #f9f9f9;
-    color: #333;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 5%;
-    background-color: #2C3E50; /* A deep blue shade */
-}
-
-#logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #ecf0f1; /* Off-white color */
-}
-
-nav a {
-    margin: 0 1.5rem;
-    text-decoration: none;
-    color: #ecf0f1;
-    transition: color 0.3s ease;
-}
-
-nav a:hover {
-    color: #3498db; /* A lighter blue shade for hover effect */
 }
 
 button, .toggle-button {
@@ -187,19 +85,6 @@ button, .toggle-button {
 button#connectWallet {
     background-color: #3498db;
     color: #ecf0f1;
-}
-
-button#connectWallet:hover {
-    background-color: #2980b9; /* A darker shade for hover effect */
-}
-
-.centered-div {
-    width: 50%;
-    margin: 2rem auto;
-    background-color: #ecf0f1; /* A light off-white background */
-    border-radius: 5px;
-    padding: 1.5rem;
-    box-shadow: 0px 3px 15px rgba(0,0,0,0.1); /* A subtle shadow for depth */
 }
 
 .bridge-div, .swap-div, .step-div {
@@ -221,31 +106,9 @@ button#connectWallet:hover {
     color: #ecf0f1;
 }
 
-.toggle-button:hover {
-    background-color: #1a242f; /* A darker shade for hover effect */
-}
-
 .bridge-text {
     font-size: 1.5rem;
     font-weight: bold;
-}
-
-button#turboBridge {
-    background-color: #e74c3c; /* A reddish shade */
-    color: #ecf0f1;
-}
-
-button#turboBridge:hover {
-    background-color: #c0392b; /* A darker shade for hover effect */
-}
-
-.crypto-dropdown {
-    width: 45%;
-    padding: 0.5rem;
-    border-radius: 4px;
-    border: 1px solid #bdc3c7; /* A light grey border */
-    font-size: 1rem;
-    color: #333;
 }
 
 button#swapButton {
@@ -254,24 +117,77 @@ button#swapButton {
     color: #ecf0f1;
 }
 
-button#swapButton:hover {
-    background-color: #1a242f; /* A darker shade for hover effect */
-}
-
 .step-text {
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
 }
 
-button#mintButton, button#bridgeButton {
-    background-color: #2ecc71; /* A green shade */
-    color: #ecf0f1;
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #f5f5f5;
 }
 
-button#mintButton:hover, button#bridgeButton:hover {
-    background-color: #27ae60; /* A darker shade for hover effect */
+nav a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: black;
 }
 
+nav a {
+    margin: 0 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode header {
+    background-color: #ecf0f1;
+}
+
+
+body.dark-mode .centered-div,
+body.dark-mode .content-div,
+body.dark-mode .swap-div,
+body.dark-mode .history-header-div,
+body.dark-mode .no-transactions-div {
+    background-color: #ecf0f1;
+    border: 1px solid #232323;
+}
+
+.centered-div {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.centered-div {
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;
+    padding: 1rem;
+}
+
+.footer-left, .footer-right {
+    display: flex;
+    align-items: center;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
 /* Dark Mode Styles */
 body.dark-mode {
     background-color: #121212;
@@ -309,19 +225,21 @@ body.dark-mode .centered-div,
 body.dark-mode .content-div,
 body.dark-mode .swap-div,
 body.dark-mode .history-header-div,
-body.dark-mode .no-transactions-div {
+body.dark-mode .no-transactions-div,
+.transaction-container,
+.transaction-list {
     background-color: #1f1f1f;
+
     border: 1px solid #232323;
 }
 
 body.dark-mode .history-text,
 body.dark-mode .sort-section span,
 body.dark-mode .gas-refuel-text,
-body.dark-mode .no-transactions-text {
+body.dark-mode .no-transactions-text{
     color: #e0e0e0;
 }
 
 body.dark-mode .crypto-dropdown {
-    border: 1px solid #232323;
+    border: 1px solid #1f1f1f;
 }
-
