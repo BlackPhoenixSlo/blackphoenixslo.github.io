@@ -276,3 +276,68 @@ body.dark-mode .no-transactions-text {
 body.dark-mode .crypto-dropdown {
     border: 1px solid #232323;
 }
+
+/* This represents the original light-mode CSS content from previous steps */
+body {
+    background-color: #ffffff;
+    color: #000000;
+}
+/* ... other original styles ... */
+
+/* Default Dark Mode Styles */
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+header {
+    background-color: #1f1f1f;
+}
+
+a {
+    color: #bb86fc;
+}
+
+button {
+    background-color: #bb86fc;
+    color: #121212;
+}
+
+select {
+    background-color: #232323;
+    color: #e0e0e0;
+}
+
+.centered-div {
+    border: 1px solid #232323;
+}
+
+.content-div {
+    background-color: #1f1f1f;
+}
+
+.centered-div,
+.content-div,
+.swap-div,
+.history-header-div,
+.no-transactions-div {
+    background-color: #1f1f1f;
+    border: 1px solid #232323;
+}
+
+.history-text,
+.sort-section span,
+.gas-refuel-text,
+.no-transactions-text {
+    color: #e0e0e0;
+}
+
+.crypto-dropdown {
+    border: 1px solid #232323;
+}
+
+/* Specific Light Mode Styles */
+body.light-mode {
+    background-color: #ffffff;
+    color: #000000;
+}
