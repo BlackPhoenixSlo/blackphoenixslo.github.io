@@ -35,3 +35,14 @@ document.getElementById("darkModeToggle").addEventListener("click", function() {
 if(localStorage.getItem("darkMode") === "on") {
     document.body.classList.add("dark-mode");
 }
+
+
+ // Check local storage for dark mode preference on page load
+ document.addEventListener("DOMContentLoaded", function() {
+    const darkModePreference = localStorage.getItem("darkMode");
+    
+    // If there's no preference set or it's set to 'on', default to dark mode
+    if ( true) {
+        document.body.classList.add("dark-mode");
+    }
+});
