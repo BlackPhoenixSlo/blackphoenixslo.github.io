@@ -23,6 +23,33 @@ footer {
 .social-icon {
     margin-left: 15px;
 }
+.transaction-container {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-top: 1rem;
+    background-color: #f5f5f5;
+}
+
+.sort-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.sort-section span {
+    margin-right: 0.5rem;
+}
+
+.transaction-list {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    background-color: #ffffff;
+}
+
+.no-transactions-text {
+    text-align: center;
+    color: #888;
+}
 
 
 header {
