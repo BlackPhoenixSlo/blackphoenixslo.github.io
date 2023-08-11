@@ -113,6 +113,7 @@ button#connectWallet {
 
 button#swapButton {
     width: 10%;
+    min-width: 70px;
     background-color: #2C3E50;
     color: #ecf0f1;
 }
@@ -241,5 +242,53 @@ body.dark-mode .no-transactions-text{
 }
 
 body.dark-mode .crypto-dropdown {
-    border: 1px solid #1f1f1f;
+    border: 1px solid #1c1414;
+}
+
+body.dark-mode .centered-div,
+body.dark-mode main main,
+body.dark-mode .swap-div{
+    background-color: #121212 !important;
+    border: 0px solid #bc0808 !important;
+
+}
+/* Mobile Responsive Styles */
+
+
+
+/* Footer adjustments for mobile */
+@media only screen and (max-width: 996px) {
+    footer {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+    }
+
+    .footer-faq, .social-icons {
+        margin: 0.5rem 0;
+    }
+
+    .social-icon {
+        margin: 0 0.5rem;
+    }
+}
+
+/* Footer adjustments for mobile to display in column */
+@media only screen and (max-width: 996px) {
+    footer {
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+    }
+
+    .footer-faq, .social-icons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0.5rem 0;
+    }
+
+    .social-icon {
+        margin: 0.3rem 0;
+    }
 }
