@@ -255,3 +255,24 @@ body.dark-mode .centered-div {
 body.dark-mode .content-div {
     background-color: #1f1f1f;
 }
+
+
+body.dark-mode .centered-div,
+body.dark-mode .content-div,
+body.dark-mode .swap-div,
+body.dark-mode .history-header-div,
+body.dark-mode .no-transactions-div {
+    background-color: #1f1f1f;
+    border: 1px solid #232323;
+}
+
+body.dark-mode .history-text,
+body.dark-mode .sort-section span,
+body.dark-mode .gas-refuel-text,
+body.dark-mode .no-transactions-text {
+    color: #e0e0e0;
+}
+
+body.dark-mode .crypto-dropdown {
+    border: 1px solid #232323;
+}
