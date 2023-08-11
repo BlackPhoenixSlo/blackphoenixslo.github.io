@@ -277,3 +277,23 @@ body.dark-mode .crypto-dropdown {
     border: 1px solid #232323;
 }
 
+/* ... previous styles ... */
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+}
+
+.footer-left, .footer-right {
+    display: flex;
+    align-items: center;
+}
+
+.social-icon {
+    margin-left: 15px;
+}
