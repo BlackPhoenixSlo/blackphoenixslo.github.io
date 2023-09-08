@@ -329,6 +329,7 @@ body.dark-mode .swap-div{
     }
 }
 footer {
+    display: none;
     position: relative;
     flex-direction: column;
     align-items: center;

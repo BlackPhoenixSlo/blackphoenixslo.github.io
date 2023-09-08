@@ -9,11 +9,6 @@ document.querySelector(".toggle-button").addEventListener("click", function() {
     toggleButton.textContent = newState;
 });
 
-// Swap Button Logic
-document.getElementById("swapButton").addEventListener("click", function() {
-    const [dropdown1, dropdown2] = document.querySelectorAll(".crypto-dropdown");
-    [dropdown1.value, dropdown2.value] = [dropdown2.value, dropdown1.value];
-});
 
 // Navigation Logic
 document.querySelectorAll("nav a").forEach(link => {

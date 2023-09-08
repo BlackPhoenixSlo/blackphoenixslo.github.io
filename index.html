@@ -1,265 +1,356 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Single Page App
-  </title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
-  <link href="styles.css" rel="stylesheet"/>
-  <script defer="" src="script.js">
-  </script>
+
+<head>
+   <meta charset="utf-8" />
+   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+   <title>
+      Single Page App
+   </title>
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+   <link href="styles.css" rel="stylesheet" />
+   <script defer="" src="script.js">
+   </script>
 
 
- </head>
- <!-- Header -->
- <header>
-    <div id="logo">
-     Sensual Speech
-    </div>
-    <nav>
-     <div><a data-content="Agencies" href="#">
-      Agencies
-     </a></div>
-     <div><a data-content="Models" href="#">
-      Models
-     </a></div>
-     <div><a data-content="OurTeam" href="#">
-      Our Team
-     </a></div>
-     <div><a data-content="SalesHistory" href="#">
-      Sales History
-     </a></div>
-     <div><a data-content="WorkerWorkingHours" href="#">
-      Worker Working Hours
-      </a></div>
+</head>
+<!-- Header -->
+<header>
+   <div id="logo">
+      Sensual Speech
+   </div>
+   <nav>
+      <div><a data-content="Agencies" href="#">
+            Agencies
+         </a></div>
+      <div><a data-content="Models" href="#">
+            Models
+         </a></div>
+      <div><a data-content="OurTeam" href="#">
+            Our Team
+         </a></div>
+      <div><a data-content="SalesHistory" href="#">
+            Sales History
+         </a></div>
+      <div><a data-content="WorkerWorkingHours" href="#">
+            Worker Working Hours
+         </a></div>
       <div><a data-content="ChattingSchedudle" href="#">
-      Chatting Schedudle
-      </a></div>
-      
-     
-    </nav>
-    <!-- In the header, next to the Connect Wallet button -->
-    <div>
-       <div><button id="darkModeToggle">
-          Toggle Dark Mode
-           </button></div> 
- 
- </div>
-   </header>
-  <!-- Main Content Area -->
-  <main>
-    <div class="content-div" id="Models" style="display: none;">
-        <!-- ONFT Bridge content here -->
-        <main>
-         <div class="centered-div">
-          <!-- Row 1 -->
-          <div class="bridge-div">
-           <div class="toggle-button" data-state="V1">
-            v1
-           </div>
-           <div class="bridge-text">
-            Our Models
-           </div>
-           <button id="turboBridge">
-            TurboRefresh
-           </button>
-          </div>
-          <!-- Row 2 -->
-          <div class="swap-div">
-           <iframe class="airtable-embed" src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shrUSk4OKozqTr1Vc?backgroundColor=gray&viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>        </div>
-          <!-- Row 3 -->
-          <div class="step-div">
-           <script src="https://static.airtable.com/js/embed/embed_snippet_v1.js"></script><iframe class="airtable-embed airtable-dynamic-height" src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shror1Y6wm2WxYu1z?backgroundColor=gray" frameborder="0" onmousewheel="" width="100%" height="1821" style="background: transparent; border: 1px solid #ccc;"></iframe>        </div>
-          <!-- Row 4 -->
-          <div class="step-div">
-           <div class="step-text">
-            Step 3: reach out to TG: @jakabasej.
-           </div>
-           <button id="bridgeButton">
-            Text tg:jakabasej   <---
-           </button>
-          </div>
-         </div>
-  
-        </main>
-     </div>
-     
-     <div class="content-div" id="Agencies">
-        <!-- ONFT Bridge content here -->
-        <main>
-         <div class="centered-div">
-          <!-- Row 1 -->
-          <div class="bridge-div">
-           <div class="toggle-button" data-state="V1">
-            v1
-           </div>
-           <div class="bridge-text">
-            Our Partner Agencies
-           </div>
-           <button id="turboBridge">
-            TurboRefresh
-           </button>
-          </div>
-          <!-- Row 2 -->
-          <div class="swap-div">
-             <iframe class="airtable-embed" src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shrFuYKkB0bUktvGS?backgroundColor=gray" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
-          </div>
-          <!-- Row 3 -->
-          <div class="step-div">
-             <script src="https://static.airtable.com/js/embed/embed_snippet_v1.js"></script><iframe class="airtable-embed airtable-dynamic-height" src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shrm3v81flY8AiZzB?backgroundColor=gray" frameborder="0" onmousewheel="" width="100%" height="1523" style="background: transparent; border: 1px solid #ccc;"></iframe>
-          </div>
-          <!-- Row 4 -->
-          <div class="step-div">
-           <div class="step-text">
-            Step 2: Add your models.
-           </div>
-           <button id="bridgeButton">
-            Add models   <---
-           </button>
-          </div>
-        </main>
-    
-         </div>
+            Chatting Schedudle
+         </a></div>
 
 
-         
-   <div class="content-div" id="getGas" style="display: none;">
-    <!-- Get Gas content here -->
-    <main>
-     <div class="centered-div">
-      <!-- Row 1 -->
-      <div class="gas-refuel-div">
-       <div class="gas-refuel-text">
-        GAS REFUEL
-       </div>
-      </div>
-      <!-- Row 2 -->
-      <div class="swap-div">
-       <select class="crypto-dropdown">
-        <option value="btc">
-         Bitcoin
-        </option>
-        <option value="eth">
-         Ethereum
-        </option>
-        <option value="ltc">
-         Litecoin
-        </option>
-       </select>
-       <button id="swapButton">
-        Swap
-       </button>
-       <select class="crypto-dropdown">
-        <option value="btc">
-         Bitcoin
-        </option>
-        <option value="eth">
-         Ethereum
-        </option>
-        <option value="ltc">
-         Litecoin
-        </option>
-       </select>
-      </div>
-      <!-- Row 3 -->
-      <div class="wallet-and-zksync-div">
-       <button id="connectWallet">
-        Connect Wallet
-       </button>
-       <button id="switchZkSync">
-        Switch to ZkSync Era
-       </button>
-      </div>
-     </div>
-    </main>
+   </nav>
+   <!-- In the header, next to the Connect Wallet button -->
+   <div>
+      <div><button id="darkModeToggle">
+            Toggle Dark Mode
+         </button></div>
+
    </div>
-
-
-
+</header>
+<!-- Main Content Area -->
+<main>
+   <div class="content-div" id="Models" style="display: none;">
+      <!-- ONFT Bridge content here -->
+      <main>
+         <div class="centered-div">
+            <!-- Row 1 -->
+            <div class="bridge-div">
+               <div class="toggle-button" data-state="V1">
+                  v1
+               </div>
+               <div class="bridge-text">
+                  Our Models
+               </div>
+               <button id="turboBridge">
+                  TurboRefresh
+               </button>
+            </div>
+            <!-- Row 2 -->
+            <div class="swap-div">
+               <iframe class="airtable-embed"
+                  src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shrUSk4OKozqTr1Vc?backgroundColor=gray&viewControls=on"
+                  frameborder="0" onmousewheel="" width="100%" height="533"
+                  style="background: transparent; border: 1px solid #ccc;"></iframe> </div>
+            <!-- Row 3 -->
+            <div class="step-div">
+               <script src="https://static.airtable.com/js/embed/embed_snippet_v1.js"></script><iframe
+                  class="airtable-embed airtable-dynamic-height"
+                  src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shror1Y6wm2WxYu1z?backgroundColor=gray"
+                  frameborder="0" onmousewheel="" width="100%" height="1821"
+                  style="background: transparent; border: 1px solid #ccc;"></iframe>
+            </div>
+            <!-- Row 4 -->
+            <div class="step-div">
+               <div class="step-text">
+                  Step 3: reach out to TG: @jakabasej.
+               </div>
+               <button id="bridgeButton">
+                  Text tg:jakabasej --- </button>
+            </div>
+         </div>
+      </main>
+   </div>
+   <div class="content-div" id="Agencies">
+      <!-- ONFT Bridge content here -->
+      <main>
+         <div class="centered-div">
+            <!-- Row 1 -->
+            <div class="bridge-div">
+               <div class="toggle-button" data-state="V1">
+                  v1
+               </div>
+               <div class="bridge-text">
+                  Our Partner Agencies
+               </div>
+               <button id="turboBridge">
+                  TurboRefresh
+               </button>
+            </div>
+            <!-- Row 2 -->
+            <div class="swap-div">
+               <iframe class="airtable-embed"
+                  src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shrFuYKkB0bUktvGS?backgroundColor=gray"
+                  frameborder="0" onmousewheel="" width="100%" height="533"
+                  style="background: transparent; border: 1px solid #ccc;"></iframe>
+            </div>
+            <!-- Row 3 -->
+            <div class="step-div">
+               <script src="https://static.airtable.com/js/embed/embed_snippet_v1.js"></script><iframe
+                  class="airtable-embed airtable-dynamic-height"
+                  src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shrm3v81flY8AiZzB?backgroundColor=gray"
+                  frameborder="0" onmousewheel="" width="100%" height="1523"
+                  style="background: transparent; border: 1px solid #ccc;"></iframe>
+            </div>
+            <!-- Row 4 -->
+            <div class="step-div">
+               <div class="step-text">
+                  Step 2: Add your models.
+               </div>
+               <button id="bridgeButton">
+                  Add models --- </button>
+            </div>
+         </div>
+      </main>
+   </div>
    <div class="content-div" id="OurTeam" style="display: none;">
-    <!-- ONFT Bridge content here -->
-    <main>
-     <div class="centered-div">
-      <!-- Row 1 -->
-      <div class="bridge-div">
-       <div class="toggle-button" data-state="V1">
-        v1
-       </div>
-       <div class="bridge-text">
-        Our Chatters
-       </div>
-       <button id="turboBridge">
-        TurboRefresh
-       </button>
-      </div>
-      <!-- Row 2 -->
-      <div class="swap-div">
-        <iframe class="airtable-embed" src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shrzz4R7MLasXCZc1?backgroundColor=gray&viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>          </div>
-      <!-- Row 3 -->
-      <div class="step-div">
-        <script src="https://static.airtable.com/js/embed/embed_snippet_v1.js"></script><iframe class="airtable-embed airtable-dynamic-height" src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shrqIkF8VUsf9Zx8v?backgroundColor=gray" frameborder="0" onmousewheel="" width="100%" height="2252" style="background: transparent; border: 1px solid #ccc;"></iframe>          </div>
-      <!-- Row 4 -->
-      <div class="step-div">
-       <div class="step-text">
-        Step 2: Add awailable hours for each day of the next week.
-       </div>
-       <button id="bridgeButton">
-        Add awailable hours   <---
-       </button>
-      </div>
-    </main>
-
-     </div>
-
-   <div class="content-div" id="history" style="display: none;">
-    <!-- History content here -->
-    <main>
-     <div class="centered-div">
-      <!-- Row 1 -->
-      <div class="transaction-container">
-       <div class="sort-section">
-        <span>
-         Sort by:
-        </span>
-        <select>
-         <option value="newest">
-          Newest
-         </option>
-         <option value="oldest">
-          Oldest
-         </option>
-        </select>
-       </div>
-       <div class="transaction-list">
-        <div class="no-transactions-text">
-         No transactions found
-        </div>
-       </div>
-      </div>
-     </div>
-    </main>
+      <!-- ONFT Bridge content here -->
+      <main>
+         <div class="centered-div">
+            <!-- Row 1 -->
+            <div class="bridge-div">
+               <div class="toggle-button" data-state="V1">
+                  v1
+               </div>
+               <div class="bridge-text">
+                  Our Chatters
+               </div>
+               <button id="turboBridge">
+                  TurboRefresh
+               </button>
+            </div>
+            <!-- Row 2 -->
+            <div class="swap-div">
+               <iframe class="airtable-embed"
+                  src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shrzz4R7MLasXCZc1?backgroundColor=gray&viewControls=on"
+                  frameborder="0" onmousewheel="" width="100%" height="533"
+                  style="background: transparent; border: 1px solid #ccc;"></iframe>
+            </div>
+            <!-- Row 3 -->
+            <div class="step-div">
+               <script src="https://static.airtable.com/js/embed/embed_snippet_v1.js">
+               </script>
+               <iframe class="airtable-embed airtable-dynamic-height"
+                  src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shrqIkF8VUsf9Zx8v?backgroundColor=gray"
+                  frameborder="0" onmousewheel="" width="100%" height="2252"
+                  style="background: transparent; border: 1px solid #ccc;"></iframe>
+            </div>
+            <!-- Row 4 -->
+            <div class="step-div">
+               <div class="step-text">
+                  Step 2: Add awailable hours for each day of the next week.
+               </div>
+               <button id="bridgeButton">
+                  Add awailable hours --- </button>
+            </div>
+      </main>
    </div>
-  </main>
-  <!-- Footer -->
-  <footer>
+   <div class="content-div" id="SalesHistory" style="display: none;">
+      <!-- ONFT Bridge content here -->
+      <main>
+         <div class="centered-div">
+            <!-- Row 1 -->
+            <div class="bridge-div">
+               <div class="toggle-button" data-state="V1">
+                  v1
+               </div>
+               <div class="bridge-text">
+                  Sales History
+               </div>
+               <button id="turboBridge">
+                  TurboRefresh
+               </button>
+            </div>
+            <!-- Row 2 -->
+            <div class="swap-div">
+               <iframe class="airtable-embed"
+                  src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shrhRCclHU6LTt2V6?backgroundColor=gray&viewControls=on"
+                  frameborder="0" onmousewheel="" width="100%" height="533"
+                  style="background: transparent; border: 1px solid #ccc;"></iframe>
+               <!-- Row 3 -->
+               <div class="step-div">
+                  <script src="https://static.airtable.com/js/embed/embed_snippet_v1.js">
+                  </script><iframe class="airtable-embed airtable-dynamic-height"
+                     src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shrMqGIzRIpI0UCIW?backgroundColor=gray"
+                     frameborder="0" onmousewheel="" width="100%" height="1093"
+                     style="background: transparent; border: 1px solid #ccc;"></iframe>
+                  <!-- Row 4 -->
+                  <div class="step-div">
+                     <div class="step-text">
+                        Step 2: Clock out in the telegram group.
+                     </div>
+                     <button id="bridgeButton">
+                        Clock out --- </button>
+                  </div>
+      </main>
+   </div>
+   <div class="content-div" id="WorkerWorkingHours" style="display: none;">
+      <!-- ONFT Bridge content here -->
+      <main>
+         <div class="centered-div">
+            <!-- Row 1 -->
+            <div class="bridge-div">
+               <div class="toggle-button" data-state="V1">
+                  v1
+               </div>
+               <div class="bridge-text">
+                  When are you free to work this week?
+               </div>
+               <button id="turboBridge">
+                  TurboRefresh
+               </button>
+            </div>
+            <!-- Row 2 -->
+            <div class="swap-div">
+               <iframe class="airtable-embed"
+                  src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shrXgTFjb31GimsIf?backgroundColor=gray&viewControls=on"
+                  frameborder="0" onmousewheel="" width="100%" height="533"
+                  style="background: transparent; border: 1px solid #ccc;"></iframe>
+               <iframe class="airtable-embed"
+                  src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shrfQYqqathPSuNyx?backgroundColor=gray&viewControls=on"
+                  frameborder="0" onmousewheel="" width="100%" height="533"
+                  style="background: transparent; border: 1px solid #ccc;"></iframe>
+            </div>
+
+            <div class="step-div">
+               <script src="https://static.airtable.com/js/embed/embed_snippet_v1.js">
+               </script><iframe class="airtable-embed airtable-dynamic-height"
+                  src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shrCpNw1M8fUOg1zi?backgroundColor=gray"
+                  frameborder="0" onmousewheel="" width="100%" height="1028"
+                  style="background: transparent; border: 1px solid #ccc;"></iframe>
+               <div class="step-div">
+                  <div class="step-text">
+                     Step 2: Check your work
+                     Schedudle.
+                  </div>
+                  <button id="bridgeButton">
+                     work Schedudle --- </button>
+               </div>
+            </div>
+      </main>
+   </div>
+   <div class="content-div" id="ChattingSchedudle" style="display: none;">
+
+      <!-- ONFT Bridge content here -->
+      <main>
+         <div class="centered-div">
+            <!-- Row 1 -->
+            <div class="bridge-div">
+               <div class="toggle-button" data-state="V1">
+                  v1
+               </div>
+               <div class="bridge-text">
+                  Here is your
+                  Schedudle.
+               </div>
+               <button id="turboBridge">
+                  TurboRefresh
+               </button>
+            </div>
+            <!-- Row 2 -->
+            <div class="swap-div">
+               Today's and
+               tomorrow's
+               Schedudle:
+               <iframe class="airtable-embed"
+                  src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shrn6S3I7Ba7vGJSi?backgroundColor=gray"
+                  frameborder="0" onmousewheel="" width="100%" height="533"
+                  style="background: transparent; border: 1px solid #ccc;"></iframe>
+               <br>
+               <br>
+               Whole Schedudle:
+               <iframe class="airtable-embed"
+                  src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shrKFGHtltsh04FjC?backgroundColor=gray&viewControls=on"
+                  frameborder="0" onmousewheel="" width="100%" height="533"
+                  style="background: transparent; border: 1px solid #ccc;"></iframe>
+
+
+               <div class="step-div">
+                  <div class="step-text">
+                     Step 2:
+                     Clock
+                     in and start
+                     Chatting.
+                  </div>
+                  <button id="bridgeButton">
+                     Clock in
+                     ---
+                  </button>
+               </div>
+
+               <div class="step-div">
+
+
+                  <iframe class="airtable-embed"
+                     src="https://airtable.com/embed/appRvQhwDRF3fsZ4B/shrXRdEGPZXJC9VJo?backgroundColor=gray"
+                     frameborder="0" onmousewheel="" width="100%" height="533"
+                     style="background: transparent; border: 1px solid #ccc;"></iframe>
+
+               </div>
+      </main>
+   </div>
+   </div>
+</main>
+<!--
+                                                                                                            Footer -->
+<footer>
    <div class="footer-left">
-    <a href="#">
-     FAQ
-    </a>
+      <a href="#">
+         FAQ
+      </a>
    </div>
    <div class="footer-right">
-    <div></div><a class="social-icon" href="#">
-    Twitter Logo
-    </a></div>
-    <div><a class="social-icon" href="#">
-    Telegram Logo
-    </a></div>
-    <div><a class="social-icon" href="#">
-    Book Logo
-    </a></div>
+      <div>
+      </div>
+      <a class="social-icon" href="#">
+         Twitter
+         Logo
+      </a>
    </div>
-  </footer>
- </body>
+   <div><a class="social-icon" href="#">
+         Telegram
+         Logo
+      </a>
+   </div>
+   <div><a class="social-icon" href="#">
+         Book
+         Logo
+      </a>
+   </div>
+   </div>
+</footer>
+</body>
+
+
 </html>
