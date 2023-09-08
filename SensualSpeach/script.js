@@ -1,23 +1,8 @@
 // script.js
 
-// Toggle Button Logic
-document.querySelector(".toggle-button").addEventListener("click", function() {
-    const toggleButton = document.querySelector(".toggle-button");
-    const currentState = toggleButton.getAttribute("data-state");
-    const newState = currentState === "v1" ? "v2" : "v1";
-    toggleButton.setAttribute("data-state", newState);
-    toggleButton.textContent = newState;
-});
 
 
-// Navigation Logic
-document.querySelectorAll("nav a").forEach(link => {
-    link.addEventListener("click", function(e) {
-        e.preventDefault();
-        document.querySelectorAll(".content-div").forEach(div => div.style.display = "none");
-        document.getElementById(e.target.getAttribute("data-content")).style.display = "block";
-    });
-});
+
 
 // Dark Mode Logic
 document.getElementById("darkModeToggle").addEventListener("click", function() {
