@@ -6,10 +6,9 @@ body {
 /* ... previous styles ... */
 
 footer {
-    display: flex;
+    display: none;
     justify-content: space-between;
     padding: 1rem 2rem;
-    position: fixed;
     bottom: 0;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
