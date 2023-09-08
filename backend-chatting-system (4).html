@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Backend Chatting System</title>
+<link href="styles.css" rel="stylesheet"/>
+<style>
+        /* Styles for the Backend Chatting System Page */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .backend-container {
+            background-color: #fff;
+            padding: 2rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .backend-image {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .access-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body><header>
+<div id="logo">
+      Sensual Speech
+   </div>
+<nav>
+<div><a data-content="Agencies" href="#">
+            Agencies
+         </a></div>
+<div><a data-content="Models" href="#">
+            Models
+         </a></div>
+<div><a data-content="OurTeam" href="#">
+            Our Team
+         </a></div>
+<div><a data-content="SalesHistory" href="#">
+            Sales History
+         </a></div>
+<div><a data-content="WorkerWorkingHours" href="#">
+            Worker Working Hours
+         </a></div>
+<div><a data-content="ChattingSchedudle" href="#">
+            Chatting Schedudle
+         </a></div>
+</nav>
+<!-- In the header, next to the Connect Wallet button -->
+<div>
+<div><button id="darkModeToggle">
+            Toggle Dark Mode
+         </button></div>
+</div>
+</header>
+<div class="backend-container">
+<img alt="Backend System Image" class="backend-image" src="https://via.placeholder.com/400"/>
+<input type="password" value=""/>
+<a class="access-button" href="#">Access System</a>
+</div>
+<script>
+document.querySelector('.access-button').addEventListener('click', function(event) {
+    var passwordValue = document.querySelector('input[type="password"]').value;
+    if(passwordValue !== 'wubbalubbadubdub') {
+        alert('Incorrect password! Please enter the correct password to access the system.');
+        event.preventDefault();
+    }
+});
+</script></body>
+</html>
