@@ -43,10 +43,20 @@
     </style>
 </head>
 <body>
-    <div class="backend-container">
-        <img class="backend-image" src="https://via.placeholder.com/400" alt="Backend System Image">
-        <input type="password" value="wubbalubbadubdub" readonly>
-        <a href="#" class="access-button">Access System</a>
-    </div>
+    <div>
+        <div class="backend-container">
+        <img alt="Backend System Image" class="backend-image" src="https://via.placeholder.com/400"/>
+        <input type="password" value=""/>
+        <a class="access-button" href="#">Access System</a>
+        </div>
+        <script>
+        document.querySelector('.access-button').addEventListener('click', function(event) {
+            var passwordValue = document.querySelector('input[type="password"]').value;
+            if(passwordValue !== 'wubbalubbadubdub') {
+                alert('Incorrect password! Please enter the correct password to access the system.');
+                event.preventDefault();
+            }
+        });
+        </script></div>
 </body>
 </html>

@@ -43,41 +43,21 @@
         }
     </style>
 </head>
-<body><header>
-<div id="logo">
-      Sensual Speech
-   </div>
-<nav>
-<div><a data-content="Agencies" href="#">
-            Agencies
-         </a></div>
-<div><a data-content="Models" href="#">
-            Models
-         </a></div>
-<div><a data-content="OurTeam" href="#">
-            Our Team
-         </a></div>
-<div><a data-content="SalesHistory" href="#">
-            Sales History
-         </a></div>
-<div><a data-content="WorkerWorkingHours" href="#">
-            Worker Working Hours
-         </a></div>
-<div><a data-content="ChattingSchedudle" href="#">
-            Chatting Schedudle
-         </a></div>
-</nav>
-<!-- In the header, next to the Connect Wallet button -->
+<body>
 <div>
-<div><button id="darkModeToggle">
-            Toggle Dark Mode
-         </button></div>
-</div>
-</header>
 <div class="backend-container">
 <img alt="Backend System Image" class="backend-image" src="https://via.placeholder.com/400"/>
-<input readonly="" type="password" value="wubbalubbadubdub"/>
+<input type="password" value=""/>
 <a class="access-button" href="#">Access System</a>
 </div>
-</body>
+<script>
+        document.querySelector('.access-button').addEventListener('click', function(event) {
+            var passwordValue = document.querySelector('input[type="password"]').value;
+            if(passwordValue !== 'wubbalubbadubdub') {
+                alert('Incorrect password! Please enter the correct password to access the system.');
+                event.preventDefault();
+            }
+        });
+        </script></div>
+<button id="darkModeToggle">Toggle Dark Mode</button></body>
 </html>

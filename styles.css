@@ -498,3 +498,22 @@ nav a {
 .image-div:hover .image-description, .portfolio-item:hover .portfolio-description {
     bottom: 0;
 }
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #121212;
+    color: #FFFFFF;
+}
+
+/* Adjusting other elements for dark mode */
+.dark-mode .transaction-container,
+.dark-mode .transaction-list {
+    background-color: #1f1f1f;
+    color: #FFFFFF;
+}
+
+.dark-mode .no-transactions-text {
+    color: #AAAAAA;
+}
+
+/* You can extend this with more specific styles for other elements as needed */
