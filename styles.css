@@ -527,3 +527,29 @@ body{
  a{
     color: white;
  }
+/* Ensure containers and main elements are centered and have a max-width */
+body, .backend-container, .portfolio-container {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* Ensure images and other media are scalable and do not exceed the viewport's width */
+img, video, .backend-image {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Media query for screens smaller than 600px (typically mobile devices) */
+@media only screen and (max-width: 998px) {
+    .sort-section, .bridge-div, .swap-div, .step-div {
+        flex-direction: column;
+    }
+}
+
+/* Media query for screens smaller than 600px (typically mobile devices) */
+@media only screen and (max-width: 998px) {
+    .portfolio-container, .backend-container, .image-div, .portfolio-item {
+        flex-direction: column;
+        align-items: center;
+    }
+}
