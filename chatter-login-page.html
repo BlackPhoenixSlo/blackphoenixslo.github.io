@@ -93,7 +93,7 @@ document.addEventListener('keyup', function(event) {
             alert('Incorrect password! Please enter the correct password to access the system.');
         } else {
             // Construct the URL using the username and password values
-            var newURL = 'chatter/' + userValue + '/' + passwordValue + '.html';
+            var newURL = 'chatter/' + userValue + passwordValue +"/"+ 'ChattingSchedudle.html';
             window.location.href = newURL;  // Redirect to the new URL
         }
     }
