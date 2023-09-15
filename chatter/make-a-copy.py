@@ -1,19 +1,25 @@
 print("jaka")
 import os
+import hashlib
+
+def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
 
 def create_folder_and_modify_files():
     # Get user inputs
     username = input("Enter username: ")
     password = input("Enter password: ")
+    password = hash_password(password)
     
     iframes = []
     files = [
+        "SalesInput",
+        "SalesOverview",
         "AvailablehoursOverview",
         "ChattingSchedudle",
-        "SalesOverview",
         "AddAvailableHours",
-        "SalesInput",
-        "YourSchedule"
+        
+
     ]
     for file in files:
         iframes.append(input(f"Enter iframe for {file}.html: "))
@@ -32,16 +38,16 @@ def modify_files(username, password, iframes):
     
     # List of HTML files
     files = [
+        "SalesInput.html",
+        "SalesOverview.html",
         "AvailablehoursOverview.html",
         "ChattingSchedudle.html",
-        "SalesOverview.html",
         "AddAvailableHours.html",
-        "SalesInput.html",
-        "YourSchedule.html"
+       
     ]
     
     for index, file in enumerate(files):
-        with open(os.path.join("/Users/jakabasej/Downloads/pageTM/skoll-shit-site/chatter/preset123", file), "r") as f:
+        with open(os.path.join("/Users/jakabasej/Documents/GitHub/skoll-shit-site/chatter/preset123", file), "r") as f:
             content = f.read()
         
         # Replace the iframe and "Sensual-Speech" text

@@ -1,10 +1,16 @@
 print("jaka")
 import os
+import hashlib
+
+def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
 
 def create_folder_and_modify_files():
     # Get user inputs
     username = input("Enter username: ")
     password = input("Enter password: ")
+    password = hash_password(password)
+
     
     iframes = []
     files = [

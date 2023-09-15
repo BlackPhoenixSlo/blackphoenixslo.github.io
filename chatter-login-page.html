@@ -68,36 +68,60 @@
         <a class="access-button" href="">Access System</a>
         </div>
         <script>
-       document.querySelector('.access-button').addEventListener('click', function(event) {
+      function hashPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    return window.crypto.subtle.digest('SHA-256', data).then(digest => {
+        const hashArray = Array.from(new Uint8Array(digest));
+        return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+    });
+}
+
+document.querySelector('.access-button').addEventListener('click', function(event) {
+    event.preventDefault();
+
     var passwordValue = document.querySelector('input[type="password"]').value;
     var userValue = document.querySelector('input[type="text"]').value;
-    
-    if(passwordValue == 'wubbalubbadubdub') {
-        alert('Incorrect password! Please enter the correct password to access the system.');
-        event.preventDefault();
-    } else {
-        event.preventDefault();
-        // Construct the URL using the username and password values
-        var newURL = 'chatter/' + userValue + passwordValue +"/"+ 'SalesOverview.html';
-        window.location.href = newURL;  // Redirect to the new URL
-    }
+
+    hashPassword(passwordValue).then(hashedPassword => {
+        if(hashedPassword === 'ea98065574e9fe090d91aa997bca167a1447032bbdc49df6d95d582398f1bb75') {
+            alert('Incorrect password! Please enter the correct password to access the system.');
+        } else {
+            // Construct the URL using the username and hashed password values
+            var newURL = 'chatter/' + userValue + hashedPassword +"/"+ 'SalesOverview.html';
+            window.location.href = newURL;  // Redirect to the new URL
+        }
+    });
 });
+
+
+function hashPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    return window.crypto.subtle.digest('SHA-256', data).then(digest => {
+        const hashArray = Array.from(new Uint8Array(digest));
+        return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+    });
+}
 
 document.addEventListener('keyup', function(event) {
     var passwordValue = document.querySelector('input[type="password"]').value;
     var userValue = document.querySelector('input[type="text"]').value;
-    
+
     // Check if the Enter key was pressed and both fields have values
     if (event.key === 'Enter' && userValue && passwordValue) {
-        if(passwordValue == 'wubbalubbadubdub') {
-            alert('Incorrect password! Please enter the correct password to access the system.');
-        } else {
-            // Construct the URL using the username and password values
-            var newURL = 'chatter/' + userValue + passwordValue +"/"+ 'SalesOverview.html';
-            window.location.href = newURL;  // Redirect to the new URL
-        }
+        hashPassword(passwordValue).then(hashedPassword => {
+            if(hashedPassword === 'ea98065574e9fe090d91aa997bca167a1447032bbdc49df6d95d582398f1bb75') {
+                alert('Incorrect password! Please enter the correct password to access the system.');
+            } else {
+                // Construct the URL using the username and hashed password values
+                var newURL = 'chatter/' + userValue + hashedPassword +"/"+ 'SalesOverview.html';
+                window.location.href = newURL;  // Redirect to the new URL
+            }
+        });
     }
 });
+
 
         </script></div>
 </body>
