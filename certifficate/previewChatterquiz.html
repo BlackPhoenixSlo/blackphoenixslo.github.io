@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chatter Exam Preview</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .question-container { margin-bottom: 30px; }
+    .answers { list-style: none; padding: 0; }
+    .answers li { margin: 8px 0; }
+    .hidden { display: none; }
+    #submitBtn { margin-top: 20px; }
+    .conversation {
+      margin-bottom: 10px;
+    }
+    .conversation .role {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Chatter Exam (Preview of 2 Questions)</h1>
+  <div id="quiz"></div>
+  <button id="submitBtn">Submit Answers</button>
+  <div id="results" class="hidden"></div>
+
+  <script>
+    // This is a preview of about 10 questions formatted in a "Guy:"/"Girl:" style,
+    // each with a blank for the Girl’s line. Answers reflect words to fill the blank.
+    // Scoring: +2 best, +1 somewhat acceptable, 0 neutral, -2 very poor.
+
+    const questions = [
+      {
+        guy: "You’ve been so sweet and patient with me, babe. I feel like I can really open up.",
+        girl: "Aww, that means a lot. I’m happy to ___ a bit more about myself when you’re comfortable.",
+        answers: [
+          { text: "reveal", value: 2 },
+          { text: "whisper", value: 1 },
+          { text: "hide", value: 0 },
+          { text: "confuse", value: -2 }
+        ]
+      },
+      {
+        guy: "I loved hearing about your travels. You said you once fell in love during a holiday?",
+        girl: "Haha yes... it was unexpected. Maybe I’ll ___ that story if you’re curious.",
+        answers: [
+          { text: "share", value: 2 },
+          { text: "skip", value: 1 },
+          { text: "rush", value: 0 },
+          { text: "deny", value: -2 }
+        ]
+      }
+    ];
+
+    // Utility function to shuffle an array (Fisher-Yates shuffle)
+    function shuffle(array) {
+      let currentIndex = array.length, randomIndex;
+      while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+      }
+      return array;
+    }
+
+    // Shuffle questions and their answers
+    shuffle(questions);
+    questions.forEach(q => shuffle(q.answers));
+
+    const quizContainer = document.getElementById('quiz');
+    const resultsContainer = document.getElementById('results');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // Generate the quiz UI
+    function generateQuiz() {
+      const output = [];
+
+      questions.forEach((currentQuestion, questionNumber) => {
+        const answers = currentQuestion.answers.map((answer, i) => {
+          return `
+            <li>
+              <label>
+                <input type="radio" name="question${questionNumber}" value="${answer.value}">
+                ${answer.text}
+              </label>
+            </li>`;
+        }).join('');
+
+        output.push(`
+          <div class="question-container">
+            <div class="conversation">
+              <div class="role">Guy:</div>
+              <div class="line">${currentQuestion.guy}</div>
+            </div>
+            <div class="conversation">
+              <div class="role">Girl:</div>
+              <div class="line">${currentQuestion.girl}</div>
+            </div>
+            <ul class="answers">${answers}</ul>
+          </div>
+        `);
+      });
+
+      quizContainer.innerHTML = output.join('');
+    }
+
+    // Calculate and display results
+    // Calculate and display results
+function showResults() {
+  const answerContainers = quizContainer.querySelectorAll('.answers');
+  let totalScore = 0;
+
+  // Go through each question's answers
+  questions.forEach((currentQuestion, questionNumber) => {
+    const selected = answerContainers[questionNumber].querySelector('input[name=question'+questionNumber+']:checked');
+    if (selected) {
+      totalScore += parseInt(selected.value, 10);
+    }
+  });
+
+  resultsContainer.classList.remove('hidden');
+  resultsContainer.innerHTML = `
+    <h2>Your Score: ${totalScore}</h2>
+    <p>Score ranges from negative values to positive based on your responses.</p>
+  `;
+
+  // Scroll to the bottom of the page to show results clearly
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+
+    // On load, generate quiz
+    generateQuiz();
+
+    // On submit, show results
+    submitBtn.addEventListener('click', showResults);
+  </script>
+</body>
+</html>

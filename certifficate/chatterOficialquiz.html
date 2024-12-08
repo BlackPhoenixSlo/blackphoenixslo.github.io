@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chatter Exam</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .question-container { margin-bottom: 30px; }
+    .answers { list-style: none; padding: 0; }
+    .answers li { margin: 8px 0; }
+    .hidden { display: none; }
+    #submitBtn { margin-top: 20px; }
+    .conversation {
+      margin-bottom: 10px;
+    }
+    .conversation .role {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Chatter Exam</h1>
+  <div id="quiz"></div>
+  <button id="submitBtn">Submit Answers</button>
+  <div id="results" class="hidden"></div>
+
+  <script>
+    const questions = [
+      // A1 LEVEL (1-20)
+      {
+        guy: "I really like talking to you. You seem so nice.",
+        girl: "Aww, that’s sweet. I’m happy to ___ with you again tomorrow.",
+        answers: [
+          { text: "talk", value: 2 },
+          { text: "cry", value: 1 },
+          { text: "run", value: 0 },
+          { text: "sleep", value: -2 }
+        ]
+      },
+      {
+        guy: "Your smile is beautiful. It made my day.",
+        girl: "I’m glad! I hope I ___ your day tomorrow too.",
+        answers: [
+          { text: "brighten", value: 2 },
+          { text: "fix", value: 1 },
+          { text: "break", value: 0 },
+          { text: "ignore", value: -2 }
+        ]
+      },
+      {
+        guy: "I love when you wear that red dress. It’s so pretty.",
+        girl: "You like it? Maybe I’ll ___ it again tonight.",
+        answers: [
+          { text: "wear", value: 2 },
+          { text: "wash", value: 1 },
+          { text: "hide", value: 0 },
+          { text: "lose", value: -2 }
+        ]
+      },
+      {
+        guy: "I’m excited to see your new photo.",
+        girl: "Just ___ me a minute, I’m uploading it now.",
+        answers: [
+          { text: "give", value: 2 },
+          { text: "take", value: 1 },
+          { text: "call", value: 0 },
+          { text: "push", value: -2 }
+        ]
+      },
+      {
+        guy: "You look happy today.",
+        girl: "Yes, the sun always makes me ___.",
+        answers: [
+          { text: "smile", value: 2 },
+          { text: "sleep", value: 1 },
+          { text: "shout", value: 0 },
+          { text: "cry", value: -2 }
+        ]
+      },
+      {
+        guy: "I can’t wait to chat with you again.",
+        girl: "Same here. Let’s ___ again this evening?",
+        answers: [
+          { text: "talk", value: 2 },
+          { text: "cook", value: 1 },
+          { text: "jump", value: 0 },
+          { text: "shout", value: -2 }
+        ]
+      },
+      {
+        guy: "Your laugh sounds so cute.",
+        girl: "Thank you! When I’m happy, I just ___ without thinking.",
+        answers: [
+          { text: "laugh", value: 2 },
+          { text: "fall", value: 1 },
+          { text: "run", value: 0 },
+          { text: "hide", value: -2 }
+        ]
+      },
+      {
+        guy: "I love how simple and honest you are.",
+        girl: "I always try to ___ true to myself.",
+        answers: [
+          { text: "stay", value: 2 },
+          { text: "cry", value: 1 },
+          { text: "jump", value: 0 },
+          { text: "eat", value: -2 }
+        ]
+      },
+      {
+        guy: "Your voice note was sweet.",
+        girl: "I’m glad you liked it. Next time I’ll ___ more softly.",
+        answers: [
+          { text: "speak", value: 2 },
+          { text: "sleep", value: 1 },
+          { text: "scream", value: 0 },
+          { text: "push", value: -2 }
+        ]
+      },
+      {
+        guy: "I enjoy your stories; they make me smile.",
+        girl: "I’m happy to ___ more stories if you want.",
+        answers: [
+          { text: "tell", value: 2 },
+          { text: "miss", value: 1 },
+          { text: "break", value: 0 },
+          { text: "kick", value: -2 }
+        ]
+      },
+      {
+        guy: "I feel calm when I talk to you.",
+        girl: "That’s lovely. I want to ___ that feeling for you.",
+        answers: [
+          { text: "keep", value: 2 },
+          { text: "wash", value: 1 },
+          { text: "drop", value: 0 },
+          { text: "hit", value: -2 }
+        ]
+      },
+      {
+        guy: "I like how you say my name.",
+        girl: "I enjoy saying it. It makes me ___ happy.",
+        answers: [
+          { text: "feel", value: 2 },
+          { text: "run", value: 1 },
+          { text: "shout", value: 0 },
+          { text: "jump", value: -2 }
+        ]
+      },
+      {
+        guy: "You’re always so kind to me.",
+        girl: "I believe kindness can ___ anyone’s day.",
+        answers: [
+          { text: "brighten", value: 2 },
+          { text: "skip", value: 1 },
+          { text: "end", value: 0 },
+          { text: "bite", value: -2 }
+        ]
+      },
+      {
+        guy: "I love your simple outfit today.",
+        girl: "Thanks, I ___ it myself this morning.",
+        answers: [
+          { text: "chose", value: 2 },
+          { text: "lost", value: 1 },
+          { text: "threw", value: 0 },
+          { text: "broke", value: -2 }
+        ]
+      },
+      {
+        guy: "Hearing from you makes my afternoon better.",
+        girl: "I’m glad! I hope I can ___ your mood tomorrow too.",
+        answers: [
+          { text: "lift", value: 2 },
+          { text: "push", value: 1 },
+          { text: "hide", value: 0 },
+          { text: "sell", value: -2 }
+        ]
+      },
+      {
+        guy: "I love when you smile at the camera.",
+        girl: "I do it because I want to ___ you happy.",
+        answers: [
+          { text: "make", value: 2 },
+          { text: "leave", value: 1 },
+          { text: "trick", value: 0 },
+          { text: "break", value: -2 }
+        ]
+      },
+      {
+        guy: "You sound cheerful today.",
+        girl: "Yes, good vibes ___ my heart warm.",
+        answers: [
+          { text: "keep", value: 2 },
+          { text: "miss", value: 1 },
+          { text: "drop", value: 0 },
+          { text: "kill", value: -2 }
+        ]
+      },
+      {
+        guy: "Your message made me smile.",
+        girl: "I love knowing I can ___ a smile on your face.",
+        answers: [
+          { text: "put", value: 2 },
+          { text: "wash", value: 1 },
+          { text: "lose", value: 0 },
+          { text: "hit", value: -2 }
+        ]
+      },
+      {
+        guy: "I’m glad we have this time together.",
+        girl: "Me too. Let’s ___ this moment special.",
+        answers: [
+          { text: "make", value: 2 },
+          { text: "fix", value: 1 },
+          { text: "drop", value: 0 },
+          { text: "hurt", value: -2 }
+        ]
+      },
+      {
+        guy: "You seem relaxed tonight.",
+        girl: "I am. Your presence helps me ___ calm.",
+        answers: [
+          { text: "stay", value: 2 },
+          { text: "jump", value: 1 },
+          { text: "cut", value: 0 },
+          { text: "dig", value: -2 }
+        ]
+      },
+
+      // B1 LEVEL (21-35)
+      {
+        guy: "Your idea about a small discount caught my attention.",
+        girl: "I decided to ___ it because you’ve been polite.",
+        answers: [
+          { text: "offer", value: 2 },
+          { text: "drop", value: 1 },
+          { text: "hide", value: 0 },
+          { text: "shout", value: -2 }
+        ]
+      },
+      {
+        guy: "I appreciate you understanding my budget.",
+        girl: "No problem. I try to ___ flexible for good customers.",
+        answers: [
+          { text: "remain", value: 2 },
+          { text: "vanish", value: 1 },
+          { text: "scream", value: 0 },
+          { text: "push", value: -2 }
+        ]
+      },
+      {
+        guy: "It’s nice how you keep things clear and honest.",
+        girl: "Honesty helps me ___ trust with you.",
+        answers: [
+          { text: "build", value: 2 },
+          { text: "flip", value: 1 },
+          { text: "erase", value: 0 },
+          { text: "kick", value: -2 }
+        ]
+      },
+      {
+        guy: "Your approach to chatting makes me comfortable.",
+        girl: "I want to ___ a relaxed vibe here.",
+        answers: [
+          { text: "maintain", value: 2 },
+          { text: "twist", value: 1 },
+          { text: "lose", value: 0 },
+          { text: "burn", value: -2 }
+        ]
+      },
+      {
+        guy: "You know how to make each moment count.",
+        girl: "I believe small details can ___ an experience.",
+        answers: [
+          { text: "enhance", value: 2 },
+          { text: "lock", value: 1 },
+          { text: "steal", value: 0 },
+          { text: "drop", value: -2 }
+        ]
+      },
+      {
+        guy: "Your last message was really charming.",
+        girl: "I try to ___ my words carefully.",
+        answers: [
+          { text: "choose", value: 2 },
+          { text: "break", value: 1 },
+          { text: "ignore", value: 0 },
+          { text: "throw", value: -2 }
+        ]
+      },
+      {
+        guy: "I notice you aren’t pushing me to buy more.",
+        girl: "I prefer not to ___ you into spending.",
+        answers: [
+          { text: "pressure", value: 2 },
+          { text: "break", value: 1 },
+          { text: "store", value: 0 },
+          { text: "lift", value: -2 }
+        ]
+      },
+      {
+        guy: "You make this place feel welcoming.",
+        girl: "I want everyone here to ___ valued.",
+        answers: [
+          { text: "feel", value: 2 },
+          { text: "melt", value: 1 },
+          { text: "crash", value: 0 },
+          { text: "tear", value: -2 }
+        ]
+      },
+      {
+        guy: "Your style of conversation keeps me intrigued.",
+        girl: "I aim to ___ curiosity rather than force it.",
+        answers: [
+          { text: "spark", value: 2 },
+          { text: "freeze", value: 1 },
+          { text: "remove", value: 0 },
+          { text: "shout", value: -2 }
+        ]
+      },
+      {
+        guy: "I respect how you handle yourself with confidence.",
+        girl: "Confidence helps me ___ genuine.",
+        answers: [
+          { text: "remain", value: 2 },
+          { text: "push", value: 1 },
+          { text: "drown", value: 0 },
+          { text: "dent", value: -2 }
+        ]
+      },
+      {
+        guy: "Your small compromises mean a lot.",
+        girl: "I never want to ___ forced.",
+        answers: [
+          { text: "appear", value: 2 },
+          { text: "confuse", value: 1 },
+          { text: "smash", value: 0 },
+          { text: "sting", value: -2 }
+        ]
+      },
+      {
+        guy: "I like how you adapt to different moods.",
+        girl: "Flexibility lets me ___ a connection.",
+        answers: [
+          { text: "maintain", value: 2 },
+          { text: "twist", value: 1 },
+          { text: "freeze", value: 0 },
+          { text: "harm", value: -2 }
+        ]
+      },
+      {
+        guy: "You’re good at reading my reactions.",
+        girl: "I pay attention to cues. It helps me ___ what you enjoy.",
+        answers: [
+          { text: "understand", value: 2 },
+          { text: "ignore", value: 1 },
+          { text: "drop", value: 0 },
+          { text: "rip", value: -2 }
+        ]
+      },
+      {
+        guy: "Your willingness to listen makes a difference.",
+        girl: "I believe listening can ___ trust and comfort.",
+        answers: [
+          { text: "build", value: 2 },
+          { text: "drill", value: 1 },
+          { text: "blur", value: 0 },
+          { text: "sink", value: -2 }
+        ]
+      },
+      {
+        guy: "Even if you adjust the price slightly, it feels fair.",
+        girl: "It’s a balance I try to ___ carefully.",
+        answers: [
+          { text: "keep", value: 2 },
+          { text: "cut", value: 1 },
+          { text: "throw", value: 0 },
+          { text: "stain", value: -2 }
+        ]
+      },
+
+      // C2 LEVEL (36-50)
+      {
+        guy: "Your subtle approach to seduction is mesmerizing.",
+        girl: "I enjoy crafting an ambiance that can ___ into your mind.",
+        answers: [
+          { text: "drift", value: 2 },
+          { text: "vanish", value: 1 },
+          { text: "crack", value: 0 },
+          { text: "slam", value: -2 }
+        ]
+      },
+      {
+        guy: "The nuance in your teasing reveals deep understanding.",
+        girl: "I tailor each moment to ___ a sense of intimacy.",
+        answers: [
+          { text: "evoke", value: 2 },
+          { text: "erase", value: 1 },
+          { text: "fracture", value: 0 },
+          { text: "drown", value: -2 }
+        ]
+      },
+      {
+        guy: "Your negotiation style never feels manipulative.",
+        girl: "I prefer to ___ genuine desire rather than force compliance.",
+        answers: [
+          { text: "foster", value: 2 },
+          { text: "discard", value: 1 },
+          { text: "obscure", value: 0 },
+          { text: "hammer", value: -2 }
+        ]
+      },
+      {
+        guy: "You engage my imagination without being explicit.",
+        girl: "Leaving space allows fantasies to ___ on their own.",
+        answers: [
+          { text: "flourish", value: 2 },
+          { text: "grind", value: 1 },
+          { text: "leak", value: 0 },
+          { text: "crash", value: -2 }
+        ]
+      },
+      {
+        guy: "Your calm assertiveness is rare.",
+        girl: "It’s crucial to ___ confidence with empathy.",
+        answers: [
+          { text: "blend", value: 2 },
+          { text: "scatter", value: 1 },
+          { text: "crush", value: 0 },
+          { text: "splash", value: -2 }
+        ]
+      },
+      {
+        guy: "I admire how you elevate simple interactions to art.",
+        girl: "Art emerges when we ___ subtle emotions.",
+        answers: [
+          { text: "embrace", value: 2 },
+          { text: "erase", value: 1 },
+          { text: "twist", value: 0 },
+          { text: "stab", value: -2 }
+        ]
+      },
+      {
+        guy: "Your approach resonates with authenticity.",
+        girl: "Authenticity requires that I ___ genuine feelings.",
+        answers: [
+          { text: "convey", value: 2 },
+          { text: "fragment", value: 1 },
+          { text: "mask", value: 0 },
+          { text: "distort", value: -2 }
+        ]
+      },
+      {
+        guy: "I appreciate your gentle persuasion.",
+        girl: "Persuasion should ___ desire, not demand it.",
+        answers: [
+          { text: "inspire", value: 2 },
+          { text: "mute", value: 1 },
+          { text: "drain", value: 0 },
+          { text: "shatter", value: -2 }
+        ]
+      },
+      {
+        guy: "Your careful choice of words lingers in my mind.",
+        girl: "I select words that ___ layers of meaning.",
+        answers: [
+          { text: "reveal", value: 2 },
+          { text: "fold", value: 1 },
+          { text: "dilute", value: 0 },
+          { text: "stomp", value: -2 }
+        ]
+      },
+      {
+        guy: "You never resort to cheap tricks.",
+        girl: "Because authenticity can ___ more intrigue than gimmicks.",
+        answers: [
+          { text: "generate", value: 2 },
+          { text: "bend", value: 1 },
+          { text: "sink", value: 0 },
+          { text: "rot", value: -2 }
+        ]
+      },
+      {
+        guy: "I sense your intent without explicit words.",
+        girl: "Subtlety can ___ the imagination to fill in gaps.",
+        answers: [
+          { text: "invite", value: 2 },
+          { text: "weigh", value: 1 },
+          { text: "reject", value: 0 },
+          { text: "smash", value: -2 }
+        ]
+      },
+      {
+        guy: "Your presence transforms the ordinary into something profound.",
+        girl: "I strive to ___ a connection that transcends transactions.",
+        answers: [
+          { text: "forge", value: 2 },
+          { text: "numb", value: 1 },
+          { text: "drip", value: 0 },
+          { text: "injure", value: -2 }
+        ]
+      },
+      {
+        guy: "Even silence with you feels meaningful.",
+        girl: "Silence can ___ depth without words.",
+        answers: [
+          { text: "convey", value: 2 },
+          { text: "fry", value: 1 },
+          { text: "twist", value: 0 },
+          { text: "shatter", value: -2 }
+        ]
+      },
+      {
+        guy: "I admire how you navigate complex desires gracefully.",
+        girl: "Grace thrives when we ___ respect above all else.",
+        answers: [
+          { text: "uphold", value: 2 },
+          { text: "rip", value: 1 },
+          { text: "fade", value: 0 },
+          { text: "crash", value: -2 }
+        ]
+      },
+      {
+        guy: "Your subtle touch on my imagination is unforgettable.",
+        girl: "I aim to ___ impressions that linger like a whisper.",
+        answers: [
+          { text: "leave", value: 2 },
+          { text: "flip", value: 1 },
+          { text: "stab", value: 0 },
+          { text: "drag", value: -2 }
+        ]
+      },
+
+      // Next 50 Questions (Grammar Focus)
+      // For the grammar questions, we now present them as dialogues with a blank in the Girl line.
+      // We'll use the same logic: The "Guy:" line states a condition/fact, the "Girl:" line uses a blank where the key grammar point is inserted.
+
+      {
+        guy: "You mentioned something special for tonight.",
+        girl: "I’m definitely ___ to reveal it once you’re ready.",
+        answers: [
+          { text: "going", value: 2 },
+          { text: "planning", value: 1 },
+          { text: "moving", value: 0 },
+          { text: "forgetting", value: -2 }
+        ]
+      },
+      {
+        guy: "Do you think you will finish setting it up by 8 p.m.?",
+        girl: "I ___ have it ready before you know it.",
+        answers: [
+          { text: "will", value: 2 },
+          { text: "might", value: 1 },
+          { text: "must", value: 0 },
+          { text: "should", value: -2 }
+        ]
+      },
+      {
+        guy: "I hope I can understand all the details once shown.",
+        girl: "I’m sure you ___, it’s not complicated.",
+        answers: [
+          { text: "can", value: 2 },
+          { text: "may", value: 1 },
+          { text: "should", value: 0 },
+          { text: "must", value: -2 }
+        ]
+      },
+      {
+        guy: "Is there something I should know beforehand?",
+        girl: "You ___ just relax and trust me.",
+        answers: [
+          { text: "should", value: 2 },
+          { text: "can", value: 1 },
+          { text: "mustn’t", value: 0 },
+          { text: "will", value: -2 }
+        ]
+      },
+      {
+        guy: "You must have done this before.",
+        girl: "I ___ admit I have some experience.",
+        answers: [
+          { text: "must", value: 2 },
+          { text: "might", value: 1 },
+          { text: "could", value: 0 },
+          { text: "would", value: -2 }
+        ]
+      },
+      {
+        guy: "You must have practiced a lot.",
+        girl: "I ___ have spent some time perfecting it.",
+        answers: [
+          { text: "must", value: 2 },
+          { text: "could", value: 1 },
+          { text: "might", value: 0 },
+          { text: "should", value: -2 }
+        ]
+      },
+      {
+        guy: "If I enjoy tonight’s surprise, I will return.",
+        girl: "If you return, I ___ prepare something better.",
+        answers: [
+          { text: "will", value: 2 },
+          { text: "may", value: 1 },
+          { text: "should", value: 0 },
+          { text: "could", value: -2 }
+        ]
+      },
+      {
+        guy: "If I were richer, I’d pay any price.",
+        girl: "If that were true, I ___ consider something luxurious.",
+        answers: [
+          { text: "would", value: 2 },
+          { text: "had", value: 1 },
+          { text: "have been", value: 0 },
+          { text: "was being", value: -2 }
+        ]
+      },
+      {
+        guy: "If I had known you earlier, I wouldn’t have missed out.",
+        girl: "If we had met sooner, I ___ have shown you many things.",
+        answers: [
+          { text: "wouldn’t", value: 2 },
+          { text: "shouldn’t", value: 1 },
+          { text: "couldn’t", value: 0 },
+          { text: "won’t", value: -2 }
+        ]
+      },
+      {
+        guy: "Your approach is more unique than others.",
+        girl: "I try to be ___ unique than the rest.",
+        answers: [
+          { text: "more", value: 2 },
+          { text: "more better", value: 1 },
+          { text: "gooder", value: 0 },
+          { text: "more bad", value: -2 }
+        ]
+      },
+      {
+        guy: "You’re the best I’ve encountered.",
+        girl: "I aim to be the ___ in this space.",
+        answers: [
+          { text: "best", value: 2 },
+          { text: "better", value: 1 },
+          { text: "goodest", value: 0 },
+          { text: "more best", value: -2 }
+        ]
+      },
+      {
+        guy: "I appreciate your willingness to listen.",
+        girl: "I enjoy ___ new ideas from you.",
+        answers: [
+          { text: "hearing", value: 2 },
+          { text: "for new ideas", value: 1 },
+          { text: "about new ideas", value: 0 },
+          { text: "to new ideas", value: -2 }
+        ]
+      },
+      {
+        guy: "I have thought about your offer all day.",
+        girl: "I’ve ___ refining it just for you.",
+        answers: [
+          { text: "considered", value: 2 },
+          { text: "had considered", value: 1 },
+          { text: "was considered", value: 0 },
+          { text: "have refining", value: -2 }
+        ]
+      },
+      {
+        guy: "I’ve been thinking about you since last night.",
+        girl: "I’ve ___ preparing a surprise since morning.",
+        answers: [
+          { text: "been", value: 2 },
+          { text: "did", value: 1 },
+          { text: "was", value: 0 },
+          { text: "am", value: -2 }
+        ]
+      },
+      {
+        guy: "Before I met you, I had never understood temptation.",
+        girl: "Before this, I had ___ anything so personal.",
+        answers: [
+          { text: "created", value: 2 },
+          { text: "have created", value: 1 },
+          { text: "was created", value: 0 },
+          { text: "were created", value: -2 }
+        ]
+      },
+      {
+        guy: "By the time you show me, I will have imagined many possibilities.",
+        girl: "By then, I will ___ have perfected every detail.",
+        answers: [
+          { text: "already", value: 2 },
+          { text: "have", value: 1 },
+          { text: "would", value: 0 },
+          { text: "had", value: -2 }
+        ]
+      },
+      {
+        guy: "I noticed your content is delivered tastefully.",
+        girl: "It’s all ___ produced to maintain elegance.",
+        answers: [
+          { text: "carefully", value: 2 },
+          { text: "being", value: 1 },
+          { text: "be", value: 0 },
+          { text: "been", value: -2 }
+        ]
+      },
+      {
+        guy: "I love the way you add a mystery to each interaction.",
+        girl: "A hint of ___ unknown creates anticipation.",
+        answers: [
+          { text: "the", value: 2 },
+          { text: "unknown", value: 1 }, // "a hint of unknown" awkward
+          { text: "an mystery", value: 0 },
+          { text: "a anticipation", value: -2 }
+        ]
+      },
+      {
+        guy: "I’m curious about what you have planned.",
+        girl: "You should focus ___ the moment.",
+        answers: [
+          { text: "on", value: 2 },
+          { text: "of", value: 1 },
+          { text: "in", value: 0 },
+          { text: "to", value: -2 }
+        ]
+      },
+      {
+        guy: "The style that you use intrigues me.",
+        girl: "It’s something ___ I developed over time.",
+        answers: [
+          { text: "which", value: 2 },
+          { text: "that", value: 1 },
+          { text: "who", value: 0 },
+          { text: "that who", value: -2 }
+        ]
+      },
+      {
+        guy: "You said yesterday you would show me something special.",
+        girl: "I told you I ___ be ready by tonight.",
+        answers: [
+          { text: "would", value: 2 },
+          { text: "should", value: 1 },
+          { text: "can", value: 0 },
+          { text: "will", value: -2 }
+        ]
+      },
+      {
+        guy: "I heard you used to tease customers before.",
+        girl: "I ___ to do that often.",
+        answers: [
+          { text: "used", value: 2 },
+          { text: "use", value: 1 },
+          { text: "am used", value: 0 },
+          { text: "was use", value: -2 }
+        ]
+      },
+      {
+        guy: "Would you prefer now or keeping it secret?",
+        girl: "I ___ rather wait until you’re relaxed.",
+        answers: [
+          { text: "would", value: 2 },
+          { text: "might", value: 1 },
+          { text: "should", value: 0 },
+          { text: "want", value: -2 }
+        ]
+      },
+      {
+        guy: "You have such a natural way.",
+        girl: "I’m happy you find it ___ delightful.",
+        answers: [
+          { text: "so", value: 2 },
+          { text: "so so", value: 1 },
+          { text: "such", value: 0 },
+          { text: "such such", value: -2 }
+        ]
+      },
+      {
+        guy: "Is this lighting soft enough or too bright?",
+        girl: "It’s never ___ bright for you, is it?",
+        answers: [
+          { text: "too", value: 2 },
+          { text: "enough", value: 1 },
+          { text: "too enough", value: 0 },
+          { text: "enough too", value: -2 }
+        ]
+      },
+      {
+        guy: "I wonder if the new idea will be as exciting as the last.",
+        girl: "I’ll make sure it’s at least ___ appealing as before.",
+        answers: [
+          { text: "as", value: 2 },
+          { text: "as so", value: 1 },
+          { text: "so", value: 0 },
+          { text: "so so", value: -2 }
+        ]
+      },
+      {
+        guy: "You arranged all this to impress me.",
+        girl: "Maybe I did it ___ catch your attention.",
+        answers: [
+          { text: "to", value: 2 },
+          { text: "for", value: 1 },
+          { text: "about", value: 0 },
+          { text: "in", value: -2 }
+        ]
+      },
+      {
+        guy: "Inspired by your creativity, I’m eager for more.",
+        girl: "I enjoy seeing you ___ by what I show.",
+        answers: [
+          { text: "fascinated", value: 2 },
+          { text: "fascinating", value: 1 },
+          { text: "inspiring", value: 0 },
+          { text: "inspired", value: -2 }
+        ]
+      },
+      {
+        guy: "Thinking about tonight keeps me curious.",
+        girl: "I know, ___ secrets can be fun.",
+        answers: [
+          { text: "hiding", value: 2 },
+          { text: "hide", value: 1 },
+          { text: "to think", value: 0 },
+          { text: "thinking", value: -2 }
+        ]
+      },
+      {
+        guy: "You really make me want more.",
+        girl: "I hope I can ___ you explore new sides.",
+        answers: [
+          { text: "let", value: 2 },
+          { text: "allow", value: 1 },
+          { text: "make you allows", value: 0 },
+          { text: "let you to exploring", value: -2 }
+        ]
+      },
+      {
+        guy: "I wish I knew how you plan these.",
+        girl: "If you knew, you ___ find it less exciting.",
+        answers: [
+          { text: "might", value: 2 },
+          { text: "may", value: 1 },
+          { text: "will", value: 0 },
+          { text: "can", value: -2 }
+        ]
+      },
+      {
+        guy: "I hope you’ll give me a clue.",
+        girl: "I ___ you wouldn’t ask so soon.",
+        answers: [
+          { text: "wish", value: 2 },
+          { text: "hope", value: 1 },
+          { text: "wish you don’t", value: 0 },
+          { text: "hope you didn’t", value: -2 }
+        ]
+      },
+      {
+        guy: "I can barely wait.",
+        girl: "You’d ___ be patient, or I might tease more.",
+        answers: [
+          { text: "better", value: 2 },
+          { text: "should", value: 1 },
+          { text: "rather", value: 0 },
+          { text: "must", value: -2 }
+        ]
+      },
+      {
+        guy: "I feel I should have asked you earlier.",
+        girl: "You ___ have tried, but waiting was sweeter.",
+        answers: [
+          { text: "should", value: 2 },
+          { text: "might", value: 1 },
+          { text: "could", value: 0 },
+          { text: "must", value: -2 }
+        ]
+      },
+      {
+        guy: "Though I’m nervous, I trust you.",
+        girl: "I appreciate that, even ___ your hesitation.",
+        answers: [
+          { text: "despite", value: 2 },
+          { text: "although", value: 1 },
+          { text: "before", value: 0 },
+          { text: "with", value: -2 }
+        ]
+      },
+      {
+        guy: "Never have I felt this intrigued.",
+        girl: "Seldom ___ I shared so much so fast.",
+        answers: [
+          { text: "have", value: 2 },
+          { text: "did", value: 1 },
+          { text: "do", value: 0 },
+          { text: "have I do", value: -2 }
+        ]
+      },
+      {
+        guy: "Your hints are so subtle.",
+        girl: "I make them ___ delicate you remain curious.",
+        answers: [
+          { text: "so", value: 2 },
+          { text: "such", value: 1 },
+          { text: "so so", value: 0 },
+          { text: "such such", value: -2 }
+        ]
+      },
+      {
+        guy: "I can either ask directly or wait.",
+        girl: "You can either guess or ___ me lead you.",
+        answers: [
+          { text: "let", value: 2 },
+          { text: "letting", value: 1 },
+          { text: "neither", value: 0 },
+          { text: "also", value: -2 }
+        ]
+      },
+      {
+        guy: "I find I can neither resist nor ignore your allure.",
+        girl: "Neither calm ___ silence can hide your curiosity.",
+        answers: [
+          { text: "nor", value: 2 },
+          { text: "neither", value: 1 },
+          { text: "either", value: 0 },
+          { text: "or", value: -2 }
+        ]
+      },
+      {
+        guy: "I’m becoming more and more eager.",
+        girl: "I’m growing ___ and more excited watching you.",
+        answers: [
+          { text: "more", value: 2 },
+          { text: "increasingly", value: 1 },
+          { text: "more excited", value: 0 },
+          { text: "more excited more", value: -2 }
+        ]
+      },
+      {
+        guy: "I’m focusing on staying calm.",
+        girl: "Consider ___ deep breaths.",
+        answers: [
+          { text: "taking", value: 2 },
+          { text: "take", value: 1 },
+          { text: "took", value: 0 },
+          { text: "stayed", value: -2 }
+        ]
+      },
+      {
+        guy: "I’m here to learn more about your style.",
+        girl: "I’m giving hints ___ keep you curious.",
+        answers: [
+          { text: "to", value: 2 },
+          { text: "for", value: 1 },
+          { text: "about", value: 0 },
+          { text: "in", value: -2 }
+        ]
+      },
+      {
+        guy: "Before this, I would wait silently.",
+        girl: "I remember when I would ___ silently.",
+        answers: [
+          { text: "tease", value: 2 },
+          { text: "used tease", value: 1 },
+          { text: "would used", value: 0 },
+          { text: "used would", value: -2 }
+        ]
+      },
+      {
+        guy: "Will you allow me to see it at midnight?",
+        girl: "I might ___ you have a sneak peek earlier.",
+        answers: [
+          { text: "let", value: 2 },
+          { text: "allow", value: 1 },
+          { text: "let you to have", value: 0 },
+          { text: "permit you", value: -2 }
+        ]
+      },
+      {
+        guy: "I never become this curious.",
+        girl: "I ___ see someone so invested.",
+        answers: [
+          { text: "rarely", value: 2 },
+          { text: "sometimes", value: 1 },
+          { text: "often", value: 0 },
+          { text: "always", value: -2 }
+        ]
+      },
+      {
+        guy: "I’m excited despite the lack of details.",
+        girl: "I enjoy your anticipation ___ telling you much.",
+        answers: [
+          { text: "without", value: 2 },
+          { text: "although", value: 1 },
+          { text: "before", value: 0 },
+          { text: "after", value: -2 }
+        ]
+      },
+      {
+        guy: "No sooner had I heard your voice than I felt intrigued.",
+        girl: "No sooner ___ you ask than I provide a hint.",
+        answers: [
+          { text: "did", value: 2 },
+          { text: "do", value: 1 },
+          { text: "Hardly did", value: 0 },
+          { text: "Hardly do", value: -2 }
+        ]
+      },
+      {
+        guy: "I want a clue so that I can prepare.",
+        girl: "I’ll give one so that you ___ relax.",
+        answers: [
+          { text: "can", value: 2 },
+          { text: "could", value: 1 },
+          { text: "must", value: 0 },
+          { text: "for can", value: -2 }
+        ]
+      },
+      {
+        guy: "I’m too eager to wait quietly.",
+        girl: "You might be ___ impatient to handle subtle hints.",
+        answers: [
+          { text: "too", value: 2 },
+          { text: "enough", value: 1 },
+          { text: "so", value: 0 },
+          { text: "too too", value: -2 }
+        ]
+      },
+      {
+        guy: "I trust you even though I barely know the plan.",
+        girl: "I appreciate that, ___ I haven’t given details.",
+        answers: [
+          { text: "although", value: 2 },
+          { text: "even though", value: 1 },
+          { text: "no details", value: 0 },
+          { text: "I have give", value: -2 }
+        ]
+      }
+    ];
+
+    // Utility function to shuffle an array (Fisher-Yates shuffle)
+    function shuffle(array) {
+      let currentIndex = array.length, randomIndex;
+      while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+      }
+      return array;
+    }
+
+    // Shuffle questions and their answers
+    shuffle(questions);
+    questions.forEach(q => shuffle(q.answers));
+
+    const quizContainer = document.getElementById('quiz');
+    const resultsContainer = document.getElementById('results');
+    const submitBtn = document.getElementById('submitBtn');
+
+    // Generate the quiz UI
+    function generateQuiz() {
+      const output = [];
+
+      questions.forEach((currentQuestion, questionNumber) => {
+        const answers = currentQuestion.answers.map((answer, i) => {
+          return `
+            <li>
+              <label>
+                <input type="radio" name="question${questionNumber}" value="${answer.value}">
+                ${answer.text}
+              </label>
+            </li>`;
+        }).join('');
+
+        output.push(`
+          <div class="question-container">
+            <div class="conversation">
+              <div class="role">Guy:</div>
+              <div class="line">${currentQuestion.guy}</div>
+            </div>
+            <div class="conversation">
+              <div class="role">Girl:</div>
+              <div class="line">${currentQuestion.girl}</div>
+            </div>
+            <ul class="answers">${answers}</ul>
+          </div>
+        `);
+      });
+
+      quizContainer.innerHTML = output.join('');
+    }
+
+    // Calculate and display results
+    // Calculate and display results
+function showResults() {
+  const answerContainers = quizContainer.querySelectorAll('.answers');
+  let totalScore = 0;
+
+  // Go through each question's answers
+  questions.forEach((currentQuestion, questionNumber) => {
+    const selected = answerContainers[questionNumber].querySelector('input[name=question'+questionNumber+']:checked');
+    if (selected) {
+      totalScore += parseInt(selected.value, 10);
+    }
+  });
+
+  resultsContainer.classList.remove('hidden');
+  resultsContainer.innerHTML = `
+    <h2>Your Score: ${totalScore}</h2>
+    <p>Score ranges from negative values to positive based on your responses.</p>
+  `;
+
+  // Scroll to the bottom of the page to show results clearly
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+
+    // On load, generate quiz
+    generateQuiz();
+
+    // On submit, show results
+    submitBtn.addEventListener('click', showResults);
+  </script>
+</body>
+</html>
