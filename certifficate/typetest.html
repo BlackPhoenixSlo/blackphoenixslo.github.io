@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Typing Speed & Accuracy Test</title>
+<style>
+  body {
+    font-family: Arial, sans-serif; margin:20px; max-width:600px; position:relative;
+  }
+  #textToType {
+    border:1px solid #ccc; padding:10px; background:#f9f9f9; white-space:pre-wrap;
+    margin-bottom:10px;
+  }
+  #inputArea {
+    width:100%; height:100px; margin-bottom:10px;
+  }
+  #inputArea.error {
+    background:#fdd;
+  }
+  #results {
+    margin-top:20px; font-weight:bold;
+  }
+  #timer {
+    font-weight:bold; margin-bottom:10px;
+  }
+  #controls button {
+    margin-right:10px; margin-bottom:10px;
+  }
+  #topBtn {
+    display:none; position:fixed; bottom:20px; right:20px; 
+    background:#333; color:#fff; padding:10px; border:none; border-radius:5px; 
+    cursor:pointer; font-size:14px;
+  }
+</style>
+</head>
+<body>
+<h1>Typing Speed & Accuracy Test</h1>
+<p>Type as much of the given text as you can in 60 seconds. Your WPM and accuracy will be measured at the end based on what you've typed. You do not need to finish or be 100% correct. You can also end early if you want. After time or ending early, you can review results or try again with new text.</p>
+
+<div id="textToType"></div>
+<div id="timer">Time: 60s</div>
+<textarea id="inputArea" disabled placeholder="Your typing here..."></textarea>
+<div id="controls">
+  <button id="startBtn">Start Test</button>
+  <button id="endBtn" style="display:none;">End Now</button>
+  <button id="newTextBtn" style="display:none;">New Text</button>
+</div>
+<div id="results"></div>
+
+<button id="topBtn" title="Go to top">Top</button>
+
+<script>
+// Extended lines from the given script snippet (Girl lines):
+let girlLines = [
+  "Maybe we could talk about your dream destinations, where would you love to go?",
+  "The best things happen at night anyways, don't they?",
+  "Am I the only one who dreams weird stuff lately?",
+  "Haha:) I am just a bit bored... I tend to do a few strange things when I am bored...",
+  "I remember once I fell in love during a holiday trip. He was a heartbreaker, haha...",
+  "Perhaps we can travel together once we get to know each other better.",
+  "You don't have to buy anything. Let's just enjoy this chat for a moment.",
+  "Where I am, it's already late at night. Are you a night owl yourself?",
+  "I probably shouldn't tell you about it... you wouldn't be interested...:D",
+  "If you are also a night owl, we might share some interesting midnight secrets.",
+  "I love it when I can stay up late, just imagining scenarios.",
+  "Could you tell me your name?"
+];
+
+// Normalize fancy quotes and ellipses to ASCII
+function normalizeText(text) {
+  return text
+    .replace(/’/g, "'")
+    .replace(/‘/g, "'")
+    .replace(/“/g, '"')
+    .replace(/”/g, '"')
+    .replace(/…/g, '...')
+    .replace(/—/g, '-'); 
+}
+
+function getRandomText(lines, count=4) {
+  const shuffled = [...lines].sort(()=>Math.random()-0.5);
+  let txt = shuffled.slice(0,count).join(' ');
+  txt = normalizeText(txt); // normalize punctuation
+  return txt;
+}
+
+let testText = getRandomText(girlLines, 4);
+const textDisplay = document.getElementById('textToType');
+const inputArea = document.getElementById('inputArea');
+const startBtn = document.getElementById('startBtn');
+const endBtn = document.getElementById('endBtn');
+const newTextBtn = document.getElementById('newTextBtn');
+const results = document.getElementById('results');
+const timerDisplay = document.getElementById('timer');
+const topBtn = document.getElementById('topBtn');
+
+let startTime;
+let timerRunning = false;
+let timeLeft = 60;
+let timerInterval = null;
+
+function displayTestText() {
+  textDisplay.textContent = testText;
+}
+
+function startTest() {
+  inputArea.disabled = false;
+  inputArea.value = '';
+  inputArea.focus();
+  startTime = Date.now();
+  timerRunning = true;
+  timeLeft = 60;
+  results.textContent = '';
+  newTextBtn.style.display='none';
+  startBtn.disabled=true;
+  endBtn.style.display='inline-block';
+  inputArea.classList.remove('error');
+  
+  timerInterval = setInterval(()=>{
+    timeLeft--;
+    timerDisplay.textContent = `Time: ${timeLeft}s`;
+    if(timeLeft<=0) {
+      finishTest();
+    }
+  },1000);
+}
+
+function finishTest(endEarly=false) {
+  timerRunning = false;
+  inputArea.disabled = true;
+  clearInterval(timerInterval);
+  const endTime = Date.now();
+  const elapsed = (endTime - startTime)/1000;
+  if(!endEarly) {
+    timerDisplay.textContent = "Time's up!";
+  } else {
+    timerDisplay.textContent = `Ended early at ${Math.round(elapsed)}s`;
+  }
+  
+  const typedText = inputArea.value;
+  const wordsTyped = typedText.trim().length>0 ? typedText.trim().split(/\s+/).length : 0;
+  const wpm = elapsed>0 ? Math.round((wordsTyped / elapsed)*60) : 0;
+
+  // Calculate accuracy:
+  const originalWords = testText.trim().split(/\s+/);
+  const typedWords = typedText.trim().split(/\s+/);
+  let correctWords = 0;
+  const minLen = Math.min(typedWords.length, originalWords.length);
+  for (let i=0; i<minLen; i++){
+    if(originalWords[i]===typedWords[i]) correctWords++;
+  }
+  // Accuracy based on typed words only:
+  const accuracy = (wordsTyped>0) ? Math.round((correctWords/wordsTyped)*100) : 0;
+
+  results.innerHTML = `You typed ${wordsTyped} words in ${Math.round(elapsed)}s. WPM: ${wpm}, Accuracy: ${accuracy}%.<br>
+  Feel free to try again or get new text.`;
+
+  startBtn.disabled = false;
+  endBtn.style.display='none';
+  newTextBtn.style.display='inline-block';
+}
+
+inputArea.addEventListener('input', ()=>{
+  if(!timerRunning) return;
+  const currentVal = inputArea.value;
+  const compareLen = Math.min(currentVal.length, testText.length);
+  let isError = false;
+  for (let i=0; i<compareLen; i++){
+    if(currentVal[i] !== testText[i]){
+      isError = true;
+      break;
+    }
+  }
+  inputArea.classList.toggle('error', isError);
+});
+
+startBtn.addEventListener('click', startTest);
+endBtn.addEventListener('click', ()=>finishTest(true));
+newTextBtn.addEventListener('click', ()=>{
+  testText = getRandomText(girlLines,4);
+  displayTestText();
+  results.textContent = '';
+  inputArea.value='';
+});
+
+window.addEventListener('scroll', ()=>{
+  if(window.scrollY>100) {
+    topBtn.style.display='block';
+  } else {
+    topBtn.style.display='none';
+  }
+});
+
+topBtn.addEventListener('click',()=>{
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+displayTestText();
+</script>
+</body>
+</html>
