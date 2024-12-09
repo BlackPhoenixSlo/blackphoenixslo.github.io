@@ -1,0 +1,134 @@
+/* styles.css */
+
+body { 
+  font-family: Arial, sans-serif; 
+  margin: 20px; 
+  background-color: #f5f5f5;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.status-box {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  color: #333;
+}
+
+#chatContainer {
+  width: 100%;
+  max-width: 600px;
+  height: 400px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow-y: auto;
+  padding: 10px;
+  margin: 0 auto 20px auto;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.conversation {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.conversation.guy {
+  justify-content: flex-start;
+}
+
+.conversation.girl {
+  justify-content: flex-end;
+}
+
+.message {
+  max-width: 70%;
+  padding: 10px;
+  border-radius: 10px;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.message.guy {
+  background-color: #e0e0e0;
+  color: #000;
+  border-top-left-radius: 0;
+}
+
+.message.girl {
+  background-color: #0084ff;
+  color: #fff;
+  border-top-right-radius: 0;
+}
+
+/* Main Action Buttons - Displayed in a Row */
+.action-buttons {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row; /* Arrange buttons horizontally */
+  justify-content: center; /* Center the buttons */
+  gap: 10px; /* Space between buttons */
+}
+
+.action-buttons li {
+  margin: 0;
+}
+
+.action-buttons button {
+  padding: 10px 15px;
+  background-color: #0084ff;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.action-buttons button:hover {
+  background-color: #005bb5;
+}
+
+/* Secondary Choices - Displayed in a Column */
+.choices { 
+  list-style: none; 
+  padding: 0; 
+  display: flex; 
+  flex-direction: column; /* Arrange buttons vertically */
+  gap: 10px; 
+}
+
+.choices li { 
+  margin: 0; 
+}
+
+.choices button {
+  padding: 10px 15px;
+  background-color: #0084ff;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.choices button:hover {
+  background-color: #005bb5;
+}
+
+#game {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.error {
+  border: 2px solid red;
+  outline: none;
+}
