@@ -82,13 +82,14 @@
         name: "Max 🌀",
         avatar: "https://i.pravatar.cc/150?img=8",
         lines: [
-            "What’s one thing that always makes you smile?",
-            "What’s your favorite type of dessert?",
-            "Do you enjoy spending time at the beach?",
-            "What’s your dream road trip destination?",
-            "Do you like journaling or writing?",
-            "What’s the best advice you’ve ever received?",
-            "Do you enjoy attending festivals or fairs?",
+            "What’s your favorite way to spend a weekend?",
+            "Do you enjoy cooking or baking?",
+            "What’s a song you can’t stop listening to lately?",
+            "What’s the last book or article you read?",
+            "Do you enjoy surprises, or do you prefer planning?",
+            "What’s one thing you’re really proud of?",
+            "What kind of movies do you enjoy?",
+            "What’s your favorite genre of music?",
             "What’s your favorite thing about weekends?",
             "Do you enjoy board games or video games?",
             "What’s a show or movie you’d recommend?",
@@ -121,12 +122,15 @@
         name: "Jack 💫",
         avatar: "https://i.pravatar.cc/150?img=7",
         lines: [
-            "What’s been the highlight of your week?",
-            "Do you enjoy listening to podcasts?",
-            "What’s your favorite childhood memory?",
-            "If you could have any superpower, what would it be?",
-            "What’s the best concert you’ve ever been to?",
-            "Are you more of a cat or dog person?",
+            "What’s your go-to comfort food?",
+            "Do you enjoy spending time outdoors?",
+            "What’s your dream vacation?",
+            "What inspires you the most?",
+            "Do you believe in love at first sight?",
+            "What’s the best compliment someone has given you?",
+            "What kind of workouts do you enjoy?",
+            "Do you enjoy late-night conversations?",
+            "If you had a free day, how would you spend it?",
             "What’s your favorite holiday tradition?",
             "Do you believe in soulmates?",
             "If you could learn a new skill instantly, what would it be?",
@@ -228,7 +232,7 @@
   let currentExpectedText = "";
   let startTime;
   let timerRunning = false;
-  let timeLeft = 60;
+  let timeLeft = 600;
   let timerInterval = null;
   
   // Typing statistics
@@ -243,6 +247,14 @@
     chatList.appendChild(li);
   });
   
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
   // Select a chat
   function selectChat(index) {
     const liItems = chatList.querySelectorAll('li');
@@ -358,7 +370,7 @@
     inputArea.focus();
     startTime = Date.now();
     timerRunning = true;
-    timeLeft = 60;
+    timeLeft = timeLeft;
     timerDisplay.textContent = `Time: ${timeLeft}s`;
     results.style.display = 'none';
     startBtn.style.display = 'none';
@@ -380,6 +392,7 @@
         finishTest();
       }
     }, 1000);
+    
   }
   
   // Finish the typing test
@@ -433,7 +446,9 @@
       return;
     }
   
-    const response = simp.lines[simp.currentMessageIndex];
+    // Select a random line
+    const randomIndex = Math.floor(Math.random() * simp.lines.length);
+    const response = simp.lines[randomIndex]; // Pull the next shuffled line
     const normalizedResponse = normalizeText(response);
   
     // displayMessage(normalizedResponse, 'system');
@@ -521,7 +536,7 @@
         setTimeout(() => {
           typingIndicator.style.display = 'none';
           sendRandomMessage();
-        }, 1000); // 1 second delay
+        }, 100); // 1 second delay
       
   }
   
@@ -584,9 +599,11 @@
   // Initialize simps' original lines
   function initializeSimps() {
     simps.forEach(simp => {
-      simp.originalLines = simp.lines.slice();
+        simp.originalLines = simp.lines.slice(); // Save the original lines
+        shuffleArray(simp.lines); // Shuffle the lines
     });
-  }
+}
+
   
   initializeSimps();
   
@@ -603,6 +620,30 @@
   startBtn.addEventListener('click', startTest);
   endBtn.addEventListener('click', endTestEarly);
   newTextBtn.addEventListener('click', getNewTest);
+  
+  // Add real-time validation for the input area
+inputArea.addEventListener('input', () => {
+    // Normalize user input and the expected text
+    const userInput = normalizeText(inputArea.value.trim());
+    const expectedText = normalizeText(currentExpectedText);
+
+    // Check if the user's input matches the start of the expected text
+    if (expectedText.startsWith(userInput)) {
+        inputArea.classList.remove('error'); // Remove error class if it matches
+    } else {
+        inputArea.classList.add('error'); // Add error class if it doesn't match
+    }
+
+    // Optionally display feedback for user
+    if (!expectedText.startsWith(userInput)) {
+        instruction.textContent = "The input doesn't match. You may correct it";
+        instruction.style.display = 'block';
+    } else {
+        instruction.textContent = '';
+        instruction.style.display = 'none';
+    }
+});
+
   
   // Top button functionality
   window.addEventListener('scroll', ()=>{

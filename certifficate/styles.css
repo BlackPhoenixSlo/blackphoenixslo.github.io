@@ -248,4 +248,8 @@
       font-size: 14px;
     }
   }
+  input.error {
+    background-color:  red;
+  }
+  
   
