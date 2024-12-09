@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Messenger-Style Typing Speed & Accuracy Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f2f5;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      background-color: #0084ff;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+    }
+
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      overflow-y: auto;
+    }
+
+    .message {
+      max-width: 60%;
+      padding: 10px 15px;
+      margin: 5px 0;
+      border-radius: 20px;
+      position: relative;
+      word-wrap: break-word;
+    }
+
+    .message.system {
+      background-color: #e4e6eb;
+      align-self: flex-start;
+    }
+
+    .message.user {
+      background-color: #0084ff;
+      color: white;
+      align-self: flex-end;
+    }
+
+    .input-area {
+      display: flex;
+      padding: 10px;
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+    }
+
+    .input-area textarea {
+      flex: 1;
+      resize: none;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .input-area button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      background-color: #0084ff;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .input-area button:disabled {
+      background-color: #a0cfff;
+      cursor: not-allowed;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+    }
+
+    .controls button {
+      padding: 10px 20px;
+      background-color: #0084ff;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .controls button:disabled {
+      background-color: #a0cfff;
+      cursor: not-allowed;
+    }
+
+    .results {
+      padding: 20px;
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+      text-align: center;
+      font-size: 18px;
+      display: none;
+    }
+
+    .timer {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* Scrollbar Styling */
+    .chat-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .chat-container::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    .chat-container::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+
+    .chat-container::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    /* Top Button */
+    #topBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #333;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    Typing Speed & Accuracy Test
+    <div class="timer" id="timer">Time: 60s</div>
+  </div>
+
+  <div class="chat-container" id="chatContainer">
+    <!-- Messages will appear here -->
+  </div>
+
+  <div class="input-area">
+    <textarea id="inputArea" rows="1" placeholder="Your typing here..." disabled></textarea>
+    <button id="sendBtn" disabled>Send</button>
+  </div>
+
+  <div class="controls">
+    <button id="startBtn">Start Test</button>
+    <button id="endBtn" style="display:none;">End Now</button>
+    <button id="newTextBtn" style="display:none;">New Text</button>
+  </div>
+
+  <div class="results" id="results">
+    <!-- Results will be displayed here -->
+  </div>
+
+  <button id="topBtn" title="Go to top">Top</button>
+
+  <script>
+    // Array of prompts
+    let girlLines = [
+      "Maybe we could talk about your dream destinations, where would you love to go?",
+      "The best things happen at night anyways, don't they?",
+      "Am I the only one who dreams weird stuff lately?",
+      "Haha:) I am just a bit bored... I tend to do a few strange things when I am bored...",
+      "I remember once I fell in love during a holiday trip. He was a heartbreaker, haha...",
+      "Perhaps we can travel together once we get to know each other better.",
+      "You don't have to buy anything. Let's just enjoy this chat for a moment.",
+      "Where I am, it's already late at night. Are you a night owl yourself?",
+      "I probably shouldn't tell you about it... you wouldn't be interested...:D",
+      "If you are also a night owl, we might share some interesting midnight secrets.",
+      "I love it when I can stay up late, just imagining scenarios.",
+      "Could you tell me your name?"
+    ];
+
+    // Normalize fancy quotes and ellipses to ASCII
+    function normalizeText(text) {
+      return text
+        .replace(/’/g, "'")
+        .replace(/‘/g, "'")
+        .replace(/“/g, '"')
+        .replace(/”/g, '"')
+        .replace(/…/g, '...')
+        .replace(/—/g, '-'); 
+    }
+
+    function getRandomText(lines, count=4) {
+      const shuffled = [...lines].sort(()=>Math.random()-0.5);
+      let txt = shuffled.slice(0,count).join(' ');
+      txt = normalizeText(txt); // normalize punctuation
+      return txt;
+    }
+
+    // Initialize variables
+    let testTexts = getRandomText(girlLines, 12).split('. ').map(s => s.trim() + (s.endsWith('.') ? '' : '.'));
+    let currentPromptIndex = 0;
+    const chatContainer = document.getElementById('chatContainer');
+    const inputArea = document.getElementById('inputArea');
+    const sendBtn = document.getElementById('sendBtn');
+    const startBtn = document.getElementById('startBtn');
+    const endBtn = document.getElementById('endBtn');
+    const newTextBtn = document.getElementById('newTextBtn');
+    const results = document.getElementById('results');
+    const timerDisplay = document.getElementById('timer');
+    const topBtn = document.getElementById('topBtn');
+
+    let startTime;
+    let timerRunning = false;
+    let timeLeft = 60;
+    let timerInterval = null;
+
+    // Display a message in the chat
+    function displayMessage(text, sender='system') {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', sender);
+      messageDiv.textContent = text;
+      chatContainer.appendChild(messageDiv);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    // Start the test
+    function startTest() {
+      // Reset variables
+      chatContainer.innerHTML = '';
+      currentPromptIndex = 0;
+      displayMessage("Welcome to the Typing Test! Let's get started.", 'system');
+      inputArea.disabled = false;
+      inputArea.value = '';
+      inputArea.focus();
+      sendBtn.disabled = false;
+      startTime = Date.now();
+      timerRunning = true;
+      timeLeft = 60;
+      timerDisplay.textContent = `Time: ${timeLeft}s`;
+      results.style.display = 'none';
+      startBtn.style.display = 'none';
+      endBtn.style.display = 'inline-block';
+      newTextBtn.style.display = 'none';
+
+      // Display first prompt
+      setTimeout(displayNextPrompt, 1000);
+
+      // Start timer
+      timerInterval = setInterval(()=>{
+        timeLeft--;
+        timerDisplay.textContent = `Time: ${timeLeft}s`;
+        if(timeLeft <= 0) {
+          finishTest();
+        }
+      }, 1000);
+    }
+
+    // Display the next prompt
+    function displayNextPrompt() {
+      if(currentPromptIndex >= testTexts.length) {
+        finishTest();
+        return;
+      }
+      const prompt = testTexts[currentPromptIndex];
+      displayMessage(prompt, 'system');
+    }
+
+    // Send user's message
+    function sendMessage() {
+      if(!timerRunning) return;
+      const userInput = inputArea.value.trim();
+      if(userInput === '') return;
+      displayMessage(userInput, 'user');
+      inputArea.value = '';
+      currentPromptIndex++;
+      if(currentPromptIndex < testTexts.length) {
+        setTimeout(displayNextPrompt, 500);
+      } else {
+        finishTest();
+      }
+    }
+
+    // Finish the test
+    function finishTest(endEarly=false) {
+      timerRunning = false;
+      inputArea.disabled = true;
+      sendBtn.disabled = true;
+      clearInterval(timerInterval);
+      const endTime = Date.now();
+      const elapsed = (endTime - startTime)/1000;
+      if(!endEarly) {
+        timerDisplay.textContent = "Time's up!";
+      } else {
+        timerDisplay.textContent = `Ended early at ${Math.round(elapsed)}s`;
+      }
+
+      // Calculate results
+      let wordsTyped = 0;
+      let correctWords = 0;
+      let totalTypedWords = 0;
+
+      const messages = chatContainer.querySelectorAll('.message.user');
+      messages.forEach((msg, index) => {
+        const typedWords = msg.textContent.trim().split(/\s+/).length;
+        wordsTyped += typedWords;
+        totalTypedWords += typedWords;
+
+        const originalWords = testTexts[index] ? testTexts[index].split(/\s+/) : [];
+        const userWords = msg.textContent.trim().split(/\s+/);
+        userWords.forEach((word, i) => {
+          if(originalWords[i] && originalWords[i].replace(/[^a-zA-Z0-9]/g, '').toLowerCase() === word.replace(/[^a-zA-Z0-9]/g, '').toLowerCase()) {
+            correctWords++;
+          }
+        });
+      });
+
+      const wpm = elapsed > 0 ? Math.round((wordsTyped / elapsed) * 60) : 0;
+      const accuracy = (wordsTyped > 0) ? Math.round((correctWords / wordsTyped) * 100) : 0;
+
+      results.innerHTML = `
+        <p>You typed <strong>${wordsTyped}</strong> words in <strong>${Math.round(elapsed)}</strong> seconds.</p>
+        <p><strong>WPM:</strong> ${wpm}</p>
+        <p><strong>Accuracy:</strong> ${accuracy}%</p>
+        <p>Feel free to try again or get new text.</p>
+      `;
+      results.style.display = 'block';
+      endBtn.style.display = 'none';
+      newTextBtn.style.display = 'inline-block';
+    }
+
+    // End the test early
+    function endTestEarly() {
+      finishTest(true);
+    }
+
+    // Get new text for the test
+    function getNewText() {
+      testTexts = getRandomText(girlLines, 12).split('. ').map(s => s.trim() + (s.endsWith('.') ? '' : '.'));
+      displayMessage("New test started. Let's begin!", 'system');
+      inputArea.value = '';
+      inputArea.disabled = false;
+      sendBtn.disabled = false;
+      results.style.display = 'none';
+      startBtn.style.display = 'none';
+      endBtn.style.display = 'inline-block';
+      newTextBtn.style.display = 'none';
+      currentPromptIndex = 0;
+      setTimeout(displayNextPrompt, 1000);
+      inputArea.focus();
+    }
+
+    // Input area event listeners
+    sendBtn.addEventListener('click', sendMessage);
+    inputArea.addEventListener('keypress', (e) => {
+      if(e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    // Control buttons
+    startBtn.addEventListener('click', startTest);
+    endBtn.addEventListener('click', endTestEarly);
+    newTextBtn.addEventListener('click', getNewText);
+
+    // Top button functionality
+    window.addEventListener('scroll', ()=>{
+      if(window.scrollY > 100) {
+        topBtn.style.display = 'block';
+      } else {
+        topBtn.style.display = 'none';
+      }
+    });
+
+    topBtn.addEventListener('click', ()=>{
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+
+    // Initial display
+    displayMessage("Click 'Start Test' to begin your typing speed & accuracy test.", 'system');
+  </script>
+</body>
+</html>

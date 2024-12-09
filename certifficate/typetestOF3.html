@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Multi-Chat Typing Speed & Accuracy Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f2f5;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      background-color: #0084ff;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+      position: relative;
+    }
+
+    .timer {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .main-container {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #fff;
+      border-right: 1px solid #ccc;
+      overflow-y: auto;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #ccc;
+      margin: 0;
+    }
+
+    .chat-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .chat-list li {
+      padding: 15px;
+      cursor: pointer;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      transition: background-color 0.3s;
+    }
+
+    .chat-list li:hover, .chat-list li.active {
+      background-color: #f1f1f1;
+    }
+
+    .chat-list img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .chat-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      background-color: #e5ddd5;
+      position: relative;
+    }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .message {
+      max-width: 60%;
+      padding: 10px 15px;
+      margin: 5px 0;
+      border-radius: 20px;
+      position: relative;
+      word-wrap: break-word;
+      clear: both;
+    }
+
+    .message.system {
+      background-color: #e4e6eb;
+      align-self: flex-start;
+      float: left;
+    }
+
+    .message.user {
+      background-color: #0084ff;
+      color: white;
+      align-self: flex-end;
+      float: right;
+    }
+
+    .typing-indicator {
+      display: none;
+      font-style: italic;
+      color: #555;
+      margin-bottom: 5px;
+    }
+
+    .input-area {
+      display: flex;
+    }
+
+    .input-area textarea {
+      flex: 1;
+      resize: none;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      outline: none;
+      height: 50px;
+    }
+
+    .input-area button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      background-color: #0084ff;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .input-area button:disabled {
+      background-color: #a0cfff;
+      cursor: not-allowed;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+    }
+
+    .controls button {
+      padding: 10px 20px;
+      background-color: #0084ff;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 0 10px;
+    }
+
+    .controls button:disabled {
+      background-color: #a0cfff;
+      cursor: not-allowed;
+    }
+
+    .results {
+      padding: 20px;
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+      text-align: center;
+      font-size: 18px;
+      display: none;
+    }
+
+    /* Scrollbar Styling */
+    .sidebar::-webkit-scrollbar, .messages::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .sidebar::-webkit-scrollbar-track, .messages::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb, .messages::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb:hover, .messages::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    /* Top Button */
+    #topBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #333;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      z-index: 100;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 200px;
+      }
+
+      .input-area textarea {
+        height: 40px;
+      }
+
+      .controls button {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    Typing Speed & Accuracy Test
+    <div class="timer" id="timer">Time: 60s</div>
+  </div>
+
+  <div class="main-container">
+    <div class="sidebar">
+      <h2>Simps</h2>
+      <ul class="chat-list" id="chatList">
+        <!-- Chat participants will be dynamically added here -->
+      </ul>
+    </div>
+
+    <div class="chat-area">
+      <div class="messages" id="messages">
+        <!-- Messages will appear here -->
+      </div>
+      <div class="typing-indicator" id="typingIndicator">Fan is typing...</div>
+      <div class="input-area">
+        <textarea id="inputArea" placeholder="Your typing here..." disabled></textarea>
+        <button id="sendBtn" disabled>Send</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="startBtn">Start Test</button>
+    <button id="endBtn" style="display:none;">End Now</button>
+    <button id="newTextBtn" style="display:none;">New Test</button>
+  </div>
+
+  <div class="results" id="results">
+    <!-- Results will be displayed here -->
+  </div>
+
+  <button id="topBtn" title="Go to top">Top</button>
+
+  <script>
+    // Array of simps (chat participants)
+    const simps = [
+      {
+        name: "Lily 🌸",
+        avatar: "https://i.pravatar.cc/150?img=1",
+        lines: [
+          "Hey there! How's your day going?",
+          "I just saw your latest post, it's amazing!",
+          "Can't wait to chat more with you 😊",
+          "Do you have any plans for the weekend?",
+          "You're so talented!",
+          "What's your favorite hobby?",
+          "I love your sense of style!",
+          "Tell me more about yourself.",
+          "You're truly inspiring!",
+          "Looking forward to our next conversation."
+        ]
+      },
+      {
+        name: "Mia 💖",
+        avatar: "https://i.pravatar.cc/150?img=2",
+        lines: [
+          "Hello! 😊",
+          "Your profile caught my eye.",
+          "How do you spend your free time?",
+          "You have a beautiful smile!",
+          "What's your favorite book?",
+          "I enjoy our chats so much!",
+          "Do you like movies? Which ones?",
+          "You're so kind and thoughtful.",
+          "Let's plan something fun together!",
+          "Can't wait to hear from you again."
+        ]
+      },
+      {
+        name: "Sophia 🌺",
+        avatar: "https://i.pravatar.cc/150?img=3",
+        lines: [
+          "Hi! How are you today?",
+          "Your content is always on point!",
+          "What's your favorite music genre?",
+          "I admire your dedication!",
+          "Do you like traveling?",
+          "You're a great listener.",
+          "What's your favorite food?",
+          "I love our conversations!",
+          "You're so creative!",
+          "Looking forward to more chats!"
+        ]
+      },
+      {
+        name: "Emma 💕",
+        avatar: "https://i.pravatar.cc/150?img=4",
+        lines: [
+          "Good day! 😊",
+          "Your posts always make me smile.",
+          "What's your favorite sport?",
+          "You're incredibly talented!",
+          "Do you have any pets?",
+          "I enjoy talking with you.",
+          "What's your dream destination?",
+          "You're so supportive!",
+          "Let's stay connected!",
+          "Can't wait to chat again."
+        ]
+      },
+      {
+        name: "Olivia 🌼",
+        avatar: "https://i.pravatar.cc/150?img=5",
+        lines: [
+          "Hey! How's everything?",
+          "Your latest photo is stunning!",
+          "What's your favorite movie?",
+          "You're so interesting!",
+          "Do you enjoy reading?",
+          "I love our interactions!",
+          "What's your favorite season?",
+          "You're so positive!",
+          "Let's share more stories!",
+          "Looking forward to our next chat."
+        ]
+      }
+    ];
+
+    // Initialize variables
+    const chatList = document.getElementById('chatList');
+    const messages = document.getElementById('messages');
+    const inputArea = document.getElementById('inputArea');
+    const sendBtn = document.getElementById('sendBtn');
+    const startBtn = document.getElementById('startBtn');
+    const endBtn = document.getElementById('endBtn');
+    const newTextBtn = document.getElementById('newTextBtn');
+    const results = document.getElementById('results');
+    const timerDisplay = document.getElementById('timer');
+    const topBtn = document.getElementById('topBtn');
+    const typingIndicator = document.getElementById('typingIndicator');
+
+    let currentChat = null;
+    let startTime;
+    let timerRunning = false;
+    let timeLeft = 60;
+    let timerInterval = null;
+    let totalTyped = 0;
+    let correctTyped = 0;
+    let randomMessageInterval = null;
+    let isWaitingForUser = false; // Flag to track if waiting for user reply
+
+    // Populate the chat list
+    simps.forEach((simp, index) => {
+      const li = document.createElement('li');
+      li.innerHTML = `<img src="${simp.avatar}" alt="${simp.name}"><span>${simp.name}</span>`;
+      li.addEventListener('click', () => selectChat(index));
+      chatList.appendChild(li);
+    });
+
+    // Select a chat
+    function selectChat(index) {
+      const liItems = chatList.querySelectorAll('li');
+      liItems.forEach((li, idx) => {
+        if(idx === index) {
+          li.classList.add('active');
+        } else {
+          li.classList.remove('active');
+        }
+      });
+
+      currentChat = simps[index];
+      messages.innerHTML = '';
+      displayMessage("Welcome! Let's start our conversation.", 'system');
+      displayMessage("Click 'Start Test' to begin.", 'system');
+
+      // Disable input area and send button until test starts
+      inputArea.value = '';
+      inputArea.disabled = true;
+      sendBtn.disabled = true;
+      isWaitingForUser = false;
+    }
+
+    // Display a message in the chat
+    function displayMessage(text, sender='system') {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', sender);
+      messageDiv.textContent = text;
+      messages.appendChild(messageDiv);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    // Start the typing test
+    function startTest() {
+      if(!currentChat) {
+        alert("Please select a chat to start the test.");
+        return;
+      }
+
+      // Reset variables
+      messages.innerHTML = '';
+      displayMessage("The test has started! Type your responses as quickly and accurately as possible.", 'system');
+      startBtn.style.display = 'none';
+      endBtn.style.display = 'inline-block';
+      newTextBtn.style.display = 'none';
+      results.style.display = 'none';
+      inputArea.value = '';
+      inputArea.disabled = true;
+      sendBtn.disabled = true;
+      totalTyped = 0;
+      correctTyped = 0;
+      timerRunning = true;
+      timeLeft = 60; // You can modify the timer here
+      timerDisplay.textContent = `Time: ${timeLeft}s`;
+      isWaitingForUser = false;
+
+      // Start timer
+      startTime = Date.now();
+      timerInterval = setInterval(()=>{
+        timeLeft--;
+        timerDisplay.textContent = `Time: ${timeLeft}s`;
+        if(timeLeft <= 0) {
+          finishTest();
+        }
+      }, 1000);
+
+      // Start the conversation
+      sendSimpMessage();
+
+      // Start sending random messages from other simps
+      startRandomMessages();
+    }
+
+    // Send a message from the main simp with delay
+    function sendSimpMessage() {
+      if(!timerRunning) return;
+
+      const message = currentChat.lines.shift();
+      if(message) {
+        // Show typing indicator
+        typingIndicator.style.display = 'block';
+
+        // Delay before displaying the message
+        setTimeout(() => {
+          typingIndicator.style.display = 'none';
+          displayMessage(message, 'system');
+          isWaitingForUser = true;
+          promptUserReply();
+        }, 3000); // 3 seconds delay
+      } else {
+        // No more messages from this simp
+        finishTest();
+      }
+    }
+
+    // Prompt user to reply
+    function promptUserReply() {
+      inputArea.disabled = false;
+      sendBtn.disabled = false;
+      inputArea.focus();
+    }
+
+    // Send user's message
+    function sendMessage() {
+      if(!timerRunning || !isWaitingForUser) return;
+      const userInput = inputArea.value.trim();
+      if(userInput === '') return;
+
+      // Calculate typing stats
+      totalTyped += userInput.length;
+      // For demonstration, assume all characters are correct
+      correctTyped += userInput.length;
+
+      displayMessage(userInput, 'user');
+      inputArea.value = '';
+      inputArea.disabled = true;
+      sendBtn.disabled = true;
+      isWaitingForUser = false;
+
+      // Send next message from main simp after a short delay
+      setTimeout(() => {
+        sendSimpMessage();
+      }, 500); // Short delay before sending next message
+    }
+
+    // Finish the typing test
+    function finishTest(endEarly=false) {
+      timerRunning = false;
+      inputArea.disabled = true;
+      sendBtn.disabled = true;
+      clearInterval(timerInterval);
+      clearInterval(randomMessageInterval);
+      typingIndicator.style.display = 'none';
+
+      if(!endEarly) {
+        timerDisplay.textContent = "Time's up!";
+      } else {
+        const elapsed = Math.round((Date.now() - startTime)/1000);
+        timerDisplay.textContent = `Ended early at ${elapsed}s`;
+      }
+
+      // Calculate WPM and Accuracy
+      const elapsedSeconds = 60 - timeLeft;
+      const wpm = elapsedSeconds > 0 ? Math.round((totalTyped / 5) / (elapsedSeconds / 60)) : 0;
+      const accuracy = totalTyped > 0 ? Math.round((correctTyped / totalTyped) * 100) : 0;
+
+      results.innerHTML = `
+        <p>You typed <strong>${totalTyped}</strong> characters with <strong>${correctTyped}</strong> correct.</p>
+        <p><strong>WPM:</strong> ${wpm}</p>
+        <p><strong>Accuracy:</strong> ${accuracy}%</p>
+        <p>Feel free to try again or select a new chat.</p>
+      `;
+      results.style.display = 'block';
+      endBtn.style.display = 'none';
+      newTextBtn.style.display = 'inline-block';
+    }
+
+    // End the test early
+    function endTestEarly() {
+      finishTest(true);
+    }
+
+    // Reset for a new test
+    function resetTest() {
+      results.style.display = 'none';
+      newTextBtn.style.display = 'none';
+      startBtn.style.display = 'inline-block';
+      endBtn.style.display = 'none';
+      timerDisplay.textContent = `Time: 60s`;
+      // Reset the main simp's messages if needed
+      simps.forEach(simp => {
+        simp.lines = shuffleArray(simp.lines);
+      });
+      // Clear messages
+      messages.innerHTML = '';
+      displayMessage("Select a chat from the sidebar and click 'Start Test' to begin.", 'system');
+      currentChat = null;
+      isWaitingForUser = false;
+      const liItems = chatList.querySelectorAll('li');
+      liItems.forEach(li => li.classList.remove('active'));
+    }
+
+    // Shuffle array for random order
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Start sending random messages from other simps
+    function startRandomMessages() {
+      randomMessageInterval = setInterval(() => {
+        if(!timerRunning) return;
+        // Choose a random simp that's not the currentChat
+        const otherSimps = simps.filter(simp => simp !== currentChat);
+        if(otherSimps.length === 0) return;
+        const randomSimp = otherSimps[Math.floor(Math.random() * otherSimps.length)];
+        if(randomSimp.lines.length === 0) return;
+
+        const message = randomSimp.lines[Math.floor(Math.random() * randomSimp.lines.length)];
+        displayMessage(`${randomSimp.name}: ${message}`, 'system');
+      }, 5000); // Every 5 seconds
+    }
+
+    // Input area event listeners
+    sendBtn.addEventListener('click', sendMessage);
+    inputArea.addEventListener('keypress', (e) => {
+      if(e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    // Control buttons
+    startBtn.addEventListener('click', startTest);
+    endBtn.addEventListener('click', endTestEarly);
+    newTextBtn.addEventListener('click', resetTest);
+
+    // Top button functionality
+    window.addEventListener('scroll', ()=>{
+      if(window.scrollY > 100) {
+        topBtn.style.display = 'block';
+      } else {
+        topBtn.style.display = 'none';
+      }
+    });
+
+    topBtn.addEventListener('click', ()=>{
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+
+    // Initial display
+    displayMessage("Select a chat from the sidebar and click 'Start Test' to begin.", 'system');
+  </script>
+</body>
+</html>
