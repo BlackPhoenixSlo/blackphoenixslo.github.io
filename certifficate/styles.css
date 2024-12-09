@@ -248,8 +248,8 @@
       font-size: 14px;
     }
   }
-  input.error {
-    background-color:  red;
+  .error {
+    background-color:  rgba(105, 8, 8, 0.214);
   }
   
   

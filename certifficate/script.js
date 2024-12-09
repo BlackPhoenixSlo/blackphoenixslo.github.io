@@ -300,10 +300,12 @@
      // Show instruction only for the clicked chat item
      const clickedItem = liItems[index];
 
-     if (clickedItem.classList.contains('active') && currentChat.messages.length != 0 ) {
+     if (clickedItem.classList.contains('active') && currentChat.messages.length % 2 != 0 ) {
          showInstruction("Please type the above message to continue.");
      } else {
          instruction.style.display = 'none';
+         showInstruction("Please find the Simp you didn't respon't to.");
+
      }
 
     
