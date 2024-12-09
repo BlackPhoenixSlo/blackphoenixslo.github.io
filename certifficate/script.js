@@ -298,6 +298,7 @@
     }
 
      // Show instruction only for the clicked chat item
+     //const liItems = chatList.querySelectorAll('li');
      const clickedItem = liItems[index];
 
      if (clickedItem.classList.contains('active') && currentChat.messages.length % 2 != 0 ) {
@@ -394,6 +395,11 @@
         finishTest();
       }
     }, 1000);
+
+
+    showInstruction("Please find the Simp you didn't respon't to and type the above message to continue.");
+
+
     
   }
   
@@ -585,6 +591,13 @@
   
     const liItems = chatList.querySelectorAll('li');
     liItems.forEach(li => li.classList.remove('active'));
+
+  
+  
+    showInstruction("Please find the Simp you didn't respon't to and type the above message to continue.");
+
+    
+
   }
   
   // Reset simps' lines to original
