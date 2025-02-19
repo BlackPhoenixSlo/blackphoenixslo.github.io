@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Messaging UI with Photo Attachments, Game Actions & OnlyFans Style</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="messaging-container">
+    <!-- Top Tabs for Model (Girl) Names -->
+    <div class="top-tabs">
+      <div class="tab active" data-girl="Jaky">Jaky</div>
+      <div class="tab" data-girl="Beth"  >Beth</div>
+      <div class="tab" data-girl="Clara"  >Clara</div>
+    </div>
+    <!-- Main Content Area -->
+    <div class="content-area">
+      <!-- Left Sidebar: Guy Names (Populated Dynamically) -->
+      <div class="left-sidebar" id="leftSidebar"></div>
+      <!-- Main Chat Window -->
+      <div class="main-chat">
+        <div class="chat-header">
+          <h2 id="chatHeader">Chat with [Select a Guy]</h2>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <!-- Container for Selected Attachments -->
+        <div id="selectedAttachmentsContainer"></div>
+        <!-- Game Action Options (Provided by Backend) -->
+        <div id="actionOptions" class="action-options">
+          <!--<button class="action-option" data-action="Option 1">Option 1</button>
+          <button class="action-option" data-action="Option 2">Option 2</button>
+          <button class="action-option" data-action="Option 3">Option 3</button>
+          -->
+        </div>
+        <!-- Chat Input Area -->
+        <div class="chat-input">
+          <input type="text" id="messageInput" placeholder="Type your message..." disabled />
+          <input type="number" id="priceInput" placeholder="Price" />
+          <button id="addPhotoBtn">Add Photo</button>
+          <button id="sendBtn">Send</button>
+        </div>
+      </div>
+      <!-- Right Sidebar: Model Info and Guy Info -->
+      <div class="right-sidebar">
+        <div class="model-info" id="modelInfo">
+          <h3>Model Info</h3>
+          <p>Name: Alice</p>
+          <p>Bio: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+        <div id="guyInfoSection" style="display:none;">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal for Photo Selection -->
+  <div id="photoModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModal">&times;</span>
+      <h2>Select Photos</h2>
+      <p>Click on images to select them. Selected images will have a green border.</p>
+      <div id="availablePhotos"></div>
+      <div style="margin-top: 10px;">
+        <button id="addAttachmentsBtn">Add Attachments</button>
+        <button id="cancelAttachmentsBtn">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <script src="datagen.js"></script>
+
+  
+ 
+  <script src="script_convo.js"></script>
+</body>
+</html>
