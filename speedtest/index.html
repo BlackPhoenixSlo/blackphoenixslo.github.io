@@ -330,7 +330,7 @@
 <body>
   <div class="header">
     Typing Speed & Accuracy Test
-    <div class="timer" id="timer">Time: 60s</div>
+    <div class="timer" id="timer">Time: 420s</div>
   </div>
 
   <div class="chat-container" id="chatContainer">
@@ -404,7 +404,7 @@
     <h2>How to Play</h2>
     <div class="tutorial-content">
       <p><strong>Welcome to the Messenger-Style Typing Test!</strong></p>
-      <p>🎯 <strong>Goal:</strong> Type as many messages as accurately as possible within 60 seconds.</p>
+      <p>🎯 <strong>Goal:</strong> Type as many messages as accurately as possible within 420 seconds.</p>
       <p>📝 <strong>How it works:</strong></p>
       <ul>
         <li>Click "Start Test" to begin</li>
@@ -619,7 +619,7 @@
 
     let startTime;
     let timerRunning = false;
-    let timeLeft = 60;
+    let timeLeft = 420;
     let timerInterval = null;
 
     // Display a message in the chat
@@ -635,7 +635,7 @@
         // Clear timer
         clearInterval(timerInterval);
         timerRunning = false;
-        timeLeft = 60;
+        timeLeft = 420;
         timerDisplay.textContent = `Time: ${timeLeft}s`;
         
         // Reset UI elements
