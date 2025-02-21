@@ -146,7 +146,7 @@ const modelGuyMapping = {
       chatMessages.scrollTop = chatMessages.scrollHeight;
     }
   }
-  
+
   function renderMessage(msg) {
     const messageDiv = document.createElement('div');
     messageDiv.className = 'message ' + (msg.sender === 'girl' ? 'from-girl' : 'from-guy');
@@ -218,70 +218,77 @@ const modelGuyMapping = {
   
   function updateSelectedAttachmentsUI() {
     selectedAttachmentsContainer.innerHTML = "";
-    currentAttachments.forEach((att, index) => {
-      const thumbDiv = document.createElement('div');
-      thumbDiv.className = 'selected-thumb';
-  
-      const img = document.createElement('img');
-      img.src = att.previewUrl;
-      thumbDiv.appendChild(img);
-  
-      const removeBtn = document.createElement('button');
-      removeBtn.className = 'remove-attachment';
-      removeBtn.textContent = "×";
-      removeBtn.addEventListener('click', function() {
-        currentAttachments.splice(index, 1);
-        updateSelectedAttachmentsUI();
-        if (currentAttachments.length === 0) {
-          priceInput.style.display = "none";
-        }
-      });
-      thumbDiv.appendChild(removeBtn);
-      selectedAttachmentsContainer.appendChild(thumbDiv);
-    });
-    priceInput.style.display = currentAttachments.length > 0 ? "block" : "none";
+    
+    if (currentAttachments.length > 0) {
+        const thumbDiv = document.createElement('div');
+        thumbDiv.className = 'selected-thumb';
+    
+        const img = document.createElement('img');
+        img.src = currentAttachments[0].previewUrl;
+        thumbDiv.appendChild(img);
+    
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-attachment';
+        removeBtn.textContent = "×";
+        removeBtn.addEventListener('click', function() {
+            currentAttachments = [];
+            updateSelectedAttachmentsUI();
+            priceInput.style.display = "none";
+        });
+        
+        thumbDiv.appendChild(removeBtn);
+        selectedAttachmentsContainer.appendChild(thumbDiv);
+        priceInput.style.display = "block";
+    } else {
+        priceInput.style.display = "none";
+    }
   }
   
   // Populate the modal with available photos by reading the folder's file list.
   async function populateAvailablePhotos() {
     availablePhotos.innerHTML = "";
-    modalSelectedPhotos = [];
+    modalSelectedPhotos = [];  // Reset selected photos
     const photos = await fetchPhotosForModel(currentModel);
+    
     photos.forEach((filename) => {
-      const photoDiv = document.createElement('div');
-      photoDiv.className = 'available-photo';
-      const folder = 'photos_' + currentModel;
-      const imgUrl = folder + '/' + filename;
-      const imgElem = document.createElement('img');
-      imgElem.src = imgUrl;
-      photoDiv.appendChild(imgElem);
-  
-      // Compute display name: remove ".jpg" (case-insensitive) and replace underscores with spaces.
-      let displayName = filename;
-      if (displayName.toLowerCase().endsWith('.jpg') || displayName.toLowerCase().endsWith('.png')) {
-        displayName = displayName.slice(0, -4);
-      }
-      displayName = displayName.replace(/_/g, ' ');
-  
-      const overlay = document.createElement('div');
-      overlay.className = 'overlay';
-      overlay.textContent = displayName;
-      photoDiv.appendChild(overlay);
-  
-      photoDiv.addEventListener('click', function() {
-        if (photoDiv.classList.contains('selected')) {
-          photoDiv.classList.remove('selected');
-          modalSelectedPhotos = modalSelectedPhotos.filter(item => item.previewUrl !== imgUrl);
-        } else {
-          photoDiv.classList.add('selected');
-          modalSelectedPhotos.push({
-            previewUrl: imgUrl,
-            name: displayName
-          });
+        const photoDiv = document.createElement('div');
+        photoDiv.className = 'available-photo';
+        const folder = 'photos_' + currentModel;
+        const imgUrl = folder + '/' + filename;
+        const imgElem = document.createElement('img');
+        imgElem.src = imgUrl;
+        photoDiv.appendChild(imgElem);
+
+        // Compute display name
+        let displayName = filename;
+        if (displayName.toLowerCase().endsWith('.jpg') || displayName.toLowerCase().endsWith('.png')) {
+            displayName = displayName.slice(0, -4);
         }
-      });
-  
-      availablePhotos.appendChild(photoDiv);
+        displayName = displayName.replace(/_/g, ' ');
+
+        const overlay = document.createElement('div');
+        overlay.className = 'overlay';
+        overlay.textContent = displayName;
+        photoDiv.appendChild(overlay);
+
+        photoDiv.addEventListener('click', function() {
+            // Remove 'selected' class from all photos
+            document.querySelectorAll('.available-photo').forEach(photo => {
+                photo.classList.remove('selected');
+            });
+            
+            // Clear modalSelectedPhotos array
+            modalSelectedPhotos = [];
+            
+            // Add selection to clicked photo
+            photoDiv.classList.add('selected');
+            modalSelectedPhotos.push({
+                previewUrl: imgUrl,
+                name: displayName
+            });
+        });
+        
+        availablePhotos.appendChild(photoDiv);
     });
   }
   
@@ -370,13 +377,16 @@ const modelGuyMapping = {
       photoModal.style.display = "none";
     });
     addAttachmentsBtn.addEventListener('click', function() {
-      modalSelectedPhotos.forEach(photo => {
-        if (!currentAttachments.some(att => att.previewUrl === photo.previewUrl)) {
-          currentAttachments.push(photo);
+        // Clear existing attachments
+        currentAttachments = [];
+        
+        // Add only the selected photo
+        if (modalSelectedPhotos.length > 0) {
+            currentAttachments.push(modalSelectedPhotos[0]);
         }
-      });
-      updateSelectedAttachmentsUI();
-      photoModal.style.display = "none";
+        
+        updateSelectedAttachmentsUI();
+        photoModal.style.display = "none";
     });
   });
   
