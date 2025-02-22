@@ -2108,258 +2108,35 @@ function createTutorialWindow() {
     const tutorialWindow = document.createElement('div');
     tutorialWindow.id = 'tutorialWindow';
     tutorialWindow.className = 'tutorial-window';
-    tutorialWindow.style.display = 'none';
+    tutorialWindow.style.display = 'none'; // Initially hidden
+    tutorialWindow.style.position = 'fixed';
+    tutorialWindow.style.top = '50%';
+    tutorialWindow.style.left = '50%';
+    tutorialWindow.style.transform = 'translate(-50%, -50%)';
+    tutorialWindow.style.backgroundColor = 'white';
+    tutorialWindow.style.padding = '20px';
+    tutorialWindow.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)';
+    tutorialWindow.style.zIndex = '1001';
 
-    // Add tutorial content with better styling
+    // Add tutorial content
     tutorialWindow.innerHTML = `
-        <div class="tutorial-header">
-            <h2>Chat Simulator Tutorial</h2>
-            <button class="close-tutorial" onclick="toggleTutorial()">×</button>
-        </div>
-        
-        <div class="tutorial-content">
-            <div class="tutorial-section welcome-section">
-                <h3>👋 Getting Started</h3>
-                <ol>
-                    <li>Engage with the fan using the action buttons</li>
-                    <li>Start with basic questions to build rapport</li>
-                    <li>Use deep questions and teasing to maintain interest</li>
-                    <li>Progress through content tiers:
-                        <ul>
-                            <li>Start with teasing images and videos</li>
-                            <li>Move to sexting only after fan is horny and has bought teasing videos</li>
-                            <li>Mix in deep conversations between sexting</li>
-                            <li>Focus on one script at a time for maximum engagement</li>
-                        </ul>
-                    </li>
-                    <li>End with cuddling messages for a lasting impression</li>
-                    <li>For bonus tip, ensure fan has:
-                        <ul>
-                            <li>Horniness > 30</li>
-                            <li>Sexiness > 50</li>
-                            <li>Charisma > 50</li>
-                        </ul>
-                    </li>
-                </ol>
-            </div>
+        <h2>Tutorial</h2>
+        <p>Welcome to the game! Here are some tips to get started:</p>
+        <ul>
+            <li>Engage with the fan using the buttons provided.</li>
+            <li>Start by asking basic questions to build rapport.</li>
+            <li>Incorporate deep questions and teasing to keep the fan interested.</li>
+            <li>Sell teasing images and videos before moving to sexting. Sext after fan is horny and you sold teasing videos.</li>
+            <li>Use deep conversations between sexting to maintain the fan's interest.</li>
+            <li>Focus on selling one script at a time to maximize the fan's interest and engagement.</li>
+            <li>End with cuddling messages to leave a lasting impression before the fan leaves.</li>
+            <li>Ensure the fan's horniness is above 30, sexiness above 50, and charisma above 50 before ending the conversation. for A big tip bonus</li>
 
-            <div class="tutorial-section">
-                <h3>🎯 Basic Interactions</h3>
-                <ul>
-                    <li>Start by selecting a model and guy to chat with</li>
-                    <li>Use the action buttons to interact:
-                        <ul>
-                            <li><strong>Convo:</strong> General conversation</li>
-                            <li><strong>Tease:</strong> Playful messages</li>
-                            <li><strong>Questions:</strong> Learn about the fan</li>
-                            <li><strong>Sext:</strong> Intimate chat</li>
-                            <li><strong>Sell Content:</strong> Offer premium content</li>
-                            <li><strong>Cuddle:</strong> Show affection</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="tutorial-section">
-                <h3>💡 Fan Psychology</h3>
-                <ul>
-                    <li>Build trust before selling premium content</li>
-                    <li>Ask questions to increase Charisma</li>
-                    <li>Use teases to boost Sexiness</li>
-                    <li>Balance interactions to maintain interest</li>
-                    <li>Watch for signs of "deeping" (losing interest)</li>
-                </ul>
-            </div>
-
-            <div class="tutorial-section">
-                <h3>💰 Content Sales</h3>
-                <ul>
-                    <li>Content tiers (lowest to highest):
-                        <ol>
-                            <li>Tease Images</li>
-                            <li>Tease Videos</li>
-                            <li>Strip to Underwear</li>
-                            <li>Strip Naked</li>
-                            <li>Quick Masturbation</li>
-                            <li>Long Masturbation</li>
-                            <li>End Script</li>
-                        </ol>
-                    </li>
-                    <li>Price based on fan's Horny Level</li>
-                    <li>Success depends on Charisma and previous interactions</li>
-                </ul>
-            </div>
-
-            <div class="tutorial-section">
-                <h3>⚠️ Important Tips</h3>
-                <ul>
-                    <li>Don't rush to sell high-tier content</li>
-                    <li>Mix different types of interactions</li>
-                    <li>Pay attention to fan stats</li>
-                    <li>Avoid repetitive actions</li>
-                    <li>Remember previous conversations</li>
-                </ul>
-            </div>
-        </div>
-    `;
-
-    // Add styles specific to tutorial
-    const style = document.createElement('style');
-    style.textContent = `
-        .tutorial-window {
-            max-width: 800px;
-            max-height: 80vh;
-            overflow-y: auto;
-            border-radius: 12px;
-            background: #ffffff;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .tutorial-header {
-            position: sticky;
-            top: 0;
-            background: #007BFF;
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 12px 12px 0 0;
-        }
-
-        .tutorial-header h2 {
-            margin: 0;
-            font-size: 1.5em;
-        }
-
-        .close-tutorial {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 0 5px;
-        }
-
-        .tutorial-content {
-            padding: 20px;
-        }
-
-        .tutorial-section {
-            margin-bottom: 25px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #007BFF;
-        }
-
-        .tutorial-section h3 {
-            color: #007BFF;
-            margin-top: 0;
-        }
-
-        .tutorial-section ul {
-            margin: 10px 0;
-            padding-left: 20px;
-        }
-
-        .tutorial-section ul li {
-            margin: 8px 0;
-            line-height: 1.4;
-        }
-
-        .tutorial-section ul ul {
-            margin-top: 5px;
-        }
-
-        .tutorial-section ol {
-            margin: 5px 0;
-            padding-left: 20px;
-        }
-
-        .tutorial-section ol li {
-            margin: 3px 0;
-        }
-        
-        ${style.textContent}
-        
-        .welcome-section {
-            background: #e8f4ff;
-            border-left: 4px solid #28a745;
-            margin-bottom: 30px;
-        }
-        
-        .welcome-section h3 {
-            color: #28a745;
-        }
-        
-        .welcome-section ol {
-            counter-reset: welcome-counter;
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .welcome-section ol > li {
-            counter-increment: welcome-counter;
-            margin: 12px 0;
-            padding-left: 35px;
-            position: relative;
-        }
-        
-        .welcome-section ol > li::before {
-            content: counter(welcome-counter);
-            background: #28a745;
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: absolute;
-            left: 0;
-            top: -2px;
-        }
-        
-        .welcome-section ul {
-            margin: 8px 0 8px 20px;
-            list-style: disc;
-        }
-        
-        .welcome-section ul li {
-            margin: 4px 0;
-        }
-    `;
-    document.head.appendChild(style);
-
-    // Add click outside to close functionality
-    document.addEventListener('mousedown', function(event) {
-        const tutorialWindow = document.getElementById('tutorialWindow');
-        // Check if tutorial is visible and click is outside the tutorial window
-        if (tutorialWindow && tutorialWindow.style.display === 'block') {
-            // Check if click target is not within tutorial window
-            if (!tutorialWindow.contains(event.target) && 
-                !event.target.matches('#tutorialButton')) {
-                tutorialWindow.style.display = 'none';
-            }
-        }
-    });
-
-    // Add to existing styles
-    style.textContent = `
-        ${style.textContent}
-        
-        .tutorial-window {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1001;
-            box-shadow: 0 0 15px rgba(0,0,0,0.3);
-        }
+            </ul>
+        <button onclick="toggleTutorial()">Close</button>
     `;
 
     document.body.appendChild(tutorialWindow);
 }
 
-// ... rest of the code ...
+// Call these functions when the DOM is loaded
