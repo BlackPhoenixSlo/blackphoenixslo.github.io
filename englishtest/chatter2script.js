@@ -302,7 +302,7 @@ document.body.insertAdjacentHTML('beforeend', `
             <ul>
                 <li>Best answer: +2 points</li>
                 <li>Good answer: +1 point</li>
-                <li>Inappropriate answer: -1 point</li>
+                <li>Inappropriate answer: -2 point</li>
             </ul>
 
             <p>💡 <strong>Tips:</strong></p>
@@ -491,7 +491,7 @@ function updateExampleQuestion() {
             resultMessage = '👍 Good answer! This is an acceptable response (+1 point)';
             resultColor = '#2196f3';
         } else {
-            resultMessage = '❌ This response could be improved. Try to be more engaging (-1 point)';
+            resultMessage = '❌ This response could be improved. Try to be more engaging ('+selectedValue+' points)';
             resultColor = '#ff6b6b';
         }
 
