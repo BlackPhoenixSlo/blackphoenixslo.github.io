@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Messenger-Style Typing Speed & Accuracy Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f2f5;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      background-color: #0084ff;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+    }
+
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      overflow-y: auto;
+    }
+
+    .message {
+      max-width: 60%;
+      padding: 10px 15px;
+      margin: 5px 0;
+      border-radius: 20px;
+      position: relative;
+      word-wrap: break-word;
+    }
+
+    .message.system {
+      background-color: #e4e6eb;
+      align-self: flex-start;
+    }
+
+    .message.user {
+      background-color: #0084ff;
+      color: white;
+      align-self: flex-end;
+    }
+
+    .input-area {
+      display: flex;
+      padding: 10px;
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+    }
+
+    .input-area textarea {
+      flex: 1;
+      resize: none;
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .input-area button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      background-color: #0084ff;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .input-area button:disabled {
+      background-color: #a0cfff;
+      cursor: not-allowed;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+    }
+
+    .controls button {
+      padding: 10px 20px;
+      background-color: #0084ff;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .controls button:disabled {
+      background-color: #a0cfff;
+      cursor: not-allowed;
+    }
+
+    .results {
+      padding: 20px;
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+      text-align: center;
+      font-size: 18px;
+      display: none;
+    }
+
+    .timer {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* Scrollbar Styling */
+    .chat-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .chat-container::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    .chat-container::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+
+    .chat-container::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    /* Top Button */
+    #topBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #333;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    /* Add new styles for the replacement panel */
+    .replacement-panel {
+      position: fixed;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px 0 0 10px;
+      box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+      width: 200px;
+      cursor: move;
+      user-select: none;
+      transition: width 0.3s ease, padding 0.3s ease;
+    }
+
+    .replacement-panel.collapsed {
+      width: 30px;
+      padding: 15px 5px;
+    }
+
+    .replacement-panel.collapsed .replacement-pair,
+    .replacement-panel.collapsed .drag-handle-text {
+      display: none;
+    }
+
+    .drag-handle {
+      background-color: #f0f0f0;
+      padding: 5px;
+      margin: -15px -15px 10px -15px;
+      border-radius: 10px 0 0 0;
+      text-align: center;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .collapse-icon {
+      font-size: 20px;
+      transform: rotate(0deg);
+      transition: transform 0.3s ease;
+    }
+
+    .collapsed .collapse-icon {
+      transform: rotate(180deg);
+    }
+
+    .replacement-pair {
+      margin-bottom: 10px;
+    }
+
+    .replacement-pair input {
+      width: 85%;
+      padding: 5px;
+      margin: 2px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .emoji-selector {
+      display: flex;
+      padding: 10px;
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+      gap: 10px;
+      justify-content: left;
+    }
+
+    .emoji-btn {
+      font-size: 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 5px;
+      transition: background-color 0.2s;
+    }
+
+    .emoji-btn:hover {
+      background-color: #f0f2f5;
+    }
+
+    /* Add tutorial styles */
+    .tutorial-btn {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      padding: 8px 15px;
+      background-color: #0084ff;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+      z-index: 1000;
+    }
+
+    .tutorial-window {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      max-width: 600px;
+      max-height: 80vh;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      z-index: 1001;
+      overflow-y: auto;
+    }
+
+    .tutorial-window.active {
+      display: block;
+    }
+
+    .tutorial-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+
+    .tutorial-overlay.active {
+      display: block;
+    }
+
+    .close-tutorial {
+      position: sticky;
+      top: 0;
+      right: 10px;
+      float: right;
+      background: white;
+      z-index: 1002;
+    }
+
+    .tutorial-content {
+      margin-top: 20px;
+      line-height: 1.6;
+      padding-bottom: 20px;
+    }
+
+    /* Add scrollbar styling for better appearance */
+    .tutorial-window::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .tutorial-window::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 4px;
+    }
+
+    .tutorial-window::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 4px;
+    }
+
+    .tutorial-window::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    Typing Speed & Accuracy Test
+    <div class="timer" id="timer">Time: 420s</div>
+  </div>
+
+  <div class="chat-container" id="chatContainer">
+    <!-- Messages will appear here -->
+  </div>
+
+  <div class="emoji-selector">
+    <button class="emoji-btn">😈</button>
+    <button class="emoji-btn">🥵</button>
+    <button class="emoji-btn">💖</button>
+    <button class="emoji-btn">💦</button>
+    <button class="emoji-btn">🔥</button>
+    <button class="emoji-btn">😏</button>
+    <button class="emoji-btn">🥰</button>
+    <button class="emoji-btn">😜</button>
+    <button class="emoji-btn">🕯️</button>
+    <button class="emoji-btn">🌶️</button>
+  </div>
+
+  <div class="input-area">
+    <textarea id="inputArea" rows="1" placeholder="Your typing here..." disabled></textarea>
+    <button id="sendBtn" disabled>Send</button>
+  </div>
+
+  <div class="controls">
+    <button id="startBtn">Start Test</button>
+    <button id="endBtn" style="display:none;">End Now</button>
+    <button id="newTextBtn" style="display:none;">New Text</button>
+  </div>
+
+  <div class="results" id="results">
+    <!-- Results will be displayed here -->
+  </div>
+
+  <button id="topBtn" title="Go to top">Top</button>
+
+  <div class="replacement-panel" id="replacementPanel">
+    <div class="drag-handle">
+      <span class="collapse-icon">›</span>
+      <span class="drag-handle-text"></span>
+    </div>
+    <div class="replacement-pair">
+      <input type="text" class="find-text" placeholder="Text to find">
+      <input type="text" class="replace-text" placeholder="Replace with">
+    </div>
+    <div class="replacement-pair">
+      <input type="text" class="find-text" placeholder="Text to find">
+      <input type="text" class="replace-text" placeholder="Replace with">
+    </div>
+    <div class="replacement-pair">
+      <input type="text" class="find-text" placeholder="Text to find">
+      <input type="text" class="replace-text" placeholder="Replace with">
+    </div>
+    <div class="replacement-pair">
+      <input type="text" class="find-text" placeholder="Text to find">
+      <input type="text" class="replace-text" placeholder="Replace with">
+    </div>
+    <div class="replacement-pair">
+      <input type="text" class="find-text" placeholder="Text to find">
+      <input type="text" class="replace-text" placeholder="Replace with">
+    </div>
+  </div>
+
+  <!-- Add tutorial button and window -->
+  <button class="tutorial-btn" id="tutorialBtn">How to Play</button>
+  
+  <div class="tutorial-overlay" id="tutorialOverlay"></div>
+  
+  <div class="tutorial-window" id="tutorialWindow">
+    <button class="close-tutorial" id="closeTutorial">×</button>
+    <h2>How to Play</h2>
+    <div class="tutorial-content">
+      <p><strong>Welcome to the Messenger-Style Typing Test!</strong></p>
+      <p>🎯 <strong>Goal:</strong> Type as many messages as accurately as possible within 420 seconds.</p>
+      <p>📝 <strong>How it works:</strong></p>
+      <ul>
+        <li>Click "Start Test" to begin</li>
+        <li>Type the message shown in the chat</li>
+        <li>Press Enter or click Send to submit</li>
+        <li>A new message will appear automatically</li>
+        <li>Continue until time runs out</li>
+      </ul>
+      <p>✨ <strong>Features:</strong></p>
+      <ul>
+        <li>Use emojis by clicking them above the input box</li>
+        <li>Create text shortcuts in the side panel</li>
+        <li>Track your WPM and accuracy in real-time</li>
+      </ul>
+      <p>🎮 <strong>Controls:</strong></p>
+      <ul>
+        <li>Enter - Send message</li>
+        <li>Space - Trigger text shortcuts</li>
+        <li>"End Now" - Finish test early</li>
+      </ul>
+
+      <hr style="margin: 20px 0;">
+      
+      <p><strong>📝 Scoring Example:</strong></p>
+      <p>Original: "I went all out for this pure fire. Ready for round two? 🥵🌶️"</p>
+      <p>Your typing:</p>
+      <ul style="color: #666;">
+        <li>"I want all out for this pure fire ready for round two?"<br>
+        <small>Score: 11/12 words correct</small></li>
+        <li>"I want all out for this pure fire ready for round two? 🌶️"<br>
+        <small>Score: 12/13 (emoji counts as a word)</small></li>
+        <li>"I went all out for this pure fire ready for round two? 🌶️"<br>
+        <small>Score: Perfect! 13/13</small></li>
+      </ul>
+
+      <p><strong>💡 Common Patterns:</strong></p>
+      <p>Messages often end with these phrases:</p>
+      <ul style="columns: 2; color: #666;">
+        <li>"You still with me? :)"</li>
+        <li>"How's it going over there? XD"</li>
+        <li>"You smashing it or nah? :/"</li>
+        <li>"What's the plan now? :P"</li>
+        <li>"You alive after that?"</li>
+        <li>"Ready for round two?"</li>
+        <li>"How you feeling, champ?"</li>
+      </ul>
+      <p><small>Tip: Learning these common endings can help improve your speed!</small></p>
+    </div>
+  </div>
+
+  <script>
+    // Array of prompts
+    let girlLines = [
+    "Yo, wanna show off your killer karaoke skills? You still with me? :) 😈🔥",
+
+"Ever fantasize about wild dreams that leave you sweating? 🥰",
+
+"I'm so bored, I might tease you with a naughty hobby. Suggestions? How's it going over there? XD 🥵🌶️",
+
+"Fell hard for someone at a coffee shop total cliche, but hot, right? 😏",
+
+"Let's plan a wild trip to nowhere ready to get naughty? Cool? 💦",
+
+"Nighttime's perfect for dirty ideas, don't you agree? You smashing it or nah? :/ 😈🕯️",
+
+"Dreaming of beaches and sun I'd love to see you there. Where's your fantasy spot? 💖😜",
+
+"I'm up all night, craving midnight secrets. You in? What's the plan now? :P 🥵🔥",
+
+"Your secrets are safe with me spill something spicy? 🌶️",
+
+"Imagine us staying up all night, getting wild. Cool 😏",
+
+"Tell me your name, or I'll call you my mystery plaything. You alive after that? 😈💦",
+
+"Ready for a filthy question? Here it comes... 🥰",
+
+"How much time can you spare to play with me? You still with me? :) 🔥",
+
+"I really want you to taste this new cafe wanna join me? Cool? 💖😜",
+
+"You have to pick pizza or tacos forever. Ready for round two? 🥵🌶️",
+
+"It's raw and hot, just how I like it. 😏",
+
+"Here's your daily dose of spice enjoy! How's it going over there? XD 😈🕯️",
+
+"You're welcome for the naughty advice. 💦",
+
+"Haven't seen that movie think it's steamy? You smashing it or nah? :/ 🥰",
+
+"Let's make a deal you pick the dirty topic. Cool :) 🔥",
+
+"Don't worry, 65 lines are enough to drive you wild. What's the plan now? :P 🥵🌶️",
+
+"Sounds nice, but I'm craving something hotter. 😏",
+
+"I want you to be the first to see my sexy new project. You alive after that? 😈💦",
+
+"Wanna try a seductive new recipe with me? Cool 🥰",
+
+"Check out this hot new spot downtown wanna explore? How you feeling, champ? 💖😜",
+
+"Just gonna tease my friends tonight nothing too wild. 🔥",
+
+"Here's better trust me, I'll make it steamy. You still with me? :) 🥵🌶️",
+
+"Sorry, autocorrect messed up my flirty vibe. :/ 😏",
+
+"Watch this vid, it's so hot you'll blush. Cool How's it going over there? XD 😈🕯️",
+
+"Feels good to dominate sometimes don't you think? 💦",
+
+"Wanna see my latest naughty creation? You smashing it or nah? :/ 💖😜",
+
+"This taste is insane you'll crave it. :P 🔥",
+
+"That's nice and sexy wanna make it hotter? Cool 🥰",
+
+"I went all out for this pure fire. Ready for round two? 🥵🌶️",
+
+"Sounds nice, but let's turn up the heat. What's the plan now? :P 😈😏",
+
+"Feeling adventurous? I've got something wild in mind. XD 💦",
+
+"I'd make you remember this hard. Cool You alive after that? 😈🔥",
+
+"My ideas are crazy hot wanna explore? 🥰",
+
+"Got some dirty stories to share. How you feeling, champ? 💖😜",
+
+"No, it's not what you think but it's filthy. :/ 😏",
+
+"What's running through your naughty mind? Cool You still with me? :) 💖😜",
+
+"Here's the moment you've been waiting for pure heat. 🔥",
+
+"I wanna send you a steamy surprise. How's it going over there? XD 🥵💦",
+
+"Stroking my wild side wanna watch? 😈",
+
+"How much can you handle for a hot bet? You smashing it or nah? :/ Cool 🕯️",
+
+"Check out my latest masterpiece it's scorching. :P 🌶️",
+
+"They're longer and hotter than you think. What's the plan now? :P 😈😏",
+
+"You there? Ready for a challenge that'll leave you breathless? 🥰",
+
+"Tell me how bad you want my surprises. Cool Ready for round two? 🥵💦",
+
+"Ready to dive into something wild and dirty? XD 🔥",
+
+"How much can you take before you break? You alive after that? 😈🌶️",
+
+"I really want you to feel this heat. :P 😏",
+
+"You have to make a tough, sexy choice. How you feeling, champ? 🥵🕯️",
+
+"It's raw and unfiltered pure fire. Cool :) 💦",
+
+"Here's the secret I've been hiding ready to unravel it? You still with me? :) XD 😈",
+
+"You're welcome for the dirty insider tip. How's it going over there? XD 💖😜",
+
+"Haven't seen you too busy being naughty? :/ 🥰",
+
+"Let's spice things up ready for more? Cool You smashing it or nah? :/ 🥵🔥",
+
+"Don't worry, I've got you under control. XD 😏",
+
+"Sounds nice, but let's add some serious heat. What's the plan now? :P 😈🌶️",
+
+"I want you to join me on this wild ride. 💦",
+
+"Unlock the next level with me ready for the fire? Cool You still with me? :) 🥵😜",
+
+"Just gonna chill and see how far we can go. 🥰",
+
+"Here's where the real fun begins. What's the plan now? :P 😈🔥",
+
+"Sorry for the delay I got distracted being bad. How's it going over there? XD You alive after that? :P 💦"
+    ];
+
+    // Normalize fancy quotes and ellipses to ASCII
+    function normalizeText(text) {
+      return text
+        .replace(/’/g, "'")
+        .replace(/‘/g, "'")
+        .replace(/“/g, '"')
+        .replace(/”/g, '"')
+        .replace(/…/g, '...'); 
+    }
+
+    function getRandomText(lines, count=4) {
+      const shuffled = [...lines].sort(() => Math.random() - 0.5);
+      return shuffled[0]; // Just return a single line
+    }
+
+    // Initialize variables
+    let testTexts = [getRandomText(girlLines)];
+    let currentPromptIndex = 0;
+    const chatContainer = document.getElementById('chatContainer');
+    const inputArea = document.getElementById('inputArea');
+    const sendBtn = document.getElementById('sendBtn');
+    const startBtn = document.getElementById('startBtn');
+    const endBtn = document.getElementById('endBtn');
+    const newTextBtn = document.getElementById('newTextBtn');
+    const results = document.getElementById('results');
+    const timerDisplay = document.getElementById('timer');
+    const topBtn = document.getElementById('topBtn');
+
+    let startTime;
+    let timerRunning = false;
+    let timeLeft = 420;
+    let timerInterval = null;
+
+    // Display a message in the chat
+    function displayMessage(text, sender='system') {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', sender);
+      messageDiv.textContent = text;
+      chatContainer.appendChild(messageDiv);
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    function resetTest() {
+        // Clear timer
+        clearInterval(timerInterval);
+        timerRunning = false;
+        timeLeft = 420;
+        timerDisplay.textContent = `Time: ${timeLeft}s`;
+        
+        // Reset UI elements
+        chatContainer.innerHTML = '';
+        inputArea.value = '';
+        inputArea.disabled = true;
+        sendBtn.disabled = true;
+        results.style.display = 'none';
+        
+        // Reset control buttons
+        startBtn.style.display = 'inline-block';
+        endBtn.style.display = 'none';
+        newTextBtn.style.display = 'none';
+        
+        // Reset test variables
+        currentPromptIndex = 0;
+        startTime = null;
+        
+        // Get new random text - now just a single line
+        testTexts = [getRandomText(girlLines)];
+        
+        // Display initial message
+        //displayMessage("Click 'Start Test' to begin your typing speed & accuracy test.", 'system');
+    }
+
+    // Start the test
+    function startTest() {
+        resetTest(); // Reset everything first
+        
+        // Then start new test
+        inputArea.disabled = false;
+        sendBtn.disabled = false;
+        startBtn.style.display = 'none';
+        endBtn.style.display = 'inline-block';
+        startTime = Date.now();
+        timerRunning = true;
+        inputArea.focus();
+
+        // Display first prompt
+        setTimeout(displayNextPrompt, 1000);
+
+        // Start timer
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            timerDisplay.textContent = `Time: ${timeLeft}s`;
+            if(timeLeft <= 0) {
+                finishTest();
+            }
+        }, 1000);
+    }
+
+    // Display the next prompt
+    function displayNextPrompt() {
+      if(!timerRunning) return;
+      const prompt = testTexts[0];
+      displayMessage(prompt, 'system');
+    }
+
+    // Send user's message
+    function sendMessage() {
+      if(!timerRunning) return;
+      const userInput = inputArea.value.trim();
+      if(userInput === '') return;
+      
+      displayMessage(userInput, 'user');
+      inputArea.value = '';
+      
+      // Get and display new random text instead of ending
+      testTexts = [getRandomText(girlLines)];
+      setTimeout(displayNextPrompt, 500);
+    }
+
+    // Finish the test
+    function finishTest(endEarly=false) {
+      timerRunning = false;
+      inputArea.disabled = true;
+      sendBtn.disabled = true;
+      clearInterval(timerInterval);
+      const endTime = Date.now();
+      const elapsed = (endTime - startTime)/1000;
+      if(!endEarly) {
+        timerDisplay.textContent = "Time's up!";
+      } else {
+        timerDisplay.textContent = `Ended early at ${Math.round(elapsed)}s`;
+      }
+
+      // Calculate results
+      let wordsTyped = 0;
+      let correctWords = 0;
+
+      const messages = chatContainer.querySelectorAll('.message.user');
+      const systemMessages = chatContainer.querySelectorAll('.message.system');
+      
+      messages.forEach((msg, index) => {
+        const systemMsg = systemMessages[index];
+        if (!systemMsg) return;
+
+        const typedText = msg.textContent.trim();
+        const originalText = systemMsg.textContent.trim();
+        
+        // Split into words and remove empty strings
+        const typedWords = typedText.split(/\s+/).filter(word => word.length > 0);
+        const originalWords = originalText.split(/\s+/).filter(word => word.length > 0);
+        
+        wordsTyped += typedWords.length;
+        
+        // Compare each word
+        typedWords.forEach((word, i) => {
+          if (i < originalWords.length) {
+            // Clean up the words before comparison
+            const cleanTyped = word.toLowerCase().replace(/[^\w\s]/g, '');
+            const cleanOriginal = originalWords[i].toLowerCase().replace(/[^\w\s]/g, '');
+            
+            console.log('Comparing:', {
+              original: cleanOriginal,
+              typed: cleanTyped,
+              matches: cleanTyped === cleanOriginal
+            });
+            
+            if (cleanTyped === cleanOriginal) {
+              correctWords++;
+            }
+          }
+        });
+
+        console.log('Message comparison:', {
+          original: originalText,
+          typed: typedText,
+          originalWords: originalWords,
+          typedWords: typedWords
+        });
+      });
+
+      const wpm = elapsed > 0 ? Math.round((wordsTyped / elapsed) * 60) : 0;
+      const accuracy = wordsTyped > 0 ? Math.round((correctWords / wordsTyped) * 100) : 0;
+
+      results.innerHTML = `
+        <p>You typed <strong>${wordsTyped}</strong> words in <strong>${Math.round(elapsed)}</strong> seconds.</p>
+        <p><strong>WPM:</strong> ${wpm}</p>
+        <p><strong>Accuracy:</strong> ${accuracy}%</p>
+        <p>Correct words: ${correctWords} out of ${wordsTyped}</p>
+        <p>Feel free to try again or get new text.</p>
+      `;
+      results.style.display = 'block';
+      endBtn.style.display = 'none';
+      newTextBtn.style.display = 'inline-block';
+
+      // Log final results
+      console.log('Final results:', {
+        wordsTyped,
+        correctWords,
+        accuracy,
+        wpm
+      });
+    }
+
+    // End the test early
+    function endTestEarly() {
+      finishTest(true);
+    }
+
+    // Get new text for the test
+    function getNewText() {
+        resetTest();
+        startTest();
+    }
+
+    // Input area event listeners
+    sendBtn.addEventListener('click', sendMessage);
+    inputArea.addEventListener('keypress', (e) => {
+      if(e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    // Control buttons
+    startBtn.addEventListener('click', startTest);
+    endBtn.addEventListener('click', endTestEarly);
+    newTextBtn.addEventListener('click', getNewText);
+
+    // Top button functionality
+    window.addEventListener('scroll', ()=>{
+      if(window.scrollY > 100) {
+        topBtn.style.display = 'block';
+      } else {
+        topBtn.style.display = 'none';
+      }
+    });
+
+    topBtn.addEventListener('click', ()=>{
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+
+    // Initial display
+    //displayMessage("Click 'Start Test' to begin your typing speed & accuracy test.", 'system');
+
+    // Add after the input area event listeners
+    inputArea.addEventListener('keydown', (e) => {
+      if (e.key === ' ') {
+        const replacementPairs = document.querySelectorAll('.replacement-pair');
+        let text = inputArea.value;
+        let cursorPosition = inputArea.selectionStart;
+
+        replacementPairs.forEach(pair => {
+          const findText = pair.querySelector('.find-text').value;
+          const replaceText = pair.querySelector('.replace-text').value;
+          
+          if (findText && replaceText) {
+            const lastWord = text.slice(0, cursorPosition).split(' ').pop();
+            if (lastWord === findText) {
+              const beforeText = text.slice(0, cursorPosition - findText.length);
+              const afterText = text.slice(cursorPosition);
+              text = beforeText + replaceText + afterText;
+              cursorPosition = beforeText.length + replaceText.length;
+            }
+          }
+        });
+
+        if (text !== inputArea.value) {
+          inputArea.value = text;
+          inputArea.selectionStart = cursorPosition;
+          inputArea.selectionEnd = cursorPosition;
+        }
+      }
+    });
+
+    // Add drag functionality
+    const replacementPanel = document.getElementById('replacementPanel');
+    let isDragging = false;
+    let currentX;
+    let currentY;
+    let initialX;
+    let initialY;
+    let xOffset = 0;
+    let yOffset = 0;
+
+    // Add collapse functionality
+    const dragHandle = replacementPanel.querySelector('.drag-handle');
+    
+    dragHandle.addEventListener('click', (e) => {
+      // Only toggle if we're clicking, not dragging
+      if (!isDragging) {
+        replacementPanel.classList.toggle('collapsed');
+      }
+    });
+
+    // Modify dragStart to prevent dragging when clicking the collapse icon
+    function dragStart(e) {
+      if (e.target.classList.contains('collapse-icon')) {
+        return;
+      }
+      
+      initialX = e.clientX - xOffset;
+      initialY = e.clientY - yOffset;
+
+      if (e.target === replacementPanel || e.target.classList.contains('drag-handle')) {
+        isDragging = true;
+      }
+    }
+
+    // Add a small delay to distinguish between click and drag
+    let dragTimeout;
+    
+    replacementPanel.addEventListener('mousedown', (e) => {
+      dragTimeout = setTimeout(() => {
+        dragStart(e);
+      }, 100);
+    });
+
+    replacementPanel.addEventListener('mouseup', () => {
+      clearTimeout(dragTimeout);
+    });
+
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('mouseup', dragEnd);
+
+    function drag(e) {
+      if (isDragging) {
+        e.preventDefault();
+        
+        currentX = e.clientX - initialX;
+        currentY = e.clientY - initialY;
+
+        xOffset = currentX;
+        yOffset = currentY;
+
+        setTranslate(currentX, currentY, replacementPanel);
+      }
+    }
+
+    function dragEnd(e) {
+      initialX = currentX;
+      initialY = currentY;
+      isDragging = false;
+    }
+
+    function setTranslate(xPos, yPos, el) {
+      el.style.transform = `translate(${xPos}px, ${yPos}px)`;
+    }
+
+    // Prevent pasting in both input area and replacement fields
+    const allInputs = document.querySelectorAll('textarea, .replacement-pair input');
+    
+    allInputs.forEach(input => {
+        // Prevent paste
+        input.addEventListener('paste', (e) => {
+            e.preventDefault();
+            return false;
+        });
+
+        // Prevent right-click menu
+        input.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            return false;
+        });
+
+        // Prevent copy
+        input.addEventListener('copy', (e) => {
+            e.preventDefault();
+            return false;
+        });
+
+        // Prevent cut
+        input.addEventListener('cut', (e) => {
+            e.preventDefault();
+            return false;
+        });
+    });
+
+    // Add emoji insertion functionality
+    const emojiButtons = document.querySelectorAll('.emoji-btn');
+    
+    emojiButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (!inputArea.disabled) {
+                const emoji = btn.textContent;
+                const cursorPos = inputArea.selectionStart;
+                const textBefore = inputArea.value.substring(0, cursorPos);
+                const textAfter = inputArea.value.substring(cursorPos);
+                
+                inputArea.value = textBefore + emoji + textAfter;
+                
+                // Set cursor position after the emoji
+                const newCursorPos = cursorPos + emoji.length;
+                inputArea.setSelectionRange(newCursorPos, newCursorPos);
+                
+                // Keep focus on input area
+                inputArea.focus();
+            }
+        });
+    });
+
+    // Add tutorial functionality
+    const tutorialBtn = document.getElementById('tutorialBtn');
+    const tutorialWindow = document.getElementById('tutorialWindow');
+    const tutorialOverlay = document.getElementById('tutorialOverlay');
+    const closeTutorial = document.getElementById('closeTutorial');
+
+    function toggleTutorial() {
+        tutorialWindow.classList.toggle('active');
+        tutorialOverlay.classList.toggle('active');
+    }
+
+    tutorialBtn.addEventListener('click', toggleTutorial);
+    closeTutorial.addEventListener('click', toggleTutorial);
+    tutorialOverlay.addEventListener('click', toggleTutorial);
+
+    // Close tutorial with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && tutorialWindow.classList.contains('active')) {
+            toggleTutorial();
+        }
+    });
+  </script>
+</body>
+</html>
