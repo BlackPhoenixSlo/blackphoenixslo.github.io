@@ -330,7 +330,7 @@
 <body>
   <div class="header">
     Typing Speed & Accuracy Test
-    <div class="timer" id="timer">Time: 60s</div>
+    <div class="timer" id="timer">Time: 420s</div>
   </div>
 
   <div class="chat-container" id="chatContainer">
@@ -404,7 +404,7 @@
     <h2>How to Play</h2>
     <div class="tutorial-content">
       <p><strong>Welcome to the Messenger-Style Typing Test!</strong></p>
-      <p>🎯 <strong>Goal:</strong> Type as many messages as accurately as possible within 60 seconds.</p>
+      <p>🎯 <strong>Goal:</strong> Type as many messages as accurately as possible within 420 seconds.</p>
       <p>📝 <strong>How it works:</strong></p>
       <ul>
         <li>Click "Start Test" to begin</li>
@@ -599,16 +599,6 @@
         .replace(/…/g, '...'); 
     }
 
-    // Helper function for timestamped logs
-    function logWithTimestamp(message, data = null) {
-      const timestamp = new Date().toISOString();
-      if (data) {
-        console.log(`[${timestamp}] ${message}`, data);
-      } else {
-        console.log(`[${timestamp}] ${message}`);
-      }
-    }
-
     function getRandomText(lines, count=4) {
       const shuffled = [...lines].sort(() => Math.random() - 0.5);
       return shuffled[0]; // Just return a single line
@@ -629,7 +619,7 @@
 
     let startTime;
     let timerRunning = false;
-    let timeLeft = 60;
+    let timeLeft = 420;
     let timerInterval = null;
 
     // Display a message in the chat
@@ -639,14 +629,13 @@
       messageDiv.textContent = text;
       chatContainer.appendChild(messageDiv);
       chatContainer.scrollTop = chatContainer.scrollHeight;
-      logWithTimestamp(`Message displayed (${sender})`, { text });
     }
 
     function resetTest() {
         // Clear timer
         clearInterval(timerInterval);
         timerRunning = false;
-        timeLeft = 60;
+        timeLeft = 420;
         timerDisplay.textContent = `Time: ${timeLeft}s`;
         
         // Reset UI elements
@@ -670,7 +659,6 @@
         
         // Display initial message
         //displayMessage("Click 'Start Test' to begin your typing speed & accuracy test.", 'system');
-        logWithTimestamp("Test reset");
     }
 
     // Start the test
@@ -697,8 +685,6 @@
                 finishTest();
             }
         }, 1000);
-
-        logWithTimestamp("Test started", { prompt: testTexts[0] });
     }
 
     // Display the next prompt
@@ -706,7 +692,6 @@
       if(!timerRunning) return;
       const prompt = testTexts[0];
       displayMessage(prompt, 'system');
-      logWithTimestamp("New prompt displayed", { prompt: testTexts[0] });
     }
 
     // Send user's message
@@ -717,8 +702,6 @@
       
       displayMessage(userInput, 'user');
       inputArea.value = '';
-      
-      logWithTimestamp("User message sent", { userInput });
       
       // Get and display new random text instead of ending
       testTexts = [getRandomText(girlLines)];
@@ -742,8 +725,6 @@
       // Calculate results
       let wordsTyped = 0;
       let correctWords = 0;
-      let messagesTyped = 0;
-      let comparisonDetails = [];
 
       const messages = chatContainer.querySelectorAll('.message.user');
       const systemMessages = chatContainer.querySelectorAll('.message.system');
@@ -751,8 +732,7 @@
       messages.forEach((msg, index) => {
         const systemMsg = systemMessages[index];
         if (!systemMsg) return;
-        
-        messagesTyped++;
+
         const typedText = msg.textContent.trim();
         const originalText = systemMsg.textContent.trim();
         
@@ -761,8 +741,6 @@
         const originalWords = originalText.split(/\s+/).filter(word => word.length > 0);
         
         wordsTyped += typedWords.length;
-        let messageCorrectWords = 0;
-        let wordComparisons = [];
         
         // Compare each word
         typedWords.forEach((word, i) => {
@@ -771,105 +749,56 @@
             const cleanTyped = word.toLowerCase().replace(/[^\w\s]/g, '');
             const cleanOriginal = originalWords[i].toLowerCase().replace(/[^\w\s]/g, '');
             
-            const isMatch = cleanTyped === cleanOriginal;
-            
-            logWithTimestamp('Word comparison', {
+            console.log('Comparing:', {
               original: cleanOriginal,
               typed: cleanTyped,
-              matches: isMatch
+              matches: cleanTyped === cleanOriginal
             });
             
-            wordComparisons.push({
-              original: originalWords[i],
-              typed: word,
-              isMatch: isMatch
-            });
-            
-            if (isMatch) {
+            if (cleanTyped === cleanOriginal) {
               correctWords++;
-              messageCorrectWords++;
             }
           }
         });
 
-        comparisonDetails.push({
-          original: originalText,
-          typed: typedText,
-          originalWordCount: originalWords.length,
-          typedWordCount: typedWords.length,
-          correctWords: messageCorrectWords,
-          words: wordComparisons
-        });
-
-        logWithTimestamp('Message comparison', {
+        console.log('Message comparison:', {
           original: originalText,
           typed: typedText,
           originalWords: originalWords,
-          typedWords: typedWords,
-          correctWords: messageCorrectWords
+          typedWords: typedWords
         });
       });
 
       const wpm = elapsed > 0 ? Math.round((wordsTyped / elapsed) * 60) : 0;
       const accuracy = wordsTyped > 0 ? Math.round((correctWords / wordsTyped) * 100) : 0;
 
-      // Create result JSON
-      const resultJson = {
-        timestamp: new Date().toISOString(),
-        testDuration: Math.round(elapsed),
-        messagesTyped,
-        wordsTyped,
-        correctWords,
-        wpm,
-        accuracy,
-        detailed: comparisonDetails
-      };
-
-      // Log and display results
-      logWithTimestamp('Final results', resultJson);
-
       results.innerHTML = `
-        <div style="display: flex; gap: 20px; align-items: stretch;">
-          <div style="flex: 1;">
-            <p>You typed <strong>${wordsTyped}</strong> words in <strong>${Math.round(elapsed)}</strong> seconds.</p>
-            <p><strong>WPM:</strong> ${wpm}</p>
-            <p><strong>Accuracy:</strong> ${accuracy}%</p>
-            <p>Correct words: ${correctWords} out of ${wordsTyped}</p>
-            <p>Feel free to try again or get new text.</p>
-          </div>
-          <div style="flex: 1; display: flex; flex-direction: column;">
-            <label for="resultJsonField" style="font-weight: bold; margin-bottom: 5px;">Result JSON:</label>
-            <textarea id="resultJsonField" style="flex-grow: 1; min-height: 150px; padding: 10px; background: #f5f5f5; border-radius: 5px; font-family: monospace; resize: vertical;">${JSON.stringify(resultJson, null, 2)}</textarea>
-            <button id="copyJsonBtn" style="margin-top: 10px; padding: 8px; background-color: #0084ff; color: white; border: none; border-radius: 20px; cursor: pointer;">Copy JSON</button>
-          </div>
-        </div>
+        <p>You typed <strong>${wordsTyped}</strong> words in <strong>${Math.round(elapsed)}</strong> seconds.</p>
+        <p><strong>WPM:</strong> ${wpm}</p>
+        <p><strong>Accuracy:</strong> ${accuracy}%</p>
+        <p>Correct words: ${correctWords} out of ${wordsTyped}</p>
+        <p>Feel free to try again or get new text.</p>
       `;
-      
-      // Add event listener for copy button
-      document.getElementById('copyJsonBtn').addEventListener('click', function() {
-        const jsonField = document.getElementById('resultJsonField');
-        jsonField.select();
-        document.execCommand('copy');
-        this.textContent = 'Copied!';
-        setTimeout(() => {
-          this.textContent = 'Copy JSON';
-        }, 2000);
-      });
-      
       results.style.display = 'block';
       endBtn.style.display = 'none';
       newTextBtn.style.display = 'inline-block';
+
+      // Log final results
+      console.log('Final results:', {
+        wordsTyped,
+        correctWords,
+        accuracy,
+        wpm
+      });
     }
 
     // End the test early
     function endTestEarly() {
-      logWithTimestamp("Test ended early");
       finishTest(true);
     }
 
     // Get new text for the test
     function getNewText() {
-        logWithTimestamp("New test requested");
         resetTest();
         startTest();
     }
