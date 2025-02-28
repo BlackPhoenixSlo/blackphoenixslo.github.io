@@ -1881,7 +1881,7 @@ function createExamButton() {
     const examButton = document.createElement('button');
     examButton.id = 'examButton';
     examButton.className = 'exam-button';
-    examButton.textContent = 'Start Exam (30min)';
+    examButton.textContent = 'Start Exam (30min, finnish in 15 minutes)';
     document.body.insertBefore(examButton, document.body.firstChild);
 
     // Update exam button styling
