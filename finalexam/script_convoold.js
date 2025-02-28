@@ -1853,7 +1853,7 @@ function updateTotalSalesDisplay() {
         salesDisplay = document.createElement('div');
         salesDisplay.id = 'totalSalesDisplay';
         salesDisplay.style.position = 'fixed';
-        salesDisplay.style.bottom = '10px'; // Changed from top to bottom
+        salesDisplay.style.top = '10px';
         salesDisplay.style.right = '10px';
         salesDisplay.style.padding = '10px';
         salesDisplay.style.backgroundColor = '#4CAF50';
@@ -1883,29 +1883,6 @@ function createExamButton() {
     examButton.className = 'exam-button';
     examButton.textContent = 'Start Exam (30min)';
     document.body.insertBefore(examButton, document.body.firstChild);
-
-    // Update exam button styling
-    const examButtonStyle = document.createElement('style');
-    examButtonStyle.textContent = `
-        .exam-button {
-            position: fixed;
-            top: 10px;
-            right: 10px; /* Changed from left to right */
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 1000;
-            font-weight: bold;
-        }
-        .exam-button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
-    `;
-    document.head.appendChild(examButtonStyle);
 
     let cooldownTimer = null;
     let examActive = false;
@@ -1990,7 +1967,7 @@ function createExamButton() {
         .exam-button {
             position: fixed;
             top: 10px;
-            right: 10px; /* Changed from left to right */
+            left: 10px;
             padding: 10px 20px;
             background-color: #4CAF50;
             color: white;
@@ -2115,7 +2092,7 @@ function createTutorialButton() {
     const tutorialButton = document.createElement('button');
     tutorialButton.id = 'tutorialButton';
     tutorialButton.className = 'tutorial-button';
-    tutorialButton.textContent = 'Clear Inctructions how to bit the game.';
+    tutorialButton.textContent = 'Show Tutorial';
     tutorialButton.style.position = 'fixed';
     tutorialButton.style.top = '10px';
     tutorialButton.style.left = '50%';
@@ -2141,142 +2118,6 @@ function createTutorialWindow() {
         </div>
         
         <div class="tutorial-content">
-
-         <div class="tutorial-section welcome-section">
-                <h3> Clear Instructions how to bit the game.</h3>
-                <ol>
-                    <li>Press the button "Start Exam (30min, finnish in 15 minutes)" to start the exam. Finnish in 15 minutes.</li>
-                    <li>Repeat it 3 times: 
-                    <ul>
-                    <li>Click tease and press send. </li>
-                    
-                    <li>Click question, basic question and press send. Remember the answer. </li>
-                  <li>Ask Him deep questions. </li>
-                  </ul>
-                  </li>
-                  <li>Click tease and press send. </li>
-                  <li>Sell tease image:
-                        <ul>
-                            <li>Click sedd content and pick tease image caption</li>
-                            <li>Add A1 tease image</li>
-                            <li>Set price to 3$ (or less than horny level / 3)</li>
-                        </ul>      
-                  </li>
-                  <li>Repeat it 3 times: 
-                    <ul>
-                    <li>Click convo and press send. </li>
-                  <li>Click deep convo and press send. </li>
-                  <li>Click question, basic question and press send. Remember the answer. </li>
-                  <li>Ask Him deep questions. </li>
-                  </ul>
-                  </li>
-                  <li>Click tease and press send. </li>
-                   <li>Click tease and press send. </li>
-                  <li>Sell tease video:
-                        <ul>
-                            <li>Click send content and pick tease video caption</li>
-                            <li>Add A1 tease image</li>
-                            <li>Set price to 5$ (or less than horny level / 2)</li>
-                        </ul>      
-                  </li>
-                  
-                  <li>Repeat it 4 times.
-                  <ul>
-                  <li>Click tease and press send. </li>
-                  <li>Click sext and press send. </li>
-                  <li>Click sext and press send. </li>
-                  <li>Click convo and press send. </li>
-                  <li>Click deep convo and press send. </li>
-                  <li>Click deep convo and press send. </li>
-                  </ul> </li>
-
-                  <li>Sell strip to underwear video:
-                        <ul>
-                            <li>Click send content and pick strip to underwear video caption</li>
-                            <li>Add A1 strip to underwear</li>
-                            <li>Set price to 15$ (or less than horny level)</li>
-                        </ul>      
-                  </li>
-
-                  <li>Repeat it 1 times.
-                  <ul>
-                  <li>Click tease and press send. </li>
-                  <li>Click sext and press send. </li>
-                  <li>Click sext and press send. </li>
-                  <li>Click convo and press send. </li>
-                  <li>Click deep convo and press send. </li>
-                  <li>Click deep convo and press send. </li>
-                  </ul> </li>
-
-                  <li>Sell strip naked video:
-                        <ul>
-                            <li>Click send content and pick strip naked video caption</li>
-                            <li>Add A1 strip naked</li>
-                            <li>Set price to 20$ (or less than horny level)</li>
-                        </ul>      
-                  </li>
-
-                  <li>Repeat it 5 times.
-                  <ul>
-                  <li>Click tease and press send. </li>
-                  <li>Click sext and press send. </li>
-                  <li>Click sext and press send. </li>
-                  <li>Click convo and press send. </li>
-                  <li>Click deep convo and press send. </li>
-                  <li>Click deep convo and press send. </li>
-                  </ul> </li>
-
-                  <li>Sell quick masturbation video:
-                        <ul>
-                            <li>Click send content and pick quick masturbation video caption</li>
-                            <li>Add quick masturbation</li>
-                            <li>Set price to 25$ (or less than horny level)</li>
-                        </ul>      
-                  </li>   
-
-                  <li>Repeat it 1 times.
-                  <ul>
-                  <li>Click tease and press send. </li>
-                  <li>Click sext and press send. </li>
-                  <li>Click sext and press send. </li>
-                  <li>Click deep convo and press send. </li>
-                  </ul> </li>
-
-                  <li>Sell long masturbation video:
-                        <ul>
-                            <li>Click send content and pick long masturbation video caption</li>
-                            <li>Add long masturbation</li>
-                            <li>Set price to 30$ (or less than horny level)</li>
-                        </ul>      
-                  </li>
-
-                  <li>Repeat it 10 times.
-                  <ul>
-                  <li>Click convo and press send. </li>  
-                  <li>Click deep convo and press send. </li>
-                  
-                  </ul> </li>
-
-                 <li>Click cuddle and press send. </li>  
-
-                  <li>Sell end script:
-                        <ul>
-                            <li>Click send content and pick end script caption</li>
-                            <li>Add end script</li>
-                            <li>Set price to 10$ (or less than horny level / 4)</li>
-                        </ul>      
-                  </li>
-
-                  <li>For bonus tip, ensure fan has:
-                        <ul>
-                            <li>Horniness > 30</li>
-                            <li>Sexiness > 50</li>
-                            <li>Charisma > 50</li>
-                        </ul>
-                    </li>
-                </ol>
-            </div>
-
             <div class="tutorial-section welcome-section">
                 <h3>👋 Getting Started</h3>
                 <ol>
@@ -2375,7 +2216,8 @@ function createTutorialWindow() {
         }
 
         .tutorial-header {
-            /* Remove position: sticky */
+            position: sticky;
+            top: 0;
             background: #007BFF;
             color: white;
             padding: 15px 20px;
