@@ -2082,12 +2082,33 @@ function showExamResults(sales, totalSold) {
         <textarea readonly style="width: 100%; height: 300px; margin: 10px 0;">${jsonData}</textarea>
         <div style="margin: 10px 0;">
             <button onclick="navigator.clipboard.writeText(this.parentElement.previousElementSibling.value)">Copy JSON</button>
+            <button onclick="downloadExamResults('${encodeURIComponent(jsonData)}')">Download JSON</button>
             <button onclick="this.closest('.exam-results').remove()">Close</button>
         </div>
     `;
     
     resultsDiv.innerHTML = resultsHTML;
     document.body.appendChild(resultsDiv);
+}
+
+// Add function to download exam results as a JSON file
+function downloadExamResults(jsonData) {
+    const decodedData = decodeURIComponent(jsonData);
+    const blob = new Blob([decodedData], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `final-exam-results-${timestamp}.json`;
+    document.body.appendChild(a);
+    a.click();
+    
+    // Clean up
+    setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }, 100);
 }
 
 // Call this in your initialization

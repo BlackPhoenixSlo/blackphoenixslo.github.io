@@ -258,6 +258,27 @@ styleSheet.textContent = `
         margin-top: 20px;
         border-top: 1px solid #eee;
     }
+
+    .download-btn {
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+
+    .download-btn:hover {
+        background: #218838;
+    }
+    
+    .modal-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
 `;
 document.head.appendChild(styleSheet);
 
@@ -269,7 +290,10 @@ document.body.insertAdjacentHTML('beforeend', `
         <h2>Test Results</h2>
         <div id="modalResults"></div>
         <textarea class="json-output" id="jsonOutput" readonly></textarea>
-        <button class="copy-btn" id="copyBtn">Copy Results</button>
+        <div class="modal-buttons">
+            <button class="copy-btn" id="copyBtn">Copy Results</button>
+            <button class="download-btn" id="downloadBtn">Download JSON</button>
+        </div>
     </div>
 `);
 
@@ -302,7 +326,7 @@ document.body.insertAdjacentHTML('beforeend', `
             <ul>
                 <li>Best answer: +2 points</li>
                 <li>Good answer: +1 point</li>
-                <li>Inappropriate answer: -2 point</li>
+                <li>Inappropriate answer: -1 point</li>
             </ul>
 
             <p>💡 <strong>Tips:</strong></p>
@@ -491,7 +515,7 @@ function updateExampleQuestion() {
             resultMessage = '👍 Good answer! This is an acceptable response (+1 point)';
             resultColor = '#2196f3';
         } else {
-            resultMessage = '❌ This response could be improved. Try to be more engaging ('+selectedValue+' points)';
+            resultMessage = '❌ This response could be improved. Try to be more engaging (-1 point)';
             resultColor = '#ff6b6b';
         }
 
@@ -545,4 +569,29 @@ if (submitBtn) {
         submitBtn.parentNode.insertBefore(container, submitBtn);
         container.appendChild(submitBtn);
     }
-} 
+}
+
+// Function to download JSON as file
+function downloadJSON(data, filename = 'english-test-results.json') {
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+// Add event listener for download button
+document.getElementById('downloadBtn').addEventListener('click', () => {
+    const jsonOutput = document.getElementById('jsonOutput');
+    const data = JSON.parse(jsonOutput.value);
+    downloadJSON(data);
+    const downloadBtn = document.getElementById('downloadBtn');
+    downloadBtn.textContent = 'Downloaded!';
+    setTimeout(() => {
+        downloadBtn.textContent = 'Download JSON';
+    }, 2000);
+}); 
