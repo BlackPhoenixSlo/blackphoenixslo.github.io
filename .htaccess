@@ -1,0 +1,14 @@
+# Add MIME type support for video files
+AddType video/quicktime .mov
+AddType video/mp4 .mp4
+AddType video/webm .webm
+
+# Enable video streaming
+<FilesMatch "\.(mov|mp4|webm)$">
+    Header set Accept-Ranges bytes
+</FilesMatch>
+
+# Allow cross-origin requests for videos
+<FilesMatch "\.(mov|mp4|webm)$">
+    Header set Access-Control-Allow-Origin "*"
+</FilesMatch> 

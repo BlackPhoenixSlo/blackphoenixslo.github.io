@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Test</title>
+</head>
+<body>
+    <h1>Video Test Page</h1>
+    
+    <h2>Test Video 1</h2>
+    <video width="315" height="560" controls>
+        <source src="lowshorts/0622 (1).mov" type="video/quicktime">
+        <source src="lowshorts/0622 (1).mov" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <h2>Test Video 2</h2>
+    <video width="315" height="560" controls>
+        <source src="lowshorts/0622 (1)(1).mov" type="video/quicktime">
+        <source src="lowshorts/0622 (1)(1).mov" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const videos = document.querySelectorAll('video');
+            videos.forEach((video, index) => {
+                video.addEventListener('loadstart', () => {
+                    console.log(`Video ${index + 1}: Load started`);
+                });
+                
+                video.addEventListener('canplay', () => {
+                    console.log(`Video ${index + 1}: Can play`);
+                });
+                
+                video.addEventListener('error', (e) => {
+                    console.error(`Video ${index + 1}: Error loading`, e);
+                    console.error('Error details:', video.error);
+                });
+                
+                video.addEventListener('loadedmetadata', () => {
+                    console.log(`Video ${index + 1}: Metadata loaded`);
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -421,6 +421,18 @@
             transform: translateY(0);
         }
 
+        /* Animation on load styles */
+        .animate-on-load {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-on-load.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         @media only screen and (min-width: 992px) {
             .big-card-coin:not(.world-arrow) {
                 /*
@@ -780,7 +792,7 @@
                                 <div class="link-arrow-down-svg bigger w-embed"><svg width="100%" height="100%"
                                         viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M1 5L6 10L11 5" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" />
+                                            stroke-linecap="round" stroke-linejoin="round" />
                                     </svg></div>
                             </div>
                             <div class="tablet-dropdown-menu is--disabled"><a href="/" aria-current="page"
@@ -849,33 +861,33 @@
             </section>
             <section class="section">
                 <div class="container regualr-padding home-hero"><img
-                        src="https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba4aa6525ebe8_hero-coins-placeholder.webp"
-                        loading="lazy" sizes="100vw"
-                        srcset="https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba4aa6525ebe8_hero-coins-placeholder-p-500.png 500w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba4aa6525ebe8_hero-coins-placeholder-p-800.png 800w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba4aa6525ebe8_hero-coins-placeholder-p-1080.png 1080w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba4aa6525ebe8_hero-coins-placeholder-p-1600.png 1600w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba4aa6525ebe8_hero-coins-placeholder-p-2000.png 2000w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba4aa6525ebe8_hero-coins-placeholder-p-2600.png 2600w"
-                        alt="" class="home-coins-img-holder" />
-                    <div class="home-hero-upper">
-                        <h1 class="heading-xxl tablet-text-60 mobile-text-32 s-m-b-40 st-m-b-30 sm-m-b-12">Outsource Your 
-                            Girlfriend Experience</h1>
-                        <p class="p-jumbo max-w-600 tablet-max-w-500 s-m-b-40 st-m-b-30 sm-m-b-20">No.1 Onlyfans Chatting Service 24/7 <br> Let our professional team take care the chatting</p><a id="hero-btn"
-                            href="#premium-packages"
-                            class="button filled-green s-m-b-30 st-m-b-20 sm-m-b-10 w-inline-block">
-                            <p>Onboard in under an hour! </p>
-                            <div class="link-arrow-right-svg w-embed"><svg width="100%" height="100%"
-                                    viewBox="0 0 20 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1 5H19M19 5L14.6667 1M19 5L14.6667 9" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg></div> 
-                        </a>
-                        <div class="flex-horizontal align-center col-gap-15 opacity-40"><img
-                                src="infloww.jpeg"
-                                loading="lazy" alt="" class="discord-partner-img" /></div>
-                                
-                    </div>
+                    src="https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba4aa6525ebe8_hero-coins-placeholder.webp"
+                    loading="lazy" sizes="100vw"
+                    srcset="https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba4aa6525ebe8_hero-coins-placeholder-p-500.png 500w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba4aa6525ebe8_hero-coins-placeholder-p-800.png 800w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba4aa6525ebe8_hero-coins-placeholder-p-1080.png 1080w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba4aa6525ebe8_hero-coins-placeholder-p-1600.png 1600w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba4aa6525ebe8_hero-coins-placeholder-p-2000.png 2000w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba4aa6525ebe8_hero-coins-placeholder-p-2600.png 2600w"
+                    alt="" class="home-coins-img-holder" />
+                <div class="home-hero-upper">
+                    <h1 class="heading-xxl tablet-text-60 mobile-text-32 s-m-b-40 st-m-b-30 sm-m-b-12 animate-on-load" data-delay="0.1">Outsource Your 
+                        Girlfriend Experience</h1>
+                    <p class="p-jumbo max-w-600 tablet-max-w-500 s-m-b-40 st-m-b-30 sm-m-b-20 animate-on-load" data-delay="0.3">No.1 Onlyfans Chatting Service 24/7 <br> Let our professional team take care the chatting</p><a id="hero-btn"
+                        href="#premium-packages"
+                        class="button filled-green s-m-b-30 st-m-b-20 sm-m-b-10 w-inline-block animate-on-load" data-delay="0.5">
+                        <p>Onboard in under an hour! </p>
+                        <div class="link-arrow-right-svg w-embed"><svg width="100%" height="100%"
+                                viewBox="0 0 20 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 5H19M19 5L14.6667 1M19 5L14.6667 9" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg></div> 
+                    </a>
+                    <div class="flex-horizontal align-center col-gap-15 opacity-40 animate-on-load" data-delay="0.7"><img
+                            src="infloww.jpeg"
+                            loading="lazy" alt="" class="discord-partner-img" /></div>
+                            
+                </div>
 
                     <div class="home-hero-lower2" style="margin-top: 80px; display: inline;">
                        
-                        <div style="margin-top: 80px;"><h2 class="heading-xl">Why use<br /><span class="text-gradient">SensualSpeech?</span></h2>
-                            <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20">We are the <span
+                        <div style="margin-top: 80px;"><h2 class="heading-xl animate-on-load" data-delay="0.1">Why use<br /><span class="text-gradient">SensualSpeech?</span></h2>
+                            <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20 animate-on-load" data-delay="0.3">We are the <span
                                     class="text-bold">#1 provider </span>of chatting service worldwide. Trusted by over
                                 <span class="text-bold">500+ models</span>
                             </p></div>
@@ -915,25 +927,25 @@
                                 alt="" class="home-hero-lightwaves-img" />
                             <div>
                                 <div>
-                                <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20"><span
+                                <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20 animate-on-load" data-delay="0.2"><span
                                         class="text-bold" style="margin-bottom: 10px; ">Save time</span> <br /> We take care of the chatting and all other aspects of your OnlyFans account so you can focus 100% on marketing.
                                     
                                 </p></div>
                                 <div style="margin-top: 80px; ">
-                                    <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20"><span
+                                    <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20 animate-on-load" data-delay="0.4"><span
                                             class="text-bold" style="margin-bottom: 10px; ">Earn more</span> <br /> Our team of expert are specialized in making the most out of each subscriber on your account.
                                         
                                     </p></div></div>
                                     <div> 
                                     <div style="margin-top: 160px; ">
-                                        <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20"><span
+                                        <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20 animate-on-load" data-delay="0.6"><span
                                                 class="text-bold" style="margin-bottom: 10px; ">Scale together</span> <br />We have the capacity to work with any numbers of models.
                                                 We even work with models in the top 0.01% doing more thank 200k / month.
                                             
                                         </p></div>
 
                                         <div style="margin-top: 80px; ">
-                                            <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20"><span
+                                            <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20 animate-on-load" data-delay="0.8"><span
                                                     class="text-bold" style="margin-bottom: 10px; ">Risk free</span> <br />You can start and stop anytime. We invoice you after we have generated the revenue on your account.
                                                     Commission based for models above 2k / month.
                                                 
@@ -974,29 +986,29 @@
                                 alt="" class="home-hero-lightwaves-img" />
                         </div>
                         
-                        <div style="margin-top: 8px; " class="display-on-desktop">
+                        <div style="margin-top: 8px; margin-left: 1vw; " class="display-on-desktop">
                                         
                             <div>
-                            <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20"><span
+                            <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20 margin-left: 1vw; margin-right: 1vw; animate-on-load" data-delay="0.2"><span
                                     class="text-bold" style="margin-bottom: 20px; "> Save time</span> <br > We take care of the chatting and all other aspects of your OnlyFans account so you can focus 100% on marketing.
                                 
                             </p></div>
                             <div style="margin-top: 80px; ">
-                                <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20"><span
+                                <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20 margin-left: 1vw; margin-right: 1vw; animate-on-load" data-delay="0.4"><span
                                         class="text-bold" style="margin-bottom: 20px; "> Earn more</span> <br > Our team of expert are specialized in making the most out of each subscriber on your account.
                                     
                                 </p></div>
 
                                 <div style="margin-top: 160px; ">
-                                    <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20"><span
+                                    <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20 margin-left: 1vw; margin-right: 1vw; animate-on-load" data-delay="0.6"><span
                                             class="text-bold" style="margin-bottom: 20px; "> Scale together</span> <br >We have the capacity to work with any numbers of models.
                                             We even work with models in the top 0.01% doing more thank 200k / month.
                                         
                                     </p></div>
 
-                                    <div style="margin-top: 240px; ">
-                                        <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20"><span
-                                                class="text-bold" style="margin-bottom: 20px; "> Risk free</span> <br >ou can start and stop anytime. We invoice you after we have generated the revenue on your account.
+                                    <div style="margin-top: 240px; margin-left: 1vw; margin-right: 1vw; ">
+                                        <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20 animate-on-load" data-delay="0.8"><span
+                                                class="text-bold" style="margin-bottom: 20px; "> Risk free</span> <br >You can start and stop anytime. We invoice you after we have generated the revenue on your account.
                                                 Commission based for models above 2k / month.
                                             
                                         </p></div>
@@ -1029,13 +1041,10 @@
                                     <!-- First Video Testimonial -->
                                     <div class="video-testimonial-container">
                                         <div class="video-wrapper">
-                                            <iframe width="280" height="500" 
-                                                src="https://www.youtube.com/embed/kglUAkdLgO4"
-                                                class="lazy-video"
-                                                frameborder="0"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowfullscreen>
-                                            </iframe>
+                                            <video width="280" height="500" controls muted class="scroll-autoplay-video">
+                                                <source src="LucasSensualSpeechReview4.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
                                         </div>
                                         <p class="testimonial-caption">"Amazing results! My earnings increased by 300% in just 2 weeks."</p>
                                         <p class="testimonial-author">- Lucas, OnlyFans Creator</p>
@@ -1045,17 +1054,16 @@
                                     <div class="video-testimonial-container"
                                      style="margin-top: 5vh;">
                                         <div class="video-wrapper">
-                                            <iframe width="280" height="500"
-                                                src="https://www.youtube.com/embed/l2eyJTCYvN0"
-                                                class="lazy-video"
-                                                frameborder="0"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowfullscreen>
-                                            </iframe>
+                                            <video width="280" height="500" controls muted class="scroll-autoplay-video">
+                                                <source src="PaulaSensualSpeechReview.mp4" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
                                         </div>
-                                        <p class="testimonial-caption">"Professional service, consistent results. Highly recommended!"</p>
+                                        <p class="testimonial-caption">"Exceptional Professional Service, Reliable Consistent Results. Recommended!"</p>
                                         <p class="testimonial-author">- Paula, OnlyFans Creator</p>
                                     </div>
+                                </div>
+                            </div>
                                 </div>
                             </div>
                         </div>
@@ -1142,7 +1150,7 @@
                                     src="https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba408f125eb6d_blur%201.webp"
                                     loading="lazy"
                                     sizes="(max-width: 479px) 100vw, (max-width: 767px) 93vw, (max-width: 991px) 88vw, (max-width: 1279px) 27vw, (max-width: 1439px) 25vw, (max-width: 1919px) 26vw, 384px"
-                                    srcset="https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba408f125eb6d_blur%25201-p-500.png 500w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba408f125eb6d_blur%25201-p-800.png 800w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba408f125eb6d_blur%25201-p-1080.png 1080w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba408f125eb6d_blur%25201-p-1600.png 1600w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba408f125eb6d_blur%201.webp 1924w"
+                                    srcset="https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba408f125eb6d_blur%25201-p-500.png 500w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba408f125eb6d_blur%25201-p-800.png 800w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba408f125eb6d_blur%201.webp 1924w"
                                     alt="" class="home-card-blur" />
                                 <div class="home-big-card-bg"></div>
                             </div><img
@@ -1469,20 +1477,87 @@
                             <button class="nav-btn prev-btn">&lt;</button>
                             <div class="shorts-container">
                                 <div class="shorts-track">
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/wE-1Q3xKpxA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/-TbJNeEtobc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/4IoqKZmLQzY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/Kacw-5WvN-8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/LKfL_f4iX5o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/O6USmz7npyc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/VSLgOOe2Jks" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/aCazim4nihE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/acZvxpVzk28" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/nX580i_XGKg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/oL2Vk2IBZi8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/q_jYWF3LquY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/Lc9AkKDU1I8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/0MyyEDi75yY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <video width="315" height="560" controls muted preload="metadata" class="autoplay-video">
+                                        <source src="lowshorts/0622 (1).mov" type="video/quicktime">
+                                        <source src="lowshorts/0622 (1).mov" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <video width="315" height="560" controls muted preload="metadata" class="autoplay-video">
+                                        <source src="lowshorts/0622 (1)(1).mov" type="video/quicktime">
+                                        <source src="lowshorts/0622 (1)(1).mov" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <video width="315" height="560" controls muted preload="metadata" class="autoplay-video">
+                                        <source src="lowshorts/0622 (1)(2).mov" type="video/quicktime">
+                                        <source src="lowshorts/0622 (1)(2).mov" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <video width="315" height="560" controls muted preload="metadata" class="autoplay-video">
+                                        <source src="lowshorts/0622 (1)(3).mov" type="video/quicktime">
+                                        <source src="lowshorts/0622 (1)(3).mov" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <video width="315" height="560" controls muted preload="metadata" class="autoplay-video">
+                                        <source src="lowshorts/0622 (1)(4).mov" type="video/quicktime">
+                                        <source src="lowshorts/0622 (1)(4).mov" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <video width="315" height="560" controls muted preload="metadata" class="autoplay-video">
+                                        <source src="lowshorts/0622 (1)(5).mov" type="video/quicktime">
+                                        <source src="lowshorts/0622 (1)(5).mov" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <video width="315" height="560" controls muted preload="metadata" class="autoplay-video">
+                                        <source src="lowshorts/0622 (1)(6).mov" type="video/quicktime">
+                                        <source src="lowshorts/0622 (1)(6).mov" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <video width="315" height="560" controls muted preload="metadata" class="autoplay-video">
+                                        <source src="lowshorts/0622 (1)(7).mov" type="video/quicktime">
+                                        <source src="lowshorts/0622 (1)(7).mov" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <video width="315" height="560" controls muted preload="metadata" class="autoplay-video">
+                                        <source src="lowshorts/0622 (1)(8).mov" type="video/quicktime">
+                                        <source src="lowshorts/0622 (1)(8).mov" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <video width="315" height="560" controls muted preload="metadata" class="autoplay-video">
+                                        <source src="lowshorts/0622 (1)(9).mov" type="video/quicktime">
+                                        <source src="lowshorts/0622 (1)(9).mov" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <video width="315" height="560" controls muted preload="metadata" class="autoplay-video">
+                                        <source src="lowshorts/0622 (1)(10).mov" type="video/quicktime">
+                                        <source src="lowshorts/0622 (1)(10).mov" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <video width="315" height="560" controls muted preload="metadata" class="autoplay-video">
+                                    <video width="315" height="560" controls muted preload="metadata">
+                                        <source src="lowshorts/0622 (1)(11).mov" type="video/quicktime">
+                                        <source src="lowshorts/0622 (1)(11).mov" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <video width="315" height="560" controls muted preload="metadata">
+                                        <source src="lowshorts/0622 (1)(12).mov" type="video/quicktime">
+                                        <source src="lowshorts/0622 (1)(12).mov" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <video width="315" height="560" controls muted preload="metadata">
+                                        <source src="lowshorts/0622 (1)(13).mov" type="video/quicktime">
+                                        <source src="lowshorts/0622 (1)(13).mov" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <video width="315" height="560" controls muted preload="metadata">
+                                        <source src="lowshorts/0622 (1)(14).mov" type="video/quicktime">
+                                        <source src="lowshorts/0622 (1)(14).mov" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <video width="315" height="560" controls muted preload="metadata">
+                                        <source src="lowshorts/0622 (1)(15).mov" type="video/quicktime">
+                                        <source src="lowshorts/0622 (1)(15).mov" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
                                 </div>
                             </div>
                             <button class="nav-btn next-btn">&gt;</button>
@@ -1538,7 +1613,7 @@
                     <script>
                         document.addEventListener('DOMContentLoaded', function() {
                             const track = document.querySelector('.shorts-track');
-                            const videos = track.querySelectorAll('iframe');
+                            const videos = track.querySelectorAll('video');
                             const nextBtn = document.querySelector('.next-btn');
                             const prevBtn = document.querySelector('.prev-btn');
                             let currentIndex = 0;
@@ -1563,7 +1638,7 @@
                                     // Pause all other videos
                                     videos.forEach(v => {
                                         if (v !== video) {
-                                            v.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                                            v.pause();
                                         }
                                     });
                                 });
@@ -3089,6 +3164,72 @@
 
             lazySections.forEach(section => {
                 lazyObserver.observe(section);
+            });
+
+            // Animation on scroll for text elements
+            const animateElements = document.querySelectorAll('.animate-on-load');
+            
+            const animateObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        const delay = parseFloat(element.getAttribute('data-delay')) || 0;
+                        
+                        setTimeout(() => {
+                            element.classList.add('animated');
+                        }, delay * 1000);
+                        
+                        // Stop observing after animation is triggered
+                        animateObserver.unobserve(element);
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.2 // Trigger when 20% of the element is visible
+            });
+
+            animateElements.forEach(element => {
+                animateObserver.observe(element);
+            });
+
+            // Autoplay videos when Chat Reviews section comes into view
+            const chatReviewsSection = document.querySelector('.section:has(.shorts-track)');
+            const autoplayVideos = document.querySelectorAll('.autoplay-video');
+            
+            const videoAutoplayObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Start playing all videos
+                        autoplayVideos.forEach(video => {
+                            video.play().catch(e => {
+                                console.log('Autoplay prevented by browser policy');
+                            });
+                        });
+                        
+                        // Stop observing after triggering autoplay
+                        videoAutoplayObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.3 // Trigger when 30% of the section is visible
+            });
+
+            if (chatReviewsSection) {
+                videoAutoplayObserver.observe(chatReviewsSection);
+            }
+
+            // Handle video interactions - pause others when one is played
+            autoplayVideos.forEach(video => {
+                video.addEventListener('play', () => {
+                    autoplayVideos.forEach(otherVideo => {
+                        if (otherVideo !== video) {
+                            otherVideo.pause();
+                        }
+                    });
+                });
             });
         });
     </script>
