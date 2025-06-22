@@ -433,6 +433,18 @@
             transform: translateY(0);
         }
 
+        /* Animation from right styles */
+        .animate-from-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-from-right.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
         @media only screen and (min-width: 992px) {
             .big-card-coin:not(.world-arrow) {
                 /*
@@ -507,92 +519,6 @@
             }
         }
     </style>
-</head>
-
-<body data-scroll-time="0">
-    <div class="custom-code">
-        <div class="global-style w-embed">
-            <style>
-                .button:hover .link-arrow-right-svg,
-                .subscribe-form-btn-contain:hover .link-arrow-right-svg,
-                .blog-filter-btn-contain:hover .link-arrow-right-svg {
-                    transform: scale(1.15, 1.05)
-                }
-
-                .resources-dropdown-contain,
-                .home-page-dropdown-contain,
-                .language-dropdown-contain,
-                .mobile-navigation-screen,
-                .platforms-dropdown-contain {
-                    pointer-events: none;
-                }
-
-                @media only screen and (min-width: 991px) and (max-width: 1365px) {
-                    .nav-item-contain {
-                        display: none;
-                    }
-
-                    .hamburger-icons-contain {
-                        display: flex;
-                    }
-
-                    .mobile-navigation-screen .header-nav-link {
-                        border-radius: 1.5rem;
-                        padding: 1.25rem 1.875rem;
-                        transition: background-color ease-in-out 0.1s;
-                    }
-
-                    .mobile-navigation-screen .header-nav-link:hover {
-                        background-color: #2b3345;
-                    }
-
-                    .tablet-dropdown-menu-item {
-                        padding: 1.25rem 1.875rem;
-                        width: 100%;
-                    }
-
-                    .tablet-dropdown-menu-item.title:hover {
-                        background-color: transparent;
-                    }
-
-                    .header-nav-link.menu-tablet {
-                        padding: 0rem 0rem;
-                    }
-
-                }
-
-                @media only screen and (min-width: 992px) {
-                    .header-nav-link p {
-                        -webkit-text-size-adjust: none;
-                        -ms-text-size-adjust: none;
-                        -moz-text-size-adjust: none;
-                        text-size-adjust: none;
-                    }
-                }
-
-                img {
-                    /* If you want to implement it in very old browser-versions */
-                    -webkit-user-select: none;
-                    /* Chrome/Safari */
-                    -moz-user-select: none;
-                    /* Firefox */
-                    -ms-user-select: none;
-                    /* IE10+ */
-
-                    /* The rule below is not implemented in browsers yet */
-                    -o-user-select: none;
-
-                    /* The rule below is implemented in most browsers by now */
-                    user-select: none;
-                }
-
-                @media only screen and (min-width: 991px) and (max-width: 1300px) {
-                    .container.regualr-padding {
-                        padding-left: 3.75em;
-                        padding-right: 3.75em;
-                    }
-                }
-            </style>
         </div>
     </div>
     <div id="smooth-wrapper" class="page-wrapper">
@@ -1039,7 +965,7 @@
                             <div class="_w-600 mobile-full-w">
                                 <div class="flex-horizontal align-center col-gap-34 tablet-justify-center mobile-col-gap-16">
                                     <!-- First Video Testimonial -->
-                                    <div class="video-testimonial-container">
+                                    <div class="video-testimonial-container animate-from-right" data-delay="0.2">
                                         <div class="video-wrapper">
                                             <video width="280" height="500" controls class="scroll-autoplay-video">
                                                 <source src="LucasSensualSpeechReview4.mp4" type="video/mp4">
@@ -1051,8 +977,8 @@
                                     </div>
                                     
                                     <!-- Second Video Testimonial -->
-                                    <div class="video-testimonial-container"
-                                     style="margin-top: 5vh;">
+                                    <div class="video-testimonial-container animate-from-right"
+                                     style="margin-top: 5vh;" data-delay="0.4">
                                         <div class="video-wrapper">
                                             <video width="280" height="500" controls class="scroll-autoplay-video">
                                                 <source src="PaulaSensualSpeechReview.mp4" type="video/mp4">
@@ -1726,7 +1652,7 @@
                     <div id="FAQ" class="container regualr-padding s-p-t-42 s-p-b-42 position-relative sm-p-t-100">
                         <div class="flex-vertical align-center row-gap-50">
                             <h1 id="faq-heading" class="heading-xl">Frequent questions</h1>
-                            <div class="faq-wrapper w-dyn-list">
+                            <div class="faq-wrapper w-dyn-list animate-on-load" data-delay="0.1">
                                 <div role="list" class="faq-container w-dyn-items">
                                     <div role="listitem" class="faq-item w-dyn-item">
                                         <div class="faq-item-title">
@@ -3167,7 +3093,7 @@
             });
 
             // Animation on scroll for text elements
-            const animateElements = document.querySelectorAll('.animate-on-load');
+            const animateElements = document.querySelectorAll('.animate-on-load, .animate-from-right');
             
             const animateObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -3185,8 +3111,8 @@
                 });
             }, {
                 root: null,
-                rootMargin: '0px',
-                threshold: 0.2 // Trigger when 20% of the element is visible
+                rootMargin: '-100px 0px 0px 0px', // Trigger 100px before the element comes into view
+                threshold: 0.1 // Trigger when 10% of the element is visible
             });
 
             animateElements.forEach(element => {
