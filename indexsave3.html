@@ -395,20 +395,7 @@
         }
 
         .home-hero-upper {
-            opacity: 1;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        /* Lazy loading styles */
-        [data-lazy-load="true"] {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        [data-lazy-load="true"].loaded {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         @media only screen and (min-width: 992px) {
@@ -1021,7 +1008,6 @@
                                         <div class="video-wrapper">
                                             <iframe width="280" height="500" 
                                                 src="https://www.youtube.com/embed/kglUAkdLgO4"
-                                                class="lazy-video"
                                                 frameborder="0"
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                 allowfullscreen>
@@ -1032,12 +1018,10 @@
                                     </div>
                                     
                                     <!-- Second Video Testimonial -->
-                                    <div class="video-testimonial-container"
-                                     style="margin-top: 5vh;">
+                                    <div class="video-testimonial-container">
                                         <div class="video-wrapper">
                                             <iframe width="280" height="500"
                                                 src="https://www.youtube.com/embed/l2eyJTCYvN0"
-                                                class="lazy-video"
                                                 frameborder="0"
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                 allowfullscreen>
@@ -1067,10 +1051,8 @@
                                         <div class="video-wrapper">
                                             <iframe width="280" height="500" 
                                                 src="https://www.youtube.com/embed/kglUAkdLgO4"
-                                                class="lazy-video"
                                                 frameborder="0"
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowfullscreen
                                                 allowfullscreen>
                                             </iframe>
                                         </div>
@@ -1084,10 +1066,8 @@
                                         <div class="video-wrapper">
                                             <iframe width="280" height="500"
                                                 src="https://www.youtube.com/embed/l2eyJTCYvN0"
-                                                class="lazy-video"
                                                 frameborder="0"
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowfullscreen
                                                 allowfullscreen>
                                             </iframe>
                                         </div>
@@ -1447,187 +1427,44 @@
                                     
                             </div>
                         </div>
-                        
-                    </div>
-                </section>
-
-
-                <section class="section" data-lazy-load="true">
-                    <div class="container regualr-padding">
-                        <h2 class="heading-xxl text-center s-m-b-40">Chat Reviews</h2>
-                        <div class="shorts-slider">
-                            <button class="nav-btn prev-btn">&lt;</button>
-                            <div class="shorts-container">
-                                <div class="shorts-track">
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/wE-1Q3xKpxA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/-TbJNeEtobc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/4IoqKZmLQzY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/Kacw-5WvN-8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/LKfL_f4iX5o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/O6USmz7npyc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/VSLgOOe2Jks" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/aCazim4nihE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/acZvxpVzk28" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/nX580i_XGKg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/oL2Vk2IBZi8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/q_jYWF3LquY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/Lc9AkKDU1I8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                    <iframe width="315" height="560" src="https://www.youtube.com/embed/0MyyEDi75yY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <div id="video-testimonials"
+                            class="flex-horizontal align-start justify-between s-m-t-167 st-m-t-104 tablet-flex-vertical tablet-align-center tablet-text-align-center sm-m-t-70">
+                            <h3 class="heading-l s-m-r-50 st-m-r-0 st-m-b-20">What our clients say about us.</h3>
+                            <div class="_w-600 mobile-full-w">
+                                <p class="p-jumbo s-m-b-40">Real testimonials from OnlyFans creators who have experienced our premium chatting services.</p>
+                                <div class="flex-horizontal align-center col-gap-34 tablet-justify-center mobile-col-gap-16">
+                                    <!-- First Video Testimonial -->
+                                    <div class="video-testimonial-container">
+                                        <div class="video-wrapper">
+                                            <iframe width="280" height="500" 
+                                                src="https://www.youtube.com/embed/kglUAkdLgO4"
+                                                frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen>
+                                            </iframe>
+                                        </div>
+                                        <p class="testimonial-caption">"Amazing results! My earnings increased by 300% in just 2 weeks."</p>
+                                        <p class="testimonial-author">- Lucas, OnlyFans Creator</p>
+                                    </div>
+                                    
+                                    <!-- Second Video Testimonial -->
+                                    <div class="video-testimonial-container">
+                                        <div class="video-wrapper">
+                                            <iframe width="280" height="500"
+                                                src="https://www.youtube.com/embed/l2eyJTCYvN0"
+                                                frameborder="0"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowfullscreen>
+                                            </iframe>
+                                        </div>
+                                        <p class="testimonial-caption">"Professional service, consistent results. Highly recommended!"</p>
+                                        <p class="testimonial-author">- Paula, OnlyFans Creator</p>
+                                    </div>
                                 </div>
                             </div>
-                            <button class="nav-btn next-btn">&gt;</button>
                         </div>
                     </div>
-                    <style>
-                        .shorts-slider {
-                            position: relative;
-                            display: flex;
-                            align-items: center;
-                            margin: 0 auto;
-                            padding: 20px 0;
-                        }
-    
-                        .shorts-container {
-                            width: 100%;
-                            overflow: hidden;
-                        }
-    
-                        .shorts-track {
-                            display: flex;
-                            gap: 20px;
-                            transition: transform 0.5s ease;
-                            will-change: transform;
-                        }
-    
-                        .nav-btn {
-                            position: absolute;
-                            top: 50%;
-                            transform: translateY(-50%);
-                            background: rgba(255,255,255,0.3);
-                            border: none;
-                            border-radius: 50%;
-                            width: 40px;
-                            height: 40px;
-                            cursor: pointer;
-                            z-index: 10;
-                            font-size: 20px;
-                        }
-    
-                        .prev-btn {
-                            left: 10px;
-                        }
-    
-                        .next-btn {
-                            right: 10px;
-                        }
-    
-                        .nav-btn:hover {
-                            background: rgba(255,255,255,0.5);
-                        }
-                    </style>
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function() {
-                            const track = document.querySelector('.shorts-track');
-                            const videos = track.querySelectorAll('iframe');
-                            const nextBtn = document.querySelector('.next-btn');
-                            const prevBtn = document.querySelector('.prev-btn');
-                            let currentIndex = 0;
-                            let autoScrollInterval;
-    
-                            // Start auto-scrolling
-                            startAutoScroll();
-    
-                            // Stop auto-scroll when interacting with any element in the section
-                            document.querySelector('.section').addEventListener('click', (e) => {
-                                stopAutoScroll();
-                            });
-    
-                            document.querySelector('.section').addEventListener('touchstart', (e) => {
-                                stopAutoScroll();
-                            });
-    
-                            // Handle video play/pause
-                            videos.forEach(video => {
-                                video.addEventListener('click', () => {
-                                    stopAutoScroll(); // Stop scrolling when video is clicked
-                                    // Pause all other videos
-                                    videos.forEach(v => {
-                                        if (v !== video) {
-                                            v.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-                                        }
-                                    });
-                                });
-                            });
-    
-                            // Navigation buttons
-                            nextBtn.addEventListener('click', () => {
-                                if (currentIndex < videos.length - 1) {
-                                    currentIndex++;
-                                    updateSliderPosition();
-                                }
-                            });
-    
-                            prevBtn.addEventListener('click', () => {
-                                if (currentIndex > 0) {
-                                    currentIndex--;
-                                    updateSliderPosition();
-                                }
-                            });
-    
-                            // Touch/swipe handling
-                            let touchStartX = 0;
-                            let touchEndX = 0;
-    
-                            track.addEventListener('touchstart', e => {
-                                stopAutoScroll();
-                                touchStartX = e.touches[0].clientX;
-                            });
-    
-                            track.addEventListener('touchend', e => {
-                                touchEndX = e.changedTouches[0].clientX;
-                                handleSwipe();
-                            });
-    
-                            function handleSwipe() {
-                                const swipeDistance = touchStartX - touchEndX;
-                                if (Math.abs(swipeDistance) > 50) { // Minimum swipe distance
-                                    if (swipeDistance > 0 && currentIndex < videos.length - 1) {
-                                        currentIndex++;
-                                    } else if (swipeDistance < 0 && currentIndex > 0) {
-                                        currentIndex--;
-                                    }
-                                    updateSliderPosition();
-                                }
-                            }
-    
-                            function updateSliderPosition() {
-                                const slideWidth = videos[0].offsetWidth + 20; // Width + gap
-                                track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-                            }
-    
-                            function startAutoScroll() {
-                                if (!autoScrollInterval) {
-                                    const startTime = Date.now();
-                                    autoScrollInterval = setInterval(() => {
-                                        const scrollAmount = (Date.now() - startTime) / 5000; // Slower speed
-                                        const slideWidth = videos[0].offsetWidth + 20;
-                                        const position = (scrollAmount * slideWidth) % (slideWidth * videos.length);
-                                        track.style.transform = `translateX(-${position}px)`;
-                                        currentIndex = Math.floor(position / slideWidth);
-                                    }, 16);
-                                }
-                            }
-    
-                            function stopAutoScroll() {
-                                if (autoScrollInterval) {
-                                    clearInterval(autoScrollInterval);
-                                    autoScrollInterval = null;
-                                }
-                            }
-                        });
-                    </script>
-                </section> 
-    
+                </section>
                 <section class="section"><img
                         src="https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba49e3825ebed_faq%20Coin-Doge%201.webp"
                         loading="lazy"
@@ -1883,12 +1720,12 @@
                                                 </p>
                                                 <p>‍</p>
 
-                                                <p>We'll give you access to ours with the same permission you have on your current Infloww.
+                                                <p>We’ll give you access to ours with the same permission you have on your current Infloww.
 
                                                 </p>
                                                 <p>‍</p>
 
-                                                <p>We manage a lot of models, that's the only way for us to manage all of them.
+                                                <p>We manage a lot of models, that’s the only way for us to manage all of them.
                                                     For now, there is no other way. </p>
                                              
 
@@ -1993,7 +1830,7 @@
                                                 <p>‍</p>
 
                                                 <p>
-                                                    We're able to start within 24 hours.
+                                                    We’re able to start within 24 hours.
                                                 </p>
                                              
 
@@ -2123,7 +1960,7 @@
                                         <div class="faq-item-content">
                                             <div class="w-richtext">
                                                 <p>
-                                                    No, you don't have to manage the chatters.
+                                                    No, you don’t have to manage the chatters.
                                                     We do it.
                                                     
                                                 </p>
@@ -2283,12 +2120,12 @@
                                         <div class="faq-item-content">
                                             <div class="w-richtext">
                                                 <p>
-                                                    It's completely safe.
+                                                    It’s completely safe.
                                                 </p>
                                                 <p>‍</p>
 
                                                 <p>
-                                                    We've been chatting 24/7 for more than a year on more than 200 models.
+                                                    We’ve been chatting 24/7 for more than a year on more than 200 models.
                                                     
                                                 </p>
                                              
@@ -3040,47 +2877,6 @@
                     $(".home-phone-img-holder,.embed-video.phone").css("display", "none")
                 }
             });
-    </script>
-    
-    <!-- Fallback script to ensure hero section is visible -->
-    <script>
-        // Ensure hero section is visible even if external scripts fail
-        document.addEventListener('DOMContentLoaded', function() {
-            const heroUpper = document.querySelector('.home-hero-upper');
-            if (heroUpper) {
-                // Set a timeout to ensure visibility after 1 second
-                setTimeout(() => {
-                    heroUpper.style.opacity = '1';
-                }, 1000);
-            }
-        });
-    </script>
-
-    <!-- Lazy loading implementation -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Lazy loading for sections with data-lazy-load="true"
-            const lazySections = document.querySelectorAll('[data-lazy-load="true"]');
-            
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
-            const lazyObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('loaded');
-                        lazyObserver.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            lazySections.forEach(section => {
-                lazyObserver.observe(section);
-            });
-        });
     </script>
 </body>
 
