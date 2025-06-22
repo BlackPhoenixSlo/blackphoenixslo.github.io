@@ -830,7 +830,7 @@
                                 
                     </div>
 
-                    <div class="home-hero-lower2" style="margin-top: 80px; display: inline;">
+                    <div class="home-hero-lower" style="margin-top: 80px;   display: inline;">
                        
                         <div style="margin-top: 80px;"><h2 class="heading-xl">Why use<br /><span class="text-gradient">SensualSpeech?</span></h2>
                             <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20">We are the <span
@@ -843,29 +843,29 @@
                             /></div>
                             <h2 class="heading-xl " style="margin-top: 80px; " >The solution you've been looking for <br /></h2>
                             <style>
-                                .display-on-mobile {
+                                /* By default, hide both elements */
+                                .display-on-mobile, .display-on-desktop {
                                     display: none;
                                 }
-                                .display-on-desktop {
-                                    display: none;
-                                }
-                                
+                            
+                                /* Display on mobile */
                                 @media screen and (max-width: 768px) {
                                     .display-on-mobile {
-                                        display: flex !important;
+                                        display: flex;
                                     }
                                 }
-                                
+                            
+                                /* Display on desktop */
                                 @media screen and (min-width: 998px)  {
                                     .display-on-desktop {
-                                        display: flex !important; 
+                                        display: flex;
                                     }
                                 }
                             </style>
                             
-                            <div class="display-on-mobile">
-                            <div>
-                                <div>
+                            <div  class="display-on-mobile" >
+                            <div >
+                                <div >
                                 <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20"><span
                                         class="text-bold" style="margin-bottom: 10px; ">Save time</span> <br /> We take care of the chatting and all other aspects of your OnlyFans account so you can focus 100% on marketing.
                                     
@@ -875,7 +875,7 @@
                                             class="text-bold" style="margin-bottom: 10px; ">Earn more</span> <br /> Our team of expert are specialized in making the most out of each subscriber on your account.
                                         
                                     </p></div></div>
-                                    <div> 
+                                    <div > 
                                     <div style="margin-top: 160px; ">
                                         <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20"><span
                                                 class="text-bold" style="margin-bottom: 10px; ">Scale together</span> <br />We have the capacity to work with any numbers of models.
@@ -892,9 +892,9 @@
 
                                     </div>
 
-                                    <div style="margin-top: 80px; " class="display-on-desktop">
+                                    <div style="margin-top: 80px; " class="display-on-desktop" >
                                         
-                                            <div>
+                                            <div >
                                             <p class="p-jumbo max-w-375 tablet-max-w-340 mobile-max-w-none sm-m-t-20"><span
                                                     class="text-bold" style="margin-bottom: 20px; "> Save time</span> <br > We take care of the chatting and all other aspects of your OnlyFans account so you can focus 100% on marketing.
                                                 
@@ -1041,15 +1041,11 @@
                                     sizes="(max-width: 479px) 100vw, (max-width: 767px) 86vw, (max-width: 991px) 40vw, (max-width: 1279px) 47vw, (max-width: 1439px) 44vw, (max-width: 1919px) 46vw, 51vw"
                                     srcset="tip.png 500w, tip.png 800w, tip.png 1200w"
                                     alt="" class="home-chart-screen-2 _2" /><img
-                                    src="crestorstaritsticcs.png"
+                                    src="https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba42bfa25eb6e_blur%203.webp"
                                     loading="lazy"
-                                    sizes="(max-width: 479px) 100vw, (max-width: 767px) 86vw, (max-width: 991px) 40vw, (max-width: 1279px) 47vw, (max-width: 1439px) 44vw, (max-width: 1919px) 46vw, 51vw"
-                                    srcset="crestorstaritsticcs.png 500w, crestorstaritsticcs.png 800w, crestorstaritsticcs.png 1200w"
-
-
-                                    
-                                   
-                                    />
+                                    sizes="(max-width: 479px) 100vw, (max-width: 991px) 720px, (max-width: 1279px) 27vw, (max-width: 1439px) 25vw, (max-width: 1919px) 26vw, 384px"
+                                    srcset="https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba42bfa25eb6e_blur%25203-p-500.png 500w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba42bfa25eb6e_blur%25203-p-800.png 800w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba42bfa25eb6e_blur%25203-p-1080.png 1080w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba42bfa25eb6e_blur%25203-p-1600.png 1600w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba42bfa25eb6e_blur%25203-p-2000.png 2000w, https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba42bfa25eb6e_blur%203.webp 2394w"
+                                    alt="" class="home-card-blur-2" />
                                 <div class="home-big-card-bg"></div>
                             </div><img
                                 src="https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba4220525eb61_sell%20button1.webp"
@@ -1077,11 +1073,20 @@
                                     alt="" class="home-chart-screen-3 _1" /><img
                                     src="main2.jpg"
                                     loading="lazy"
-                                   
+                                    alt="" class="home-chart-screen-3 _2 no1" /><img
+                                    src="main3.jpg"
+                                    loading="lazy"
                                     alt="" class="home-chart-screen-3 _2 no2" /><img
                                     src="crestorstaritsticcs.png"
                                     loading="lazy"
-                                    />
+                                    sizes="(max-width: 479px) 100vw, (max-width: 767px) 93vw, (max-width: 991px) 40vw, (max-width: 1279px) 50vw, (max-width: 1439px) 47vw, (max-width: 1919px) 49vw, 54vw"
+                                    srcset="crestorstaritsticcs.png 500w, crestorstaritsticcs.png 592w"
+                                    alt="" class="home-chart-screen-3 _2 no3" /><img
+                                    src="https://assets.website-files.com/63003501019ba4a4ba25eb18/633735458d7fcaf04017c9f5_Card%203%20bg.webp"
+                                    loading="lazy"
+                                    sizes="(max-width: 479px) 100vw, (max-width: 767px) 93vw, (max-width: 991px) 88vw, (max-width: 1279px) 27vw, (max-width: 1439px) 25vw, (max-width: 1919px) 26vw, 384px"
+                                    srcset="https://assets.website-files.com/63003501019ba4a4ba25eb18/633735458d7fcaf04017c9f5_Card%203%20bg-p-500.png 500w, https://assets.website-files.com/63003501019ba4a4ba25eb18/633735458d7fcaf04017c9f5_Card%203%20bg-p-800.png 800w, https://assets.website-files.com/63003501019ba4a4ba25eb18/633735458d7fcaf04017c9f5_Card%203%20bg-p-1080.png 1080w, https://assets.website-files.com/63003501019ba4a4ba25eb18/633735458d7fcaf04017c9f5_Card%203%20bg-p-1600.png 1600w, https://assets.website-files.com/63003501019ba4a4ba25eb18/633735458d7fcaf04017c9f5_Card%203%20bg.webp 1988w"
+                                    alt="" class="home-card-blur-3 homepage" />
                                 <div class="home-big-card-bg"></div>
                             </div> <img
                                 src="https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba4539525eb62_Bell_A2%201.webp"
@@ -1273,8 +1278,8 @@
                                 </div>
                                 <h4
                                     class="heading-s opacity-20 s-m-b-10 decor-strike-through tablet-text-32 mobile-text-20">
-                                    15%</h4>
-                                <h3 class="heading-l s-m-b-16 tablet-text-60 mobile-text-50">22%</h3>
+                                    22%</h4>
+                                <h3 class="heading-l s-m-b-16 tablet-text-60 mobile-text-50">15%</h3>
                                 <p class="p-lead green s-m-b-50 st-m-b-36">Save 7% eventually</p>
                                 <p class="p-lead s-m-b-50 st-m-b-36">Chatting & <br>OF Page Optimiation</p>
 
@@ -1297,11 +1302,11 @@
                                 </div>
                                 <h4
                                     class="heading-s opacity-20 s-m-b-10 decor-strike-through tablet-text-32 mobile-text-20 position-relative">
-                                    70%</h4>
-                                <h3 class="heading-l s-m-b-16 tablet-text-60 mobile-text-50 position-relative">?
+                                    75%</h4>
+                                <h3 class="heading-l s-m-b-16 tablet-text-60 mobile-text-50 position-relative">?%
                                 </h3>
-                                <p class="p-lead green s-m-b-50 st-m-b-36 position-relative">Free</p>
-                                <p class="p-lead s-m-b-50 st-m-b-36">Full Service & AI</p>
+                                <p class="p-lead green s-m-b-50 st-m-b-36 position-relative">Save Max%</p>
+                                <p class="p-lead s-m-b-50 st-m-b-36">Full Service</p>
 
                                
                                 <a href="mailto:jakabasej1999@gmail.com"><div
@@ -2071,7 +2076,7 @@
                             <div class="flex-horizontal align-center col-gap-5 s-m-t-20 s-m-b-46 st-m-t-17 st-m-b-28" style="background-color: rgba(255,255,255,0.05); padding: 15px; border-radius: 5px;">
                                 <img src="https://assets.website-files.com/63003501019ba4a4ba25eb18/63003501019ba4610125eb96_Discord%20partner.webp"
                                     loading="lazy" alt="" class="discord-partner-icon" />
-                                <h1 class="p-body" style="background-color: rgba(0,0,255,0.3); padding: 10px; border-radius: 5px;">DM me for Free Access</h1>
+                                <p class="p-body" style="background-color: rgba(255,255,255,0.1); padding: 10px; border-radius: 5px;">DM me for Free Access</p>
                             </div><a id="homeDiscordBtn" href="https://skool.com/hybridAI" target="_blank"
                                 class="button outline-white w-inline-block" style="background-color: rgba(255,255,255,0.1);">
                                 <p style="background-color: rgba(255,255,255,0.05); padding: 5px; border-radius: 3px;">skool.com/hybridAI</p>
